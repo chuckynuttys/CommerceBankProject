@@ -1,10 +1,10 @@
 import React from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
-import './AC.css';
+import './ArchivedChanges.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
-import NavBar from "../../Components/NavBar/NavBar";
+import NavBar from "../../Components/NavBar";
 const AC = () => {
   return (
     <div id="base" class="">
