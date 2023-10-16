@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./Components/Login/Login";
-import Entry from "./Components/Entry/Entry";
-import Review from "./Components/Review/Review";
-import AC from "./Components/ArchivedChanges/AC";
-import LS from "./Components/ListScreen/LS";
+import Login from "./files/Login/Login";
+import Entry from "./files/Entry/Entry";
+import Review from "./files/Review/Review";
+import AC from "./files/AC/AC";
+import LS from "./files/ListScreen/LS";
 
 
 
