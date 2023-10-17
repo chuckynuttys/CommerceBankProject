@@ -1,6 +1,7 @@
 package com.example.ChangeManage.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class CMUser {
     private String authorizationLevel;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<ChangeRequest> changeRequests = new ArrayList<>();
 
 }
