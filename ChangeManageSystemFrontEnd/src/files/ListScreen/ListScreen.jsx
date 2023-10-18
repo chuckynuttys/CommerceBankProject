@@ -4,7 +4,7 @@ import '../../css/styles.css';
 import './ListScreen.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
-import ListRequestComponent from "../../Components/ListRequest";
+import ListChangeRequests from "../../Components/ListChangeRequests";
 class ListScreenApp extends Component { 
   render() {
     return (
@@ -214,7 +214,8 @@ class ListScreenApp extends Component {
                 </div>
               </div>
               
-              <ListRequestComponent/>
+              <ListChangeRequests page={1}/>
+              
               
               <div id="u532" class="ax_default box_1" data-label="Action (Header)">
                 <div id="u532_div" class=""></div>
@@ -314,191 +315,8 @@ class ListScreenApp extends Component {
                   <p><span>Change_Number</span></p>
                 </div>
               </div>
+              <ListChangeRequests page={2}/>
 
-              
-              <div id="u545" class="ax_default" data-label="Table Repeater">
-                <script id="u545_script" type="axure-repeater-template" data-label="Table Repeater">
-
-                  
-                  <div id="u546" class="ax_default box_1 u546" data-label="Window_Start_Date">
-                    <div id="u546_div" class="u546_div"></div>
-                    <div id="u546_text" class="text u546_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u547" class="ax_default box_1 u547" data-label="Change_Number">
-                    <div id="u547_div" class="u547_div"></div>
-                    <div id="u547_text" class="text u547_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u548" class="ax_default box_1 u548" data-label="Window_Start_Time">
-                    <div id="u548_div" class="u548_div"></div>
-                    <div id="u548_text" class="text u548_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u549" class="ax_default box_1 u549" data-label="Window_Stop_Date">
-                    <div id="u549_div" class="u549_div"></div>
-                    <div id="u549_text" class="text u549_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u550" class="ax_default box_1 u550" data-label="Window_Stop_Time">
-                    <div id="u550_div" class="u550_div"></div>
-                    <div id="u550_text" class="text u550_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u551" class="ax_default box_1 u551" data-label="Backout_Plan">
-                    <div id="u551_div" class="u551_div"></div>
-                    <div id="u551_text" class="text u551_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u552" class="ax_default box_1 u552" data-label="Backout_Minutes">
-                    <div id="u552_div" class="u552_div"></div>
-                    <div id="u552_text" class="text u552_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u553" class="ax_default box_1 u553" data-label="Other_Needed_Departments">
-                    <div id="u553_div" class="u553_div"></div>
-                    <div id="u553_text" class="text u553_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u554" class="ax_default box_1 u554" data-label="Risk_Level">
-                    <div id="u554_div" class="u554_div"></div>
-                    <div id="u554_text" class="text u554_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u555" class="ax_default box_1 u555" data-label="State">
-                    <div id="u555_div" class="u555_div"></div>
-                    <div id="u555_text" class="text u555_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u556" class="ax_default box_1 u556" data-label="Action">
-                    <div id="u556_div" class="u556_div"></div>
-                    <div id="u556_text" class="text u556_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-                </script>
-                <div id="u545-1" class="preeval" style={{width: '1312px', height: '30px'}}>
-
-                  
-                  <div id="u546-1" class="ax_default box_1 u546" data-label="Window_Start_Date" style={{width: '120px', height: '30px', left: '119px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u546-1_div" class="u546_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u546-1_text" class="text u546_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u547-1" class="ax_default box_1 u547" data-label="Change_Number" style={{width: '120px', height: '30px', left: '0px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u547-1_div" class="u547_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u547-1_text" class="text u547_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u548-1" class="ax_default box_1 u548" data-label="Window_Start_Time" style={{width: '120px', height: '30px', left: '239px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u548-1_div" class="u548_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u548-1_text" class="text u548_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u549-1" class="ax_default box_1 u549" data-label="Window_Stop_Date" style={{width: '120px', height: '30px', left: '359px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u549-1_div" class="u549_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u549-1_text" class="text u549_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u550-1" class="ax_default box_1 u550" data-label="Window_Stop_Time" style={{width: '120px', height: '30px', left: '479px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u550-1_div" class="u550_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u550-1_text" class="text u550_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u551-1" class="ax_default box_1 u551" data-label="Backout_Plan" style={{width: '120px', height: '30px', left: '599px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u551-1_div" class="u551_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u551-1_text" class="text u551_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u552-1" class="ax_default box_1 u552" data-label="Backout_Minutes" style={{width: '120px', height: '30px', left: '719px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u552-1_div" class="u552_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u552-1_text" class="text u552_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u553-1" class="ax_default box_1 u553" data-label="Other_Needed_Departments" style={{width: '120px', height: '30px', left: '839px', top: '0px', 
-                  visibility: 'inherit'}}>
-                    <div id="u553-1_div" class="u553_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u553-1_text" class="text u553_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u554-1" class="ax_default box_1 u554" data-label="Risk_Level" style={{width: '120px', height: '30px', left: '959px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u554-1_div" class="u554_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u554-1_text" class="text u554_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u555-1" class="ax_default box_1 u555" data-label="State" style={{width: '120px', height: '30px', left: '1079px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u555-1_div" class="u555_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u555-1_text" class="text u555_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                    </div>
-                  </div>
-
-                  
-                  <div id="u556-1" class="ax_default box_1 u556" data-label="Action" style={{width: '113px', height: '30px', left: '1199px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u556-1_div" class="u556_div" style={{width: '113px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u556-1_text" class="text u556_text" style={{display: 'none', visibility: 'hidden'}}>
-                      <p></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import "../../css/styles.css";
 import "./Login.css";
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
+import LoginComponent from "../../Components/LoginComponent";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
@@ -63,18 +64,9 @@ const Login = () => {
         </div>
       </div>
 
-      <div id="u5" class="ax_default shape" data-label="Helper Text">
-        <div id="u5_div" class=""></div>
-        <div id="u5_text" class="text ">
-          <p></p>
-        </div>
-      </div>
+      <LoginComponent/>
 
-      <div id="u6" class="ax_default text_field" data-label="Input Field">
-        <div id="u6_div" class=""></div>
-        <input id="u6_input" type="text" value="" class="u6_input"/>
-      </div>
-
+      {/* Upper Label UserID */}
       <div id="u7" class="ax_default shape ax_default_hidden selected" data-label="Upper Label" style={{display: 'none', visibility: 'hidden'}}>
         <div id="u7_div" class="selected"></div>
         <div id="u7_text" class="text ">
@@ -82,43 +74,11 @@ const Login = () => {
         </div>
       </div>
 
-      <div id="u8" class="ax_default shape" data-label="Lower Label">
-        <div id="u8_div" class=""></div>
-        <div id="u8_text" class="text ">
-          <p><span>UserID</span></p>
-        </div>
-      </div>
-
-      <div id="u9" class="ax_default shape" data-label="Helper Text">
-        <div id="u9_div" class=""></div>
-        <div id="u9_text" class="text ">
-          <p></p>
-        </div>
-      </div>
-
-      <div id="u10" class="ax_default text_field" data-label="Input Field">
-        <div id="u10_div" class=""></div>
-        <input id="u10_input" type="text" value="" class="u10_input"/>
-      </div>
-
+      {/* Upper Label Password */}
       <div id="u11" class="ax_default shape ax_default_hidden selected" data-label="Upper Label" style={{display: 'none', visibility: 'hidden'}}>
         <div id="u11_div" class="selected"></div>
         <div id="u11_text" class="text ">
           <p><span>Password</span></p>
-        </div>
-      </div>
-
-      <div id="u12" class="ax_default shape" data-label="Lower Label">
-        <div id="u12_div" class=""></div>
-        <div id="u12_text" class="text ">
-          <p><span>Password</span></p>
-        </div>
-      </div>
-
-      <div id="u13" class="ax_default primary_button" style={{cursor: 'pointer'}}> 
-        <div id="u13_div" class=""></div>
-        <div id="u13_text" class="text ">
-          <p><span>Log In</span></p>
         </div>
       </div>
 
