@@ -4,6 +4,7 @@ import '../../css/styles.css';
 import './Entry.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
+import NavBar from "../../Components/NavBar";
 const Entry = () => {
   return (
     <body>
@@ -933,46 +934,9 @@ const Entry = () => {
           <p></p>
         </div>
       </div>
-
-      CALL HERE
-      <div id="u171" class="ax_default button">
-        <div id="u171_div" class=""></div>
-        <div id="u171_text" class="text ">
-          <p><span>Submit Request</span></p>
-        </div>
-      </div>
-
       
-      <div id="u172" class="ax_default button">
-        <div id="u172_div" class=""></div>
-        <div id="u172_text" class="text ">
-          <p><span>View Change Reuqests</span></p>
-        </div>
-      </div>
-
-      
-      <div id="u173" class="ax_default button">
-        <div id="u173_div" class=""></div>
-        <div id="u173_text" class="text ">
-          <p><span>Log out</span></p>
-        </div>
-      </div>
-
-      
-      <div id="u174" class="ax_default button">
-        <div id="u174_div" class=""></div>
-        <div id="u174_text" class="text ">
-          <p><span>View Change Request Archive</span></p>
-        </div>
-      </div>
-
-      
-      <div id="u175" class="ax_default heading_1">
-        <div id="u175_div" class=""></div>
-        <div id="u175_text" class="text ">
-          <p><span>Change Request Form</span></p>
-        </div>
-      </div>
+      {/* Call NavBar Here */}
+      <NavBar/>
 
       
       <div id="u176" class="ax_default" data-label="Change Window Start Date" data-left="1016" data-top="127" data-width="200" data-height="50" layer-opacity="1">

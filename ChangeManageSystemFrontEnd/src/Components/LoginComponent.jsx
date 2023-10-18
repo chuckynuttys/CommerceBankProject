@@ -20,9 +20,6 @@ class LoginComponent extends Component {
       this[nameValue] = value;
       console.log(this.userId);
       console.log(this.password);
-      // this.state.e.target.name = e.target.value;
-      // console.log(e.target.name + " name ");
-      // console.log(e.target.value + " value ");
     }
     requestUser=(e)=>{
       e.preventDefault();
@@ -38,12 +35,16 @@ class LoginComponent extends Component {
               document.cookie = "userId=" + this.userID;
               console.log(document.cookie);
           } else {
-        console.log("Incorrect Password");
-        console.log(this.password);
+          // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
+          // Logging for debugging below.
+          console.log("Incorrect Password");
+          console.log(this.password);
           }
         } else {
-        console.log("Incorrect userId");
-        console.log(this.userID);
+          // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
+          // Logging for debugging below.
+          console.log("Incorrect userId");
+          console.log(this.userID);
         }
       })
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ChangeRequestDataService from '../Service/ChangeRequestDataService';
 
 const userid = document.cookie;
-var page;
+var page = 1;
 
 class ListChangeRequests extends Component {
     constructor(props) {
