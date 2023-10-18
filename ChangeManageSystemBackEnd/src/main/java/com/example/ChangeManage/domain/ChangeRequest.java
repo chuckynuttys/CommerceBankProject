@@ -22,13 +22,13 @@ public class ChangeRequest {
     private String changeType;
     private String whyDescription;
     private String whatDescription;
-    private String who;
-    private String when;
+    private String whoDescription;
+    private String whenDescription;
     private String otherNeededDepartments;
     private String riskLevel;
     private String Implementer;
     private String ImplementationStatus;
-    private String state;
+    private String stateLevel;
 
     @ManyToOne
     @JoinColumn(name = "id")
