@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200" })
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 public class CMUserController {
@@ -33,13 +33,12 @@ public class CMUserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") String id) {
-        Optional<User> userData = Optional.ofNullable((User) cmUserService.getUserById(id));
-        if (userData.isPresent()){
-            return new ResponseEntity<>(userData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<CMUser> getUser(@PathVariable int id) {
+        Optional<CMUser> user = cmUserService.getCMUserById(id);
+        if (!user.isPresent()) {
+            throw new UserNotFoundException(String.format("UserId[%d] not found", id));
         }
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 
 }

@@ -7,6 +7,7 @@ import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import LoginComponent from "../../Components/LoginComponent";
 
+
 const Login = () => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -64,7 +65,7 @@ const Login = () => {
         </div>
       </div>
 
-      <LoginComponent/>
+      <LoginComponent />
 
       {/* Upper Label UserID */}
       <div id="u7" class="ax_default shape ax_default_hidden selected" data-label="Upper Label" style={{display: 'none', visibility: 'hidden'}}>

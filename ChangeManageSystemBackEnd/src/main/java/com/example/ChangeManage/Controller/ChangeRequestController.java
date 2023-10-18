@@ -22,7 +22,7 @@ public class ChangeRequestController{
     @Autowired
     ChangeRequestRepository changeRequestRepository;
     // Creating ChangeRequests
-    @PostMapping("/changerequests")
+    @PostMapping("/changerequest")
     public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest, String userid) {
 
 
@@ -30,7 +30,7 @@ public class ChangeRequestController{
     }
 
     // Getting all ChangeRequests
-    @GetMapping("/changerequests")
+    @GetMapping("/changerequest")
     public ResponseEntity<?> get(@RequestBody ChangeRequest changeRequest) {
         try {
             List<ChangeRequest> changeRequests = new ArrayList<ChangeRequest>();

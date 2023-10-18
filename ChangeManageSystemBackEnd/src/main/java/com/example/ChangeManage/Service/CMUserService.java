@@ -19,8 +19,8 @@ public class CMUserService {
     public CMUser create(CMUser user){
         return cmUserRepository.save(user);
     }
-    public CMUser getUserById(@PathVariable("id") String id) {
-        return cmUserRepository.findByUserId(id);
+    public Optional<CMUser> getCMUserById(int id) {
+        return cmUserRepository.findById(id);
     }
 
 }
