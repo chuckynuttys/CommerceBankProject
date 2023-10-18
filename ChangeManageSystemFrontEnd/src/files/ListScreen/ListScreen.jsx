@@ -214,7 +214,7 @@ class ListScreenApp extends Component {
                 </div>
               </div>
               
-              <ListChangeRequests page={1}/>
+              {/* <ListChangeRequests page={1}/> */}
               
               
               <div id="u532" class="ax_default box_1" data-label="Action (Header)">
@@ -315,7 +315,7 @@ class ListScreenApp extends Component {
                   <p><span>Change_Number</span></p>
                 </div>
               </div>
-              <ListChangeRequests page={2}/>
+              {/* <ListChangeRequests page={2}/> */}
 
               </div>
             </div>

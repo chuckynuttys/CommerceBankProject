@@ -18,7 +18,7 @@ class ListChangeRequests extends Component {
     }
 
     refreshChangeRequests() {
-      ChangeRequestDataService.retrieveAllChangeRequests(userid).then(
+      ChangeRequestDataService.getAllChangeRequests(userid).then(
         response => {
           this.setState({ changeRequests: response.data});
         }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200" })
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequiredArgsConstructor
 @RestController
 public class ChangeRequestController{
@@ -22,7 +22,7 @@ public class ChangeRequestController{
     @Autowired
     ChangeRequestRepository changeRequestRepository;
     // Creating ChangeRequests
-    @PostMapping("/changerequest")
+    @PostMapping("/changerequests")
     public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest, String userid) {
 
 
@@ -30,7 +30,7 @@ public class ChangeRequestController{
     }
 
     // Getting all ChangeRequests
-    @GetMapping("/changerequest")
+    @GetMapping("/changerequests")
     public ResponseEntity<?> get(@RequestBody ChangeRequest changeRequest) {
         try {
             List<ChangeRequest> changeRequests = new ArrayList<ChangeRequest>();

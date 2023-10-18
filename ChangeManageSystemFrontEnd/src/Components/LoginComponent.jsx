@@ -1,52 +1,53 @@
 import React, { Component } from 'react';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import {Formik, Field, ErrorMessage} from 'formik';
 import ChangeRequestDataService from '../Service/ChangeRequestDataService';
 
 var userID;
 
 class LoginComponent extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            userID: [],
-            password: ''
+            currentUser: {
+                userID: null,
+                password: null
+            }
         };
 
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
-        console.log(this.state.userID);
-        if (this.state.userID == -1) {
-            return
-        }
-    }
-    onSubmit(values) {
-        let username = ChangeRequestDataService.findByID();
-        if (username == this.state.userID) {
-            document.cookie = "username=" + username;
-            console.log(username);
-            this.props.history.push('/Entry');
-        }
         
-
+    }
+    onSubmit(userID, password) {
+        console.log("Success");
+        <div>test</div>
+        ChangeRequestDataService.get(userID)
+        .then(response => {
+            if (response.data.userID == userID && response.data.password == password) {
+                document.cookie = "id=" + userID;
+                <div>Hello</div>
+            } else {
+                <div>Helo</div>
+            }
+            console.log(response.data);
+        })
+        .catch(e => {
+            console.log(e);
+        })
     }
 
 
 
     render() {
         
-        let { userID, password} = this.state;
+        const {currentUser} = this.state;
         return (
-            <Formik initialValues={{
-                userID,
-                password
-              }}>
-                {
-                  (props) => (
-                    <Form>
+            
+                    <form>
                       <fieldset id="u6" class="ax_default text_field" data-label="Input Field">
                         <div id="u6_div" class=""></div>
-                        <input id="u6_input" type="text" value="" class="u6_input"/>
+                        <input id="u6_input" type="text" class="u6_input" value={currentUser.userID}/>
                       </fieldset>
                       <div id="u8" class="ax_default shape" data-label="Lower Label">
                       <div id="u8_div" class=""></div>
@@ -57,7 +58,7 @@ class LoginComponent extends Component {
         
                       <fieldset id="u10" class="ax_default text_field" data-label="Input Field">
                         <div id="u10_div" class=""></div>
-                        <input id="u10_input" type="text" value="" class="u10_input"/>
+                        <input id="u10_input" type="text" class="u10_input" value={currentUser.password}/>
                       </fieldset>
                       <div id="u12" class="ax_default shape" data-label="Lower Label">
                       <div id="u12_div" class=""></div>
@@ -65,17 +66,14 @@ class LoginComponent extends Component {
                           <p><span>Password</span></p>
                         </div>
                       </div>
-                      <div id="u13" class="ax_default primary_button" style={{cursor: 'pointer'}} onClick={this.onSubmit}> 
+                      <button id="u13" class="ax_default primary_button" style={{cursor: 'pointer'}} onClick={this.onSubmit}> 
                       <div id="u13_div" class=""></div>
                       <div id="u13_text" class="text ">
                         <p><span>Log In</span></p>
                         </div>
-                      </div>
-                    </Form>
+                      </button>
+                    </form>
                   )
-                }
-              </Formik>
-        )
     }
 }
 
