@@ -26,30 +26,16 @@ const AC = () => {
       </div>
 
       
+      
       <div id="u559" class="ax_default box_3">
         <div id="u559_div" class="">
-        <NavBar />
         </div>
         <div id="u559_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
           <p></p>
         </div>
       </div>
 
-      
-      <div id="u560" class="ax_default button">
-        <div id="u560_div" class=""></div>
-        <div id="u560_text" class="text ">
-          <p><span>Submit Request</span></p>
-        </div>
-      </div>
-
-      
-      <div id="u561" class="ax_default button">
-        <div id="u561_div" class=""></div>
-        <div id="u561_text" class="text ">
-          <p><span>Log out</span></p>
-        </div>
-      </div>
+        
 
       
       <div id="u562" class="ax_default box_2">
@@ -65,11 +51,14 @@ const AC = () => {
         <div id="u563_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
           <p></p>
         </div>
-      </div>
+          </div>
 
-      
-      <div id="u564" class="ax_default" data-label="Table Repeater">
+        <NavBar />
+
+          <div id="u564" class="ax_default" data-label="Table Repeater">
+
         <script id="u564_script" type="axure-repeater-template" data-label="Table Repeater">
+          
 
           
           <div id="u565" class="ax_default box_1 u565">

@@ -5,6 +5,7 @@ import './ListScreen.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
+import NavBar from "../../Components/NavBar";
 class ListScreenApp extends Component { 
   render() {
     return (
@@ -34,46 +35,14 @@ class ListScreenApp extends Component {
         </div>
       </div>
 
-      
-      <div id="u495" class="ax_default button">
-        <div id="u495_div" class=""></div>
-        <div id="u495_text" class="text ">
-          <p><span>Submit Request</span></p>
-        </div>
-      </div>
+     <NavBar/>
 
-      
-      <div id="u496" class="ax_default button">
-        <div id="u496_div" class=""></div>
-        <div id="u496_text" class="text ">
-          <p><span>Log out</span></p>
-        </div>
-      </div>
-
-      
-      <div id="u497" class="ax_default button">
-        <div id="u497_div" class=""></div>
-        <div id="u497_text" class="text ">
-          <p><span>View Change Request Archive</span></p>
-        </div>
-      </div>
-
-      
       <div id="u498" class="ax_default box_2">
         <div id="u498_div" class=""></div>
         <div id="u498_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
           <p></p>
         </div>
       </div>
-
-      
-      <div id="u499" class="ax_default button">
-        <div id="u499_div" class=""></div>
-        <div id="u499_text" class="text ">
-          <p><span>View Change Requests</span></p>
-        </div>
-      </div>
-
       
       <div id="u500" class="ax_default image">
         <img id="u500_img" class="img " src={logo}/>
