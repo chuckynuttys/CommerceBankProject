@@ -15,13 +15,15 @@ function App() {
     
     <Router>
       <Routes>
+        <Route path="/">
+        <Route index element={<Navigate to="/Login" replace/>}/>
         <Route path="/Login" element={<Login />} />
         <Route path="/Entry" element={<Entry />} />
         <Route path="/Review" element={<Review />} />
         <Route path="/ArchivedChangesApp" element={<AC />} />
         <Route path="/ListScreenApp" element={<ListScreenApp />} />
+        </Route>
       </Routes>
-      <Navigate from="/" to="/Login" />
     </Router>
     
     
