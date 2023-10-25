@@ -22,27 +22,27 @@ public class ChangeRequestController{
     @Autowired
     ChangeRequestRepository changeRequestRepository;
     // Creating ChangeRequests
-    @PostMapping("/changerequest")
-    public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest, String userid) {
-
-
-        return new ResponseEntity<>(changeRequestService.create(changeRequest, userid), HttpStatus.CREATED);
-    }
-
-    // Getting all ChangeRequests
-    @GetMapping("/changerequest")
-    public ResponseEntity<?> get(@RequestBody ChangeRequest changeRequest) {
-        try {
-            List<ChangeRequest> changeRequests = new ArrayList<ChangeRequest>();
-
-            changeRequests = changeRequestService.get(changeRequest, changeRequests);
-            if (changeRequests.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(changeRequests, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/changerequest")
+//    public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest, String userid) {
+//
+//
+//        return new ResponseEntity<>(changeRequestService.create(changeRequest, userid), HttpStatus.CREATED);
+//    }
+//
+//    // Getting all ChangeRequests
+//    @GetMapping("/changerequest")
+//    public ResponseEntity<?> get(@RequestBody ChangeRequest changeRequest) {
+//        try {
+//            List<ChangeRequest> changeRequests = new ArrayList<ChangeRequest>();
+//
+//            changeRequests = changeRequestService.get(changeRequest, changeRequests);
+//            if (changeRequests.isEmpty()) {
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//            return new ResponseEntity<>(changeRequests, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 }

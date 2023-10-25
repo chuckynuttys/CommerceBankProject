@@ -14,16 +14,13 @@ class LoginComponent extends Component {
       this.requestUser = this.requestUser.bind(this);
     };
     changeValue=(e)=>{
-      console.log(e.target.name);
       const nameValue = e.target.name;
       const value = JSON.stringify(e.target.value);
       this[nameValue] = value;
-      console.log(this.userId);
-      console.log(this.password);
     }
     requestUser=(e)=>{
       e.preventDefault();
-      fetch(`http://localhost:8080/users/${this.userId}`)
+      fetch(`http://localhost:8080/users?userId=${this.userId}`)
       .then(data=> {
         return data.json();
       })
@@ -32,7 +29,7 @@ class LoginComponent extends Component {
         console.log(post.password);
         if (post.userId == this.userId) {
           if (post.password == this.password) {
-              document.cookie = "userId=" + this.userID;
+              document.cookie = "userId=" + this.userId;
               console.log(document.cookie);
           } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
@@ -44,7 +41,7 @@ class LoginComponent extends Component {
           // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
           // Logging for debugging below.
           console.log("Incorrect userId");
-          console.log(this.userID);
+          console.log(this.userId);
         }
       })
     }
