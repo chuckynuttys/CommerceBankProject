@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CMUserRepository extends JpaRepository<CMUser, Integer> {
-    CMUser findByUserId(String userId);
 
 }

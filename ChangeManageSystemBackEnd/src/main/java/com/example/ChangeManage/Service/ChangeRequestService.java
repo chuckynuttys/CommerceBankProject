@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor // Injects Construcotrs
-@Service // Creates it as a Object to call to.
+@RequiredArgsConstructor
+@Service
 public class ChangeRequestService
 {
     private final CMUserRepository cmUserRepository;
@@ -19,15 +19,7 @@ public class ChangeRequestService
 
 
 
-    public ChangeRequest create(ChangeRequest changeRequest, String userid) {
-        CMUser cmuser = cmUserRepository.findByUserId(userid);
-        changeRequest.setUser(cmuser);
 
-        return changeRequestRepository.save(changeRequest);
-    }
 
-    public List<ChangeRequest> get(ChangeRequest changeRequest, List<ChangeRequest> changeRequests) {
-        changeRequestRepository.findAll().forEach(changeRequests::add);
-        return changeRequests;
-    }
+
 }
