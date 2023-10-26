@@ -21,14 +21,12 @@ class LoginComponent extends Component {
     requestUser=(e)=>{
       e.preventDefault();
       fetch(`http://localhost:8080/users?userId=${this.userId}`)
-      .then(data=> {
-        return data.json();
-      })
-      .then(post => {
-        console.log(post.userId);
-        console.log(post.password);
-        if (post.userId == this.userId) {
-          if (post.password == this.password) {
+      .then(data=>data.json())
+      .then(data => {
+        console.log(data.userId);
+        console.log(data.password);
+        if (data.userId == this.userId) {
+          if (data.password == this.password) {
               document.cookie = "userId=" + this.userId;
               console.log(document.cookie);
           } else {
@@ -36,12 +34,14 @@ class LoginComponent extends Component {
           // Logging for debugging below.
           console.log("Incorrect Password");
           console.log(this.password);
+          console.log(data.password);
           }
         } else {
           // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
           // Logging for debugging below.
           console.log("Incorrect userId");
           console.log(this.userId);
+          console.log(data.userId);
         }
       })
     }

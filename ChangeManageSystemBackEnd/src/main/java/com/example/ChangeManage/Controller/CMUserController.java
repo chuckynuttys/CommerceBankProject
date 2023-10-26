@@ -20,6 +20,7 @@ import java.util.Optional;
 public class CMUserController {
 
     private final CMUserService cmUserService;
+    private final CMUserRepository cmUserRepository;
 
     @CrossOrigin
     @PostMapping("/users")
@@ -32,15 +33,19 @@ public class CMUserController {
 
     }
 
-    @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET, path = "/users?userId={userId}")
-    public ResponseEntity<CMUser> getUser(@PathVariable String userId) {
-        System.out.println("Get Test");
+    @CrossOrigin(origins = "htttp://localhost:3000")
+    @GetMapping("/users")
+    public ResponseEntity<CMUser> getUser(@RequestParam(required = true) String userId) {
+        System.out.println("Get Test; userId:" + userId);
         Optional<CMUser> user = cmUserService.getCMUserByUserId(userId);
-        System.out.println("Get Request Fetched; userID: " + user.get().getUserId());
-        if (!user.isPresent()) {
+        Optional<CMUser> user1 = cmUserRepository.findById(1);
+        if (user.isEmpty()) {
+            if (user1.isPresent()) {
+                System.out.println("User1 Present; UserID: "  + user1.get().getUserId());
+            }
             throw new UserNotFoundException(String.format("UserId[%s] not found", userId));
         } else {
+            System.out.println("UserID: " + user.get().getUserId());
             return new ResponseEntity(user, HttpStatus.OK);
         }
     }

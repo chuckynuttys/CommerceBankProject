@@ -22,8 +22,7 @@ public class CMUserService {
         return cmUserRepository.save(user);
     }
     @Transactional
-    public Optional<CMUser> getCMUserByUserId(String id) {
-        return cmUserRepository.findByUserId(id);
+    public Optional<CMUser> getCMUserByUserId(String userId) {
+        return cmUserRepository.findByUserId(userId);
     }
-
 }
