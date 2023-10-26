@@ -33,7 +33,7 @@ public class CMUserController {
     }
 
     @CrossOrigin
-    @GetMapping("/users?userId={userId}")
+    @RequestMapping(method = RequestMethod.GET, path = "/users?userId={userId}")
     public ResponseEntity<CMUser> getUser(@PathVariable String userId) {
         System.out.println("Get Test");
         Optional<CMUser> user = cmUserService.getCMUserByUserId(userId);
