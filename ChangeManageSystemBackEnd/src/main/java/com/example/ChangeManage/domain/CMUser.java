@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name="CMUser")
+@Entity
 public class CMUser {
 
     @Id
@@ -21,7 +21,7 @@ public class CMUser {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String userId;
+    private String username;
     private String password;
     private String authorizationLevel;
 

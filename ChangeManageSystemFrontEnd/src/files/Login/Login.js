@@ -12,16 +12,11 @@ const Login = () => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  var movePage = true;
   
 
-  const handleSignIn = () => {
-    if (userId === "a" && password === "1") {
-      navigate("/AC");
-    } else if (userId === "b" && password === "2") {
-      navigate("/LS");
-    } else if (userId === "c" && password === "3") {
-      navigate("/Review");
-    } else {
+  const handleSignIn = (t) => {
+    if (t == true) {
       navigate("/Entry");
     }
   };
@@ -65,7 +60,7 @@ const Login = () => {
         </div>
       </div>
 
-      <LoginComponent />
+      <LoginComponent handleSignIn={handleSignIn}/>
 
       {/* Upper Label UserID */}
       <div id="u7" class="ax_default shape ax_default_hidden selected" data-label="Upper Label" style={{display: 'none', visibility: 'hidden'}}>
