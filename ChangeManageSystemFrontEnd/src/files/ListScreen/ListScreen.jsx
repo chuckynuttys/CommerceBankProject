@@ -1,12 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
 import './ListScreen.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
-class ListScreenApp extends Component { 
-  render() {
+const ListScreenApp = () => { 
+  const[changeRequests, setChangeRequests] = useState([]);
+
+  useEffect(()=>{
+    fetch(`http://localhost:8080/changerequests?archivedStatus=false`, {method:"GET"})
+    .then(res => res.json())
+    .then(res => {setChangeRequests(res)})
+  },[])
+  
+
     return (
     <div id="base" class="">
 
@@ -213,16 +221,18 @@ class ListScreenApp extends Component {
                   <p><span>Who</span></p>
                 </div>
               </div>
-              
-              {/* <ListChangeRequests page={1}/> */}
-              
-              
               <div id="u532" class="ax_default box_1" data-label="Action (Header)">
                 <div id="u532_div" class=""></div>
                 <div id="u532_text" class="text ">
                   <p><span>Action</span></p>
                 </div>
               </div>
+
+              <div id="u520" class="ax_default" data-label="Table Repeater">
+              {changeRequests.map(changeRequest=> <ListChangeRequests key={changeRequest.changeId} changeRequest={changeRequest}></ListChangeRequests>)}
+                </div>
+              
+              
             </div>
           </div>
           <div id="u508_state1" class="panel_state" data-label="State2" style={{visibility: 'hidden'}}>
@@ -315,8 +325,11 @@ class ListScreenApp extends Component {
                   <p><span>Change_Number</span></p>
                 </div>
               </div>
-              {/* <ListChangeRequests page={2}/> */}
+              <div id="u520" class="ax_default" data-label="Table Repeater">
 
+              
+              {/* <ListChangeRequests page={2}/> */}
+                </div>
               </div>
             </div>
           </div>
@@ -324,6 +337,4 @@ class ListScreenApp extends Component {
       </div>
     );
   }
-}
-
 export default ListScreenApp;

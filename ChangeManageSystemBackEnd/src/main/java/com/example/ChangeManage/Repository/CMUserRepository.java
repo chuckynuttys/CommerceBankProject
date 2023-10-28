@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CMUserRepository extends JpaRepository<CMUser, Integer> {
 
-    Optional<CMUser> findByUsername(String username);
+    CMUser findByUsername(String username);
+
 }
