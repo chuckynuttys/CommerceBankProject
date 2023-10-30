@@ -1,14 +1,13 @@
 body {
-    margin:0px;
-    background-color:rgba(214, 210, 196, 1);
-    background-image:none;
-    position:relative;
-    left:-0px;
-    width:1920px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:left;
-  }
+  background-image: url('/././src/Images/BackgroundImg.jpg');
+  background-size: cover;
+  margin: auto;
+  position: relative;
+  size: auto;
+  height: auto;
+  width: 100%;
+  overflow-x:hidden;
+}
   .form_sketch {
     border-color:transparent;
     background-color:transparent;
