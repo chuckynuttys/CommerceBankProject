@@ -12,7 +12,7 @@ function ListChangeRequests(props) {
 
       if(props.tabSet == 1) {
         return (
-    
+          // tab 1
           <div id="u520-1" class="preeval" style={{width: '1317px', height: '60px', top: ((changeId - 1) * 30) + "px"}}>
                           <div id="u521-1" class="ax_default box_1 u521" data-label="Full_Name" style={{width: '120px', height: '30px', left: '119px', top: '0px', visibility: 'inherit'}}>
                           <div id="u521-1_div" class="u521_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
@@ -86,13 +86,95 @@ function ListChangeRequests(props) {
                         <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '120px', height: '30px', left: '1197px', top: '0px', visibility: 'inherit'}}>
                           <div id="u531-1_div" class="u531_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
                           <div id="u531-1_text" class="text u531_text" style={{display: 'none', visibility: 'hidden'}}>
-                            <p>{stateLevel}</p>
+                            <p></p>
                             </div>
                           </div>
                         </div>
         );
       } else {
-        
+        // tab 2
+        return (
+        <div id="u545-1" class="preeval" style={{width: '1312px', height: '30px', top: ((changeId - 1) * 30) + "px"}}>
+
+          <div id="u546-1" class="ax_default box_1 u546" data-label="Window_Start_Date" style={{width: '120px', height: '30px', left: '119px', top: '0px', visibility: 'inherit'}}>
+            <div id="u546-1_div" class="u546_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u546-1_text" class="text u546_text" style={{visibility: 'inherit'}}>
+              <p>{changeWindowStartDate}</p>
+            </div>
+          </div>
+
+          <div id="u547-1" class="ax_default box_1 u547" data-label="Change_Number" style={{width: '120px', height: '30px', left: '0px', top: '0px', visibility: 'inherit'}}>
+            <div id="u547-1_div" class="u547_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u547-1_text" class="text u547_text" style={{visibility: 'inherit'}}>
+              <p>{changeId}</p>
+            </div>
+          </div>
+
+          <div id="u548-1" class="ax_default box_1 u548" data-label="Window_Start_Time" style={{width: '120px', height: '30px', left: '239px', top: '0px', visibility: 'inherit'}}>
+            <div id="u548-1_div" class="u548_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u548-1_text" class="text u548_text" style={{visibility: 'inherit'}}>
+              <p>{changeWindowStartTime}</p>
+            </div>
+          </div>
+
+          <div id="u549-1" class="ax_default box_1 u549" data-label="Window_Stop_Date" style={{width: '120px', height: '30px', left: '359px', top: '0px', visibility: 'inherit'}}>
+            <div id="u549-1_div" class="u549_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u549-1_text" class="text u549_text" style={{visibility: 'inherit'}}>
+              <p>{changeWindowStopDate}</p>
+            </div>
+          </div>
+
+          <div id="u550-1" class="ax_default box_1 u550" data-label="Window_Stop_Time" style={{width: '120px', height: '30px', left: '479px', top: '0px', visibility: 'inherit'}}>
+            <div id="u550-1_div" class="u550_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u550-1_text" class="text u550_text" style={{visibility: 'inherit'}}>
+              <p>{changeWindowStopTime}</p>
+            </div>
+          </div>
+
+          <div id="u551-1" class="ax_default box_1 u551" data-label="Backout_Plan" style={{width: '120px', height: '30px', left: '599px', top: '0px', visibility: 'inherit'}}>
+            <div id="u551-1_div" class="u551_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u551-1_text" class="text u551_text" style={{visibility: 'inherit'}}>
+              <p>Backout Plan</p>
+            </div>
+          </div>
+
+          <div id="u552-1" class="ax_default box_1 u552" data-label="Backout_Minutes" style={{width: '120px', height: '30px', left: '719px', top: '0px', visibility: 'inherit'}}>
+            <div id="u552-1_div" class="u552_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u552-1_text" class="text u552_text" style={{visibility: 'inherit'}}>
+              <p>Backout Minutes</p>
+            </div>
+          </div>
+
+          <div id="u553-1" class="ax_default box_1 u553" data-label="Other_Needed_Departments" style={{width: '120px', height: '30px', left: '839px', top: '0px', visibility: 'inherit'}}>
+            <div id="u553-1_div" class="u553_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u553-1_text" class="text u553_text" style={{visibility: 'inherit'}}>
+              <p>{otherNeededDepartments}</p>
+            </div>
+            </div>
+
+          <div id="u554-1" class="ax_default box_1 u554" data-label="Risk_Level" style={{width: '120px', height: '30px', left: '959px', top: '0px', visibility: 'inherit'}}>
+            <div id="u554-1_div" class="u554_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u554-1_text" class="text u554_text" style={{visibility: 'inherit'}}>
+              <p>{riskLevel}</p>
+            </div>
+          </div>
+          
+          <div id="u555-1" class="ax_default box_1 u555" data-label="State" style={{width: '120px', height: '30px', left: '1079px', top: '0px', visibility: 'inherit'}}>
+            <div id="u555-1_div" class="u555_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u555-1_text" class="text u555_text" style={{visibility: 'inherit'}}>
+              <p>{stateLevel}</p>
+            </div>
+          </div>
+
+          <div id="u556-1" class="ax_default box_1 u556" data-label="Action" style={{width: '113px', height: '30px', left: '1199px', top: '0px', visibility: 'inherit'}}>
+            <div id="u556-1_div" class="u556_div" style={{width: '113px', height: '30px', visibility: 'inherit'}}></div>
+            <div id="u556-1_text" class="text u556_text" style={{visibility: 'inherit'}}>
+              <p></p>
+            </div>
+          </div>
+
+        </div>
+        )
       }
   
 }

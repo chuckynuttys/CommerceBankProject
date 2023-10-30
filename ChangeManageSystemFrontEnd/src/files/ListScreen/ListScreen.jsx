@@ -5,6 +5,7 @@ import './ListScreen.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
+
 const ListScreenApp = () => { 
   const[changeRequests, setChangeRequests] = useState([]);
   var tabSet;
@@ -15,18 +16,26 @@ const ListScreenApp = () => {
     .then(res => {setChangeRequests(res)})
   },[])
 
-  changeTab(()=> {
-    const tabOneElement = document.getElementById("u507_div");
-    const tabTwoElement = document.getElementById("u506_div");
-    if (tabOneElement.getAttribute("class") != "selected" && value == 1) {
+  const handleClick = (e) => {
+    console.log(e);
+    
+    if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
+      // Tab 1
+      console.log("Successful! Tab 1 was selected");
       document.getElementById("u507_div").setAttribute("class", "selected");
-      document.getElementById("u508_state2").setAttribute("style", {visibility: 'hidden'});
-
-    } else if (tabTwoElement.getAttribute("class" != "selected" && value == 2)) {
+      document.getElementById("u506_div").setAttribute("class", "");
+      document.getElementById("u508_state0").setAttribute("style", "visibility: visible");
+      document.getElementById("u508_state1").setAttribute("style", "visibility: hidden");
+    } else if (document.getElementById("u506_div").getAttribute("class") == "" && e == "2") {
+      // Tab 2
+      console.log("Successful! Tab 2 was selected");
       document.getElementById("u506_div").setAttribute("class", "selected");
-      document.getElementById("u508_state1").setAttribute("style", {visibility: 'hidden'});
+      document.getElementById("u507_div").setAttribute("class", "");
+      document.getElementById("u508_state1").setAttribute("style", "visibility: visible");
+      document.getElementById("u508_state0").setAttribute("style", "visibility: hidden");
     }
-  },[])
+  }
+  
   
 
     return (
@@ -135,17 +144,17 @@ const ListScreenApp = () => {
         <div id="u505" class="ax_default" data-left="308" data-top="304" data-width="221" data-height="41" layer-opacity="1">
 
           
-          <div id="u506" class="ax_default box_3" data-label="Tab Label 2" selectiongroup="Tabs">
+          <div id="u506" class="ax_default box_3" data-label="Tab Label 2" selectiongroup="Tabs" onClick={() => handleClick(2)} style={{cursor: 'pointer'}} >
             <div id="u506_div" class=""></div>
-            <div id="u506_text" class="text " onClick={changeTab()}>
+            <div id="u506_text" class="text ">
               <p><span>Tab 2</span></p>
             </div>
           </div>
 
           
-          <div id="u507" class="ax_default box_3 selected" data-label="Tab Label 1" selectiongroup="Tabs">
+          <div id="u507" class="ax_default box_3 selected" data-label="Tab Label 1" selectiongroup="Tabs" onClick={() => handleClick(1)} style={{cursor: 'pointer'}} >
             <div id="u507_div" class="selected"></div>
-            <div id="u507_text" class="text " onClick={changeTab()} >
+            <div id="u507_text" class="text ">
               <p><span>Tab 1</span></p>
             </div>
           </div>
@@ -341,7 +350,7 @@ const ListScreenApp = () => {
               </div>
               <div id="u520" class="ax_default" data-label="Table Repeater">
 
-              {changeRequests.map(changeRequest=> <ListChangeRequests key={changeRequest.changeId} changeRequest={changeRequest} tabSet={1}></ListChangeRequests>)}
+              {changeRequests.map(changeRequest=> <ListChangeRequests key={changeRequest.changeId} changeRequest={changeRequest} tabSet={2}></ListChangeRequests>)}
                 
                 </div>
               </div>
