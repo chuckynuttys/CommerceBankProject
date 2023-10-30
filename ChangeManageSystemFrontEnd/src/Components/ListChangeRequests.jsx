@@ -8,14 +8,15 @@ function ListChangeRequests(props) {
     const {changeId, applicationId, description, reason, reasonNumber, changeType, whyDescription, whatDescription, whoIsImplementers,
            changeWindowStartDate, changeWindowStopDate, changeWindowStartTime, changeWindowStopTime, otherNeededDepartments, riskLevel, implementer,
            implementationStatus, implementationDate, implementationTime, stateLevel, archivedStatus, } = props.changeRequest;
-    console.log("Test");
+    
 
 
   return (
+    
     <div id="u520-1" class="preeval" style={{width: '1317px', height: '60px'}}>
-                    <div id="u521-1" class="ax_default box_1 u521" data-label="Full_Name" style={{width: '120px', height: '30px', left: '119px', top: '0px', visibility: 'inherit'}}>
-                    <div id="u521-1_div" class="u521_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-                    <div id="u521-1_text" class="text u521_text" style={{visibility: 'inherit'}}>
+                    <div id={"u521" + {changeId}} class="ax_default box_1 u521" data-label="Full_Name" style={{width: '120px', height: '30px', left: '119px', top: '0px', visibility: 'inherit'}}>
+                    <div id={"u521" + {changeId} + "_div"} class="u521_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
+                    <div id={"u521" + {changeId} + "_text"} class="text u521_text" style={{visibility: 'inherit'}}>
                     <p><span>Full Name</span></p>
                       </div>
                     </div>
