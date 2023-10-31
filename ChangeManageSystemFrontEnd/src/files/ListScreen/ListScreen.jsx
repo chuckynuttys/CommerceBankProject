@@ -6,7 +6,10 @@ import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
 import NavBar from "../../Components/NavBar";
+
+var navBarNumber;
 class ListScreenApp extends Component { 
+  
   render() {
     return (
     <div id="base" class="">
@@ -35,7 +38,7 @@ class ListScreenApp extends Component {
         </div>
       </div>
 
-     <NavBar/>
+     <NavBar navBarNumber={3}/>
 
       <div id="u498" class="ax_default box_2">
         <div id="u498_div" class=""></div>

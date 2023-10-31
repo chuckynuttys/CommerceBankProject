@@ -5,6 +5,7 @@ import './ArchivedChanges.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
+var navBarNumber;
 const AC = () => {
   return (
     <div id="base" class="">
@@ -29,12 +30,15 @@ const AC = () => {
       
       <div id="u559" class="ax_default box_3">
         <div id="u559_div" class="">
+          
         </div>
         <div id="u559_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
+          
           <p></p>
         </div>
+        
       </div>
-
+      <NavBar navBarNumber={4}/>
         
 
       
@@ -53,7 +57,7 @@ const AC = () => {
         </div>
           </div>
 
-        <NavBar />
+        
 
           <div id="u564" class="ax_default" data-label="Table Repeater">
 
@@ -417,20 +421,7 @@ const AC = () => {
       </div>
 
       
-      <div id="u578" class="ax_default button">
-        <div id="u578_div" class=""></div>
-        <div id="u578_text" class="text ">
-          <p><span>View Change Request Archive</span></p>
-        </div>
-      </div>
-
       
-      <div id="u579" class="ax_default button">
-        <div id="u579_div" class=""></div>
-        <div id="u579_text" class="text ">
-          <p><span>View Change Requests</span></p>
-        </div>
-      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import './Review.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
-
+var navBarNumber;
 const Review = () => {
   return (
     <div id="base" class="">
@@ -396,7 +396,7 @@ const Review = () => {
     </div>
 
     
-    <NavBar/>
+    <NavBar navBarNumber={2}/>
 
     
     <div id="u480" class="ax_default heading_1">

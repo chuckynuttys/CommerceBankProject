@@ -5,6 +5,8 @@ import './Entry.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
+var navBarNumber;
+
 const Entry = () => {
   return (
     <body>
@@ -936,7 +938,7 @@ const Entry = () => {
       </div>
       
       {/* Call NavBar Here */}
-      <NavBar/>
+      <NavBar navBarNumber={1}/>
 
       
       <div id="u176" class="ax_default" data-label="Change Window Start Date" data-left="1016" data-top="127" data-width="200" data-height="50" layer-opacity="1">
