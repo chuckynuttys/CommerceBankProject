@@ -5,6 +5,8 @@ import './Entry.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
+var navBarNumber;
+
 const Entry = () => {
   return (
     <form>
