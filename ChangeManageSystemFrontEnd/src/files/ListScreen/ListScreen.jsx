@@ -1,12 +1,43 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
 import './ListScreen.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
-class ListScreenApp extends Component { 
-  render() {
+
+const ListScreenApp = () => { 
+  const[changeRequests, setChangeRequests] = useState([]);
+  var tabSet;
+
+  useEffect(()=>{
+    fetch(`http://localhost:8080/changerequests?archivedStatus=false`, {method:"GET"})
+    .then(res => res.json())
+    .then(res => {setChangeRequests(res)})
+  },[])
+
+  const handleClick = (e) => {
+    console.log(e);
+    
+    if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
+      // Tab 1
+      console.log("Successful! Tab 1 was selected");
+      document.getElementById("u507_div").setAttribute("class", "selected");
+      document.getElementById("u506_div").setAttribute("class", "");
+      document.getElementById("u508_state0").setAttribute("style", "visibility: visible");
+      document.getElementById("u508_state1").setAttribute("style", "visibility: hidden");
+    } else if (document.getElementById("u506_div").getAttribute("class") == "" && e == "2") {
+      // Tab 2
+      console.log("Successful! Tab 2 was selected");
+      document.getElementById("u506_div").setAttribute("class", "selected");
+      document.getElementById("u507_div").setAttribute("class", "");
+      document.getElementById("u508_state1").setAttribute("style", "visibility: visible");
+      document.getElementById("u508_state0").setAttribute("style", "visibility: hidden");
+    }
+  }
+  
+  
+
     return (
     <div id="base" class="">
 
@@ -113,7 +144,7 @@ class ListScreenApp extends Component {
         <div id="u505" class="ax_default" data-left="308" data-top="304" data-width="221" data-height="41" layer-opacity="1">
 
           
-          <div id="u506" class="ax_default box_3" data-label="Tab Label 2" selectiongroup="Tabs">
+          <div id="u506" class="ax_default box_3" data-label="Tab Label 2" selectiongroup="Tabs" onClick={() => handleClick(2)} style={{cursor: 'pointer'}} >
             <div id="u506_div" class=""></div>
             <div id="u506_text" class="text ">
               <p><span>Tab 2</span></p>
@@ -121,7 +152,7 @@ class ListScreenApp extends Component {
           </div>
 
           
-          <div id="u507" class="ax_default box_3 selected" data-label="Tab Label 1" selectiongroup="Tabs">
+          <div id="u507" class="ax_default box_3 selected" data-label="Tab Label 1" selectiongroup="Tabs" onClick={() => handleClick(1)} style={{cursor: 'pointer'}} >
             <div id="u507_div" class="selected"></div>
             <div id="u507_text" class="text ">
               <p><span>Tab 1</span></p>
@@ -213,15 +244,17 @@ class ListScreenApp extends Component {
                   <p><span>Who</span></p>
                 </div>
               </div>
-              
-              {/* <ListChangeRequests page={1}/> */}
-              
-              
               <div id="u532" class="ax_default box_1" data-label="Action (Header)">
                 <div id="u532_div" class=""></div>
                 <div id="u532_text" class="text ">
                   <p><span>Action</span></p>
                 </div>
+              </div>
+
+              <div id="u520" class="ax_default" data-label="Table Repeater">
+              
+              {changeRequests.map(changeRequest=> <ListChangeRequests key={changeRequest.changeId} changeRequest={changeRequest} tabSet={1}></ListChangeRequests>)}
+              
               </div>
             </div>
           </div>
@@ -315,8 +348,11 @@ class ListScreenApp extends Component {
                   <p><span>Change_Number</span></p>
                 </div>
               </div>
-              {/* <ListChangeRequests page={2}/> */}
+              <div id="u520" class="ax_default" data-label="Table Repeater">
 
+              {changeRequests.map(changeRequest=> <ListChangeRequests key={changeRequest.changeId} changeRequest={changeRequest} tabSet={2}></ListChangeRequests>)}
+                
+                </div>
               </div>
             </div>
           </div>
@@ -324,6 +360,4 @@ class ListScreenApp extends Component {
       </div>
     );
   }
-}
-
 export default ListScreenApp;

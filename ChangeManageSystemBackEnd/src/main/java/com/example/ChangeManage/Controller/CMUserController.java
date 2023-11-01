@@ -38,11 +38,11 @@ public class CMUserController {
     public ResponseEntity<CMUser> getUser(@RequestParam(required = true) String username) {
         username = username.replaceAll("\"", "");
         System.out.println("Get Test; username:" + username);
-        Optional<CMUser> user = cmUserService.getCMUserByUserId(username);
-        if (user.isEmpty()) {
+        CMUser user = cmUserService.getCMUserByUserId(username);
+        if (user == null) {
             throw new UserNotFoundException(String.format("UserId[%s] not found", username));
         } else {
-            System.out.println("UserID: " + user.get().getUsername());
+            System.out.println("UserID: " + user.getUsername());
             return new ResponseEntity(user, HttpStatus.OK);
         }
     }

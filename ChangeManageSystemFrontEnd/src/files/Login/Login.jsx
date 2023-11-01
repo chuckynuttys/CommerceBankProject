@@ -9,17 +9,13 @@ import LoginComponent from "../../Components/LoginComponent";
 
 
 const Login = () => {
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  var movePage = true;
-  
-
   const handleSignIn = (t) => {
     if (t == true) {
       navigate("/Entry");
     }
   };
+  
 
   return (
     <body>
