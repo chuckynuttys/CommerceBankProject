@@ -21,7 +21,7 @@ public class CMUser {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String userId;
+    private String username;
     private String password;
     private String authorizationLevel;
 

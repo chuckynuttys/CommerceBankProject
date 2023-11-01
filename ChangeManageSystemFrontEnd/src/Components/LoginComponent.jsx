@@ -2,65 +2,60 @@ import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {Formik, Field, ErrorMessage} from 'formik';
 import ChangeRequestDataService from '../Service/ChangeRequestDataService';
+import { useNavigate } from 'react-router-dom';
 
 class LoginComponent extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        userId:'',
+        username:'',
         password:'',
+        shouldRedirect: false,
       }
       this.changeValue = this.changeValue.bind(this);
       this.requestUser = this.requestUser.bind(this);
+      
     };
     changeValue=(e)=>{
-      console.log(e.target.name);
       const nameValue = e.target.name;
       const value = JSON.stringify(e.target.value);
       this[nameValue] = value;
-      console.log(this.userId);
-      console.log(this.password);
     }
     requestUser=(e)=>{
       e.preventDefault();
-      fetch(`http://localhost:8080/users/${this.userId}`)
-      .then(data=> {
-        return data.json();
-      })
-      .then(post => {
-        console.log(post.userId);
-        console.log(post.password);
-        if (post.userId == this.userId) {
-          if (post.password == this.password) {
-              document.cookie = "userId=" + this.userID;
+      console.log(this.username);
+      let CurrentPassword = this.password;
+      let CurrentUsername = this.username;
+      CurrentPassword = CurrentPassword.replaceAll("\"", "");
+      CurrentUsername = CurrentUsername.replaceAll("\"", "");
+      fetch(`http://localhost:8080/users?username=${CurrentUsername}`)
+      .then(data=>data.json())
+      .then(data => {
+        if (data.password == CurrentPassword) {
+              document.cookie = "username=" + CurrentUsername;
               console.log(document.cookie);
-          } else {
+              this.props.handleSignIn(true);
+        } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
           // Logging for debugging below.
           console.log("Incorrect Password");
-          console.log(this.password);
-          }
-        } else {
-          // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
-          // Logging for debugging below.
-          console.log("Incorrect userId");
-          console.log(this.userID);
+          console.log(CurrentPassword);
+          console.log(data.password);
         }
       })
     }
     render() {
         return (
                     <Form onSubmit={this.requestUser}>
-                      
                         <div id="u6" class="ax_default text_field" data-label="Input Field">
                           <div id="u6_div" class=""></div>
-                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="userId"/>
+                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="username"/>
                         </div>
 
                         <div id="u8" class="ax_default shape" data-label="Lower Label">
                         <div id="u8_div" class=""></div>
                         <div id="u8_text" class="text ">
-                          <p><span>UserID</span></p>
+                          <p><span>username</span></p>
                           </div>
                         </div>
                       
