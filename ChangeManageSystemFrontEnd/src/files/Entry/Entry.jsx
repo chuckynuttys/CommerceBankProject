@@ -101,8 +101,8 @@ const Entry = () => {
              <input type="submit" value="Submit" /> 
           
              </fieldset>
-        </div>
-        </form>
+          </div>
+          </form>
   );
 };
 
