@@ -10,6 +10,7 @@ var navBarNumber;
 const Entry = () => {
   return (
     <form>
+      <NavBar navBarNumber={1}/>
           <div className="menu">
              <h1> <img className = "logo" src={logo} alt="logo" /> </h1>
              <h2>Change Request Form</h2>
