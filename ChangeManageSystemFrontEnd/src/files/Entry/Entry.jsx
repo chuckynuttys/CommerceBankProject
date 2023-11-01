@@ -10,7 +10,6 @@ var navBarNumber;
 const Entry = () => {
   return (
     <form>
-      <NavBar navBarNumber={1}></NavBar>
           <div className="menu">
              <h1> <img className = "logo" src={logo} alt="logo" /> </h1>
              <h2>Change Request Form</h2>
@@ -102,8 +101,8 @@ const Entry = () => {
              <input type="submit" value="Submit" /> 
           
              </fieldset>
-             </div>
-      </form>
+        </div>
+        </form>
   );
 };
 
