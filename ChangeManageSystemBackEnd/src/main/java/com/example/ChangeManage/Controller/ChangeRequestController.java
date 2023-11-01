@@ -38,9 +38,9 @@ public class ChangeRequestController{
         if (changeRequestList.isPresent()) {
             System.out.println("Change requests present: ");
             System.out.println("Change request List size: " + changeRequestList.get().size());
-            for (int i = 0; i < changeRequestList.get().size(); i++) {
-                System.out.println("changeID:" + changeRequestList.get().get(i).getChangeId());
-            }
+//            for (int i = 0; i < changeRequestList.get().size(); i++) {
+//                System.out.println("changeID:" + changeRequestList.get().get(i).getChangeId());
+//            }
         }
 
         return new ResponseEntity<>(changeRequestService.getChangeRequests(archivedStatus), HttpStatus.OK);
