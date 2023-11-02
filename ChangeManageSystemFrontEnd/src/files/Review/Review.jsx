@@ -4,6 +4,8 @@ import '../../css/styles.css';
 import './Review.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
+import NavBar from "../../Components/NavBar";
+var navBarNumber;
 const Review = () => {
   return (
     <div id="base" class="">
@@ -394,20 +396,7 @@ const Review = () => {
     </div>
 
     
-    <div id="u478" class="ax_default button">
-      <div id="u478_div" class=""></div>
-      <div id="u478_text" class="text ">
-        <p><span>View Change Requests</span></p>
-      </div>
-    </div>
-
-    
-    <div id="u479" class="ax_default button">
-      <div id="u479_div" class=""></div>
-      <div id="u479_text" class="text ">
-        <p><span>Log out</span></p>
-      </div>
-    </div>
+    <NavBar navBarNumber={2}/>
 
     
     <div id="u480" class="ax_default heading_1">

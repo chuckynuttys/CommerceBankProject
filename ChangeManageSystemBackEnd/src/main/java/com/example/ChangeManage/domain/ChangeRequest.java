@@ -23,14 +23,15 @@ public class ChangeRequest {
     private String changeType;
     private String whyDescription;
     private String whatDescription;
-    private String whoIsImplementers; // Should be who is implementing the change.
+    private String backOutPlan;
+    private String backOutMinutes;
     private String changeWindowStartDate;
     private String changeWindowStopDate;
     private String changeWindowStartTime;
     private String changeWindowStopTime;
     private String otherNeededDepartments;
     private String riskLevel;
-    private String implementer; // Implementer should be equal to the 'whoIsImplementers' value
+    private String implementer;
     private String implementationStatus;
     private String implementationDate; // Must be between changeWindow Start and Stop Date/Time
     private String implementationTime;
