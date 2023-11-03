@@ -54,7 +54,8 @@ fieldset{
   width:45%;
 }
 .fs2{
-  padding-left:5px;
+
+  padding-left:8px;
   margin-left: 9%;
   width: 45%;
 }
@@ -72,11 +73,11 @@ h2{
   display: block;
   margin: 0.7rem 0;
   font-size: 12px;
-  margin-right: auto; 
+  margin-right: 0px; 
   margin-top: 25px;
   margin-bottom: 0px;
   height: 120px;
-  width: auto;
+  width: 100%;
   
 }
 
@@ -84,10 +85,11 @@ h2{
   display: block;
   margin: 0.7rem 0;
   font-size: 12px;
-  margin-right: auto; 
+  margin-right: 0px; 
   margin-top: 30px;
   margin-bottom: 0px;
   height: 100px;
+  width: 100%;
   
 }
 
@@ -96,7 +98,7 @@ h2{
   font-size: 16px;
   top: 0;
   display: block;
-  width: 90%;
+  width: 100%;
   position: relative;
   background-color: rgb(231,231,231);
   border: 1px solid rgb(231,231,231);
@@ -127,7 +129,7 @@ textarea{
   border: 1px solid rgb(231,231,231);
   padding: 5%;
   top:10px;
-  width: 90%;
+  width: 100%;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -203,7 +205,8 @@ textarea{
   margin-top: 0px;
   margin-bottom: 15px;
   top:100%;
-  margin-left: 15%;
+  margin-left: 25%;
+  width: auto;
 }
 
 .inputCalender{
