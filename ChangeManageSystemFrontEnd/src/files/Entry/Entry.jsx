@@ -9,13 +9,12 @@ import NavBar from "../../Components/NavBar";
 var navBarNumber;
 const Entry = () => {
   return (
-    <div>
-    <form>
-    <NavBar navBarNumber={1}/>
+    
+      <form> 
           <div className="menu">
              <h1> <img className = "logo" src={logo} alt="logo" /> </h1>
              <h2>Change Request Form</h2>
-             <fieldset>
+             <fieldset className="fs1">
               <label className= "labelInput" htmlFor="aId">
               <input className="inputLabelTopPage" id="aId" name = "aID" rows="9" cols="50" placeholder="Application ID" />
               <p className = "button">Three character ID of the application team implementing the change</p>
@@ -105,8 +104,7 @@ const Entry = () => {
              </fieldset>
           </div>
           </form>
-          </div>
+      
   );
 };
-
 export default Entry;
