@@ -24,7 +24,7 @@ const NavBar = (props) => {
             <div id="u172" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
             <div id="u172_div" class=""></div>
                 <div id="u172_text" class="text ">
-              <p><span>View Change Request</span></p>
+              <p><span>View Change Requests</span></p>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@ const NavBar = (props) => {
     return (
         <div>
 
-            <div id="478" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
+            <div id="u478" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
             <div id="u478_div" class=""></div>
             <div id="u478_text" class="text ">
               <p><span>View Change Requests</span></p>
@@ -89,7 +89,7 @@ const NavBar = (props) => {
             <div id="u499" class="ax_default button">
                 <div id="u499_div" class=""></div>
                 <div id="u499_text" class="text ">
-                    <p><span>View Change Request</span></p>
+                    <p><span>View Change Requests</span></p>
                 </div>
             </div>
 
@@ -115,7 +115,7 @@ const NavBar = (props) => {
             <div id="u579" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
                 <div id="u579_div" class=""></div>
                 <div id="u579_text" class="text ">
-                    <p><span>View Change Request</span></p>
+                    <p><span>View Change Requests</span></p>
                 </div>
             </div>
             <div id="u578" class="ax_default button">

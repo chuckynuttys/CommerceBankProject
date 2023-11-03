@@ -135,7 +135,7 @@ body {
     left:0px;
     top:0px;
     width:140px;
-    height:41px;
+    height:40px;
     background:inherit;
     background-color:rgba(192, 188, 175, 1);
     border:none;
@@ -154,7 +154,7 @@ body {
     border-width:0px;
     position:absolute;
     left:215px;
-    top:64px;
+    top:63px;
     width:140px;
     height:41px;
     display:flex;
@@ -177,7 +177,7 @@ body {
     left:0px;
     top:0px;
     width:140px;
-    height:40px;
+    height:39px;
     background:inherit;
     background-color:rgba(192, 188, 175, 1);
     box-sizing:border-box;
@@ -221,7 +221,7 @@ body {
     left:0px;
     top:0px;
     width:208px;
-    height:41px;
+    height:39px;
     background:inherit;
     background-color:rgba(178, 174, 160, 1);
     box-sizing:border-box;
@@ -301,9 +301,9 @@ body {
     border-width:0px;
     position:absolute;
     left:0px;
-    top:0px;
+    top:-1px;
     width:208px;
-    height:41px;
+    height:40px;
     background:inherit;
     background-color:rgba(178, 174, 160, 1);
     box-sizing:border-box;
