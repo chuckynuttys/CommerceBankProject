@@ -36,12 +36,14 @@ class LoginComponent extends Component {
               console.log(document.cookie);
           } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
+            this.setState({ incorrectPassword: true });
           // Logging for debugging below.
           console.log("Incorrect Password");
           console.log(this.password);
           }
         } else {
           // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
+          this.setState({ incorrectUserId: true });
           // Logging for debugging below.
           console.log("Incorrect userId");
           console.log(this.userID);
@@ -56,18 +58,23 @@ class LoginComponent extends Component {
                           <div id="u6_div" class=""></div>
                           <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="userId"/>
                         </div>
-
+                        {this.state.incorrectUserId && (
+                    <div className="error-message">Incorrect userId</div>
+                        )}
                         <div id="u8" class="ax_default shape" data-label="Lower Label">
                         <div id="u8_div" class=""></div>
                         <div id="u8_text" class="text ">
                           <p><span>UserID</span></p>
                           </div>
                         </div>
-                      
+
                         <div id="u10" class="ax_default text_field" data-label="Input Field">
                           <div id="u10_div" class=""></div>
                           <input id="u10_input" type="text" class="u10_input" onChange = {this.changeValue} name="password"/>
                         </div>
+                        {this.state.incorrectPassword && (
+                    <div className="error-message">Incorrect Password</div>
+                        )}
                         <div id="u12" class="ax_default shape" data-label="Lower Label">
                         <div id="u12_div" class=""></div>
                         <div id="u12_text" class="text ">
