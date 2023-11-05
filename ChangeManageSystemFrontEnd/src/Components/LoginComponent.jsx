@@ -1,52 +1,55 @@
 import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {Formik, Field, ErrorMessage} from 'formik';
-import ChangeRequestDataService from '../Service/ChangeRequestDataService';
+
 
 class LoginComponent extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        userId:'',
+        username:'',
         password:'',
       }
       this.changeValue = this.changeValue.bind(this);
       this.requestUser = this.requestUser.bind(this);
     };
     changeValue=(e)=>{
-      console.log(e.target.name);
       const nameValue = e.target.name;
       const value = JSON.stringify(e.target.value);
       this[nameValue] = value;
-      console.log(this.userId);
-      console.log(this.password);
     }
     requestUser=(e)=>{
       e.preventDefault();
-      fetch(`http://localhost:8080/users/${this.userId}`)
+      console.log(this.username);
+      let CurrentPassword = this.password;
+      let CurrentUsername = this.username;
+      CurrentPassword = CurrentPassword.replaceAll("\"", "");
+      CurrentUsername = CurrentUsername.replaceAll("\"", "");
+      fetch(`http://localhost:8080/users?username=${CurrentUsername}`)
       .then(data=> {
         return data.json();
       })
       .then(post => {
         console.log(post.userId);
         console.log(post.password);
-        if (post.userId == this.userId) {
-          if (post.password == this.password) {
-              document.cookie = "userId=" + this.userID;
+        if (post.username == CurrentUsername) {
+          if (post.password == CurrentPassword) {
+              document.cookie = "userId=" + CurrentUsername;
               console.log(document.cookie);
+              this.props.handleSignIn(true);
           } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
           this.setState({ incorrectPassword: true, incorrectUserId: false });
           // Logging for debugging below.
           console.log("Incorrect Password");
-          console.log(this.password);
+          console.log(CurrentPassword);
           }
         } else {
           // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
           this.setState({ incorrectUserId: true, incorrectPassword: false });
           // Logging for debugging below.
           console.log("Incorrect userId");
-          console.log(this.userID);
+          console.log(CurrentUsername);
         }
       })
       .catch(error => {
@@ -60,7 +63,7 @@ class LoginComponent extends Component {
                       
                         <div id="u6" class="ax_default text_field" data-label="Input Field">
                           <div id="u6_div" class=""></div>
-                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="userId"/>
+                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="username"/>
                         </div>
                         {this.state.incorrectUserId && (
                     <div className="error-message">Incorrect userId</div>
