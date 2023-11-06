@@ -46,32 +46,32 @@ class LoginComponent extends Component {
     render() {
         return (
                     <Form onSubmit={this.requestUser}>
-                        <div id="u6" class="ax_default text_field" data-label="Input Field">
-                          <div id="u6_div" class=""></div>
-                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="username"/>
+                        <div id="u6" className="ax_default text_field" data-label="Input Field">
+                          <div id="u6_div" className=""></div>
+                          <input id="u6_input" type="text" className="u6_input" onChange = {this.changeValue} name="username"/>
                         </div>
 
-                        <div id="u8" class="ax_default shape" data-label="Lower Label">
-                        <div id="u8_div" class=""></div>
-                        <div id="u8_text" class="text ">
+                        <div id="u8" className="ax_default shape" data-label="Lower Label">
+                        <div id="u8_div" className=""></div>
+                        <div id="u8_text" className="text ">
                           <p><span>username</span></p>
                           </div>
                         </div>
                       
-                        <div id="u10" class="ax_default text_field" data-label="Input Field">
-                          <div id="u10_div" class=""></div>
-                          <input id="u10_input" type="text" class="u10_input" onChange = {this.changeValue} name="password"/>
+                        <div id="u10" className="ax_default text_field" data-label="Input Field">
+                          <div id="u10_div" className=""></div>
+                          <input id="u10_input" type="text" className="u10_input" onChange = {this.changeValue} name="password"/>
                         </div>
-                        <div id="u12" class="ax_default shape" data-label="Lower Label">
-                        <div id="u12_div" class=""></div>
-                        <div id="u12_text" class="text ">
+                        <div id="u12" className="ax_default shape" data-label="Lower Label">
+                        <div id="u12_div" className=""></div>
+                        <div id="u12_text" className="text ">
                             <p><span>Password</span></p>
                           </div>
                         </div>
                       
-                      <button id="u13" class="ax_default primary_button" style={{cursor: 'pointer'}} type="submit"> 
-                      <div id="u13_div" class=""></div>
-                      <div id="u13_text" class="text ">
+                      <button id="u13" className="ax_default primary_button" style={{cursor: 'pointer'}} type="submit"> 
+                      <div id="u13_div" className=""></div>
+                      <div id="u13_text" className="text ">
                         <p><span>Log In</span></p>
                         </div>
                       </button>

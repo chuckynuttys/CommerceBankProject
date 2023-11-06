@@ -10,6 +10,7 @@ body {
     font-feature-settings: "kern" 1;
     font-kerning: normal;
     overflow: hidden;
+    overflow-x:hidden;
 }
 
 a {

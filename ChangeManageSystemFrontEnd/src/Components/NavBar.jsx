@@ -14,30 +14,30 @@ const NavBar = (props) => {
     return(
 
         <div>
-            <div id="u171" class="ax_default button">
-                <div id="u171_div" class=""></div>
-                <div id="u171_text" class="text ">
+            <div id="u171" className="ax_default button">
+                <div id="u171_div" className=""></div>
+                <div id="u171_text" className="text ">
                     <p><span>Submit Request</span></p>
                 </div>
             </div>
 
-            <div id="u172" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
-            <div id="u172_div" class=""></div>
-                <div id="u172_text" class="text ">
+            <div id="u172" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
+            <div id="u172_div" className=""></div>
+                <div id="u172_text" className="text ">
               <p><span>View Change Requests</span></p>
                 </div>
             </div>
 
-            <div id="u174" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ArchivedChangesApp")}>
-            <div id="u174_div" class=""></div>
-            <div id="u174_text" class="text ">
+            <div id="u174" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ArchivedChangesApp")}>
+            <div id="u174_div" className=""></div>
+            <div id="u174_text" className="text ">
               <p><span>View Change Request Archive</span></p>
                 </div>
             </div>
 
-            <div id="u173" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
-            <div id="u173_div" class=""></div>
-            <div id="u173_text" class="text ">
+            <div id="u173" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
+            <div id="u173_div" className=""></div>
+            <div id="u173_text" className="text ">
               <p><span>Log out</span></p>
                 </div>
             </div>
@@ -51,16 +51,16 @@ const NavBar = (props) => {
     return (
         <div>
 
-            <div id="u478" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
-            <div id="u478_div" class=""></div>
-            <div id="u478_text" class="text ">
+            <div id="u478" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
+            <div id="u478_div" className=""></div>
+            <div id="u478_text" className="text ">
               <p><span>View Change Requests</span></p>
                 </div>
             </div>
 
-            <div id="u479" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
-            <div id="u479_div" class=""></div>
-            <div id="u479_text" class="text ">
+            <div id="u479" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
+            <div id="u479_div" className=""></div>
+            <div id="u479_text" className="text ">
               <p><span>Log out</span></p>
                 </div>
             </div>
@@ -71,31 +71,31 @@ const NavBar = (props) => {
     // NavBar for ChangeRequestsPage
     return (
         <div>
-            <div id="u495" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Entry")}>
-                <div id="u495_div" class=""></div>
-                <div id="u495_text" class="text ">
+            <div id="u495" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Entry")}>
+                <div id="u495_div" className=""></div>
+                <div id="u495_text" className="text ">
                     <p><span>Submit Request</span></p>
                 </div>
             </div>
 
 
-            <div id="u496" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
-                <div id="u496_div" class=""></div>
-                <div id="u496_text" class="text ">
+            <div id="u496" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
+                <div id="u496_div" className=""></div>
+                <div id="u496_text" className="text ">
                     <p><span>Log out</span></p>
                 </div>
             </div>
             
-            <div id="u499" class="ax_default button">
-                <div id="u499_div" class=""></div>
-                <div id="u499_text" class="text ">
+            <div id="u499" className="ax_default button">
+                <div id="u499_div" className=""></div>
+                <div id="u499_text" className="text ">
                     <p><span>View Change Requests</span></p>
                 </div>
             </div>
 
-            <div id="u497" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ArchivedChangesApp")}>
-                <div id="u497_div" class=""></div>
-                <div id="u497_text" class="text ">
+            <div id="u497" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ArchivedChangesApp")}>
+                <div id="u497_div" className=""></div>
+                <div id="u497_text" className="text ">
                     <p><span>View Change Request Archive</span></p>
                 </div>
             </div>
@@ -106,28 +106,28 @@ const NavBar = (props) => {
     // NavBar for ArchivedChangesPage
     return(
         <div>
-            <div id="u560" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Entry")}>
-                <div id="u560_div" class=""></div>
-                <div id="u560_text" class="text ">
+            <div id="u560" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Entry")}>
+                <div id="u560_div" className=""></div>
+                <div id="u560_text" className="text ">
                     <p><span>Submit Request</span></p>
                 </div>
             </div>
-            <div id="u579" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
-                <div id="u579_div" class=""></div>
-                <div id="u579_text" class="text ">
+            <div id="u579" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
+                <div id="u579_div" className=""></div>
+                <div id="u579_text" className="text ">
                     <p><span>View Change Requests</span></p>
                 </div>
             </div>
-            <div id="u578" class="ax_default button">
-                <div id="u578_div" class=""></div>
-                <div id="u578_text" class="text ">
+            <div id="u578" className="ax_default button">
+                <div id="u578_div" className=""></div>
+                <div id="u578_text" className="text ">
                     <p><span>View Change Request Archive</span></p>
                 </div>
             </div>
 
-            <div id="u561" class="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
-                <div id="u561_div" class=""></div>
-                <div id="u461_text" class="text ">
+            <div id="u561" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
+                <div id="u561_div" className=""></div>
+                <div id="u461_text" className="text ">
                     <p><span>Log out</span></p>
                 </div>
             </div>
