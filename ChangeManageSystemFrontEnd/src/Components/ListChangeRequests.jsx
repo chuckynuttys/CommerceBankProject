@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ActionComponent from './ActionComponent';
 
 const userid = document.cookie;
 var page = 1;
@@ -83,12 +83,8 @@ function ListChangeRequests(props) {
                             </div>
                           </div>
                         
-                        <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '120px', height: '120px', left: '1197px', top: '0px', visibility: 'inherit'}}>
-                          <div id="u531-1_div" class="u531_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
-                          <div id="u531-1_text" class="text u531_text" style={{display: 'none', visibility: 'hidden'}}>
-                            <p></p>
-                            </div>
-                          </div>
+                        <ActionComponent stateLevel={stateLevel}/>
+                        
                         </div>
         );
       } else if(props.tabSet == 2) {

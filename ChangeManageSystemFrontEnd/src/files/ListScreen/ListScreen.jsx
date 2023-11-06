@@ -229,7 +229,7 @@ const ListScreenApp = () => {
                 </div>
               </div>
 
-              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
+              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow": 'auto', height: '370px',}}>
               
               {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index}/>)}
               
