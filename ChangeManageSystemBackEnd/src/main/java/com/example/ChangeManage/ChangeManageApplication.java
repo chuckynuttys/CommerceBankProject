@@ -66,7 +66,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Robert Lukenbill",
-					null, null, null, "Open",
+					null, null, null, "Frozen",
 					false, null);
 			changeRequestService.create(newChangeRequest, "RL4");
 			newChangeRequest = new ChangeRequest(2, 2,

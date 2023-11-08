@@ -31,20 +31,41 @@ public class ChangeRequestController{
 
     // Getting all ChangeRequests on the archived Status
     @GetMapping("/changerequests")
-    public ResponseEntity<?> getChangeRequests(@RequestParam(required = true) boolean archivedStatus) {
-        Optional<List<ChangeRequest>> changeRequestList = changeRequestService.getChangeRequests(archivedStatus);
-        if (changeRequestList.isPresent()) {
-            System.out.println("Change requests present: ");
-            System.out.println("Change request List size: " + changeRequestList.get().size());
+    public ResponseEntity<?> getChangeRequests(@RequestParam(required = true) boolean archivedStatus,
+                                               @RequestParam(required = false) Integer id,
+                                               @RequestParam(required = false) String authorizationLevel) {
+        if (id == null) {
+            // Archived Status Request
+            Optional<List<ChangeRequest>> changeRequestList =
+                    changeRequestService.getChangeRequestsByArchivedStatus(archivedStatus);
+            if (changeRequestList.isPresent()) {
+                System.out.println("Change Requests present: ");
+                System.out.println("Change Request List Size: " + changeRequestList.get().size());
+            }
+            return new ResponseEntity<>(changeRequestService.getChangeRequestsByArchivedStatus(archivedStatus),
+                    HttpStatus.OK);
+        } else {
+            Optional<List<ChangeRequest>> changeRequestList = changeRequestService.getChangeRequestsById(archivedStatus,
+                    id, authorizationLevel);
+            if (changeRequestList.isPresent()) {
+                System.out.println("Change requests present: ");
+                System.out.println("Change request List size: " + changeRequestList.get().size());
+            }
+            return new ResponseEntity<>(changeRequestService.getChangeRequestsById(archivedStatus, id, authorizationLevel), HttpStatus.OK);
         }
-        return new ResponseEntity<>(changeRequestService.getChangeRequests(archivedStatus), HttpStatus.OK);
+
     }
 
-    // Updating a specific ChangeRequest
-    @PutMapping("/changerequests")
-    public ResponseEntity<?> updateChangeRequest(@RequestParam(required = true) Integer changeId,
-                                                 @RequestParam(required = true) String stateLevel) {
-
+    // Updating a specific ChangeRequest through the changeId & stateLevel
+    @PatchMapping("/changerequests/{id}")
+    public boolean updateStateLevelOfChangeRequest(@PathVariable Integer id,
+                                                 @RequestParam(required = true) String stateLevel,
+                                                   @RequestParam(required = false) Boolean archivedStatus) {
+    if (archivedStatus != null) {
+        return (changeRequestService.updateChangeRequestsByStateLevelAndArchivedStatus(id, stateLevel, archivedStatus));
+    } else {
+        return (changeRequestService.updateChangeRequestsByStateLevel(id, stateLevel));
+    }
     }
 
 }

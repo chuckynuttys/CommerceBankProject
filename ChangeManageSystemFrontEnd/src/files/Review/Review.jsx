@@ -393,7 +393,6 @@ const Review = () => {
       <div id="u477_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
         <p></p>
       </div>
-      
     </div>
 
     <NavBar navBarNumber={2}/>

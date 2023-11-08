@@ -1,20 +1,48 @@
 import React, {Component} from "react";
+import user from "../files/UserFile";
 
 class ActionComponent extends Component {
 constructor(props) {
     super(props)
     this.state = {
       stateLevel: props.stateLevel,
+      changeId: props.changeId,
     }
     this.handleClick = this.handleClick.bind(this);
 }
-
 handleClick=(e)=>{
-    if (e.target.value == "Freeze") {
-        console.log("Freeze");
-    } else if (e.target.value == "Edit") {
-        console.log("Edit");
+    
+    const params = {
+        stateLevel: this.state.stateLevel,
+        
     }
+    
+    if (e.target.value == "Freeze") {
+        // Freeze 
+        params.stateLevel = "Freeze";
+    } else if (e.target.value == "Approve") {
+        // Approve & Archive if user role is Operations, otherwise go to next department.
+        switch (user.authorizationLevel) {
+            case "departmentUser":
+                params.stateLevel = "Department";
+                break;
+            case "applicationUser":
+                params.stateLevel = "Application";
+                break;
+            case "operationsUser":
+                params.stateLevel = "Approved";
+                params.archivedStatus = "true";
+                break;
+        }
+    } else if (e.target.value == "Deny") {
+        // Deny & Archive
+        params.stateLevel = "Deny";
+    } else {
+        // Unfreeze
+        params.stateLevel = "Open";
+    }
+    const searchParams = new URLSearchParams(params);
+        fetch(`http://localhost:8080/changerequests/` + this.state.changeId + '?' + searchParams.toString(), {method: 'PATCH'});
 }
 
 render() {
@@ -30,7 +58,6 @@ if (this.state.stateLevel == "Open") {
         <div id="u531-1_text" class="text u531_text">
             <ul>
                 <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Freeze">Freeze</button>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Edit">Edit</button>
             </ul>
         </div>
     </div>

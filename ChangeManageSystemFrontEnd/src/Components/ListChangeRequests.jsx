@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ActionComponent from './ActionComponent';
+import { useNavigate } from 'react-router-dom';
 
 const userid = document.cookie;
 var page = 1;
@@ -9,6 +10,8 @@ function ListChangeRequests(props) {
            changeWindowStartDate, changeWindowStopDate, changeWindowStartTime, changeWindowStopTime, otherNeededDepartments, riskLevel, implementer,
            implementationStatus, implementationDate, implementationTime, stateLevel, archivedStatus, } = props.changeRequest;
     const indexNumber = props.index;
+    
+    const navigate = useNavigate();
 
       if(props.tabSet == 1) {
         return (
@@ -72,18 +75,18 @@ function ListChangeRequests(props) {
                         <div id="u529-1" class="ax_default box_1 u529" data-label="What" style={{width: '120px', height: '120px', left: '957px', top: '0px', visibility: 'inherit'}}>
                           <div id="u529-1_div" class="u529_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
                           <div id="u529-1_text" class="text u529_text" style={{visibility: 'inherit'}}>
-                            <p><span>{whatDescription}</span></p>
+                            <p><span>{implementer}</span></p>
                             </div>
                           </div>
       
                         <div id="u530-1" class="ax_default box_1 u530" data-label="Who" style={{width: '120px', height: '120px', left: '1077px', top: '0px', visibility: 'inherit'}}>
                           <div id="u530-1_div" class="u530_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
                           <div id="u530-1_text" class="text u530_text" style={{visibility: 'inherit'}}>
-                            <p><span>{implementer}</span></p>
+                            <p><span>{stateLevel}</span></p>
                             </div>
                           </div>
                         
-                        <ActionComponent stateLevel={stateLevel}/>
+                        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate}/>
                         
                         </div>
         );
@@ -162,12 +165,7 @@ function ListChangeRequests(props) {
             </div>
           </div>
 
-          <div id="u556-1" class="ax_default box_1 u556" data-label="Action" style={{width: '113px', height: '120px', left: '1199px', top: '0px', visibility: 'inherit'}}>
-            <div id="u556-1_div" class="u556_div" style={{width: '113px', height: '120px', visibility: 'inherit'}}></div>
-            <div id="u556-1_text" class="text u556_text" style={{visibility: 'inherit'}}>
-              <p></p>
-            </div>
-          </div>
+          <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate}/>
 
         </div>
         )

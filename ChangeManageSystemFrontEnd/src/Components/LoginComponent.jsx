@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {Formik, Field, ErrorMessage} from 'formik';
 import { useNavigate } from 'react-router-dom';
+import user from '../files/UserFile';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -22,7 +23,6 @@ class LoginComponent extends Component {
     }
     requestUser=(e)=>{
       e.preventDefault();
-      console.log(this.username);
       let CurrentPassword = this.password;
       let CurrentUsername = this.username;
       CurrentPassword = CurrentPassword.replaceAll("\"", "");
@@ -31,8 +31,11 @@ class LoginComponent extends Component {
       .then(data=>data.json())
       .then(data => {
         if (data.password == CurrentPassword) {
-              document.cookie = "username=" + CurrentUsername;
-              console.log(document.cookie);
+              // document.cookie = "username=" + CurrentUsername;
+              // console.log(document.cookie);
+              user.username = data.username;
+              user.authorizationLevel = data.authorizationLevel;
+              user.id = data.id;
               this.props.handleSignIn(true);
         } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.

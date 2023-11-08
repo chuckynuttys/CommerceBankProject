@@ -10,8 +10,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -33,9 +39,72 @@ public class ChangeRequestService
     }
 
     @Transactional
-    public Optional<List<ChangeRequest>> getChangeRequests(boolean archivedStatus) {
+    public Optional<List<ChangeRequest>> getChangeRequestsById(boolean archivedStatus, int id, String authorizationLevel) {
+        switch (authorizationLevel) {
+            case "departmentUser":
+                // Only show Change Requests that are Frozen not from the User and Change Requests
+                // that are Open from the user
+                return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
+                        archivedStatus, id, "Open"),
+                                changeRequestRepository.findChangeRequestsNotFromUserWithCustomQuery(
+                                        archivedStatus, id, "Frozen"))
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .flatMap(List::stream)
+                        .collect(Collectors.toList()));
+
+            case "applicationUser":
+                // Only show Change Requests that are Department not from the User and Change Requests
+                // that are open from the user
+                return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
+                                        archivedStatus, id, "Open"),
+                                changeRequestRepository.findChangeRequestsNotFromUserWithCustomQuery(
+                                        archivedStatus, id, "Department"))
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .flatMap(List::stream)
+                        .collect(Collectors.toList()));
+
+            case "operationsUser":
+                // Show all change Requests except frozen ones from the User
+                return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
+                                        archivedStatus, id, "Open"),
+                                changeRequestRepository.findAllChangeRequestsNotFromUserWithCustomQuery(
+                                        archivedStatus, id))
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .flatMap(List::stream)
+                        .collect(Collectors.toList()));
+
+            default:
+                // Only show Change Requests from the user that are Open
+                return changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(archivedStatus, id,
+                        "Open");
+
+        }
+    }
+    @Transactional
+    public Optional<List<ChangeRequest>> getChangeRequestsByArchivedStatus(boolean archivedStatus) {
         return changeRequestRepository.findByArchivedStatus(archivedStatus);
     }
+    @Transactional
+    public boolean updateChangeRequestsByStateLevelAndArchivedStatus(Integer id, String stateLevel,
+                                                                     boolean archivedStatus) {
+        ChangeRequest changeRequestEntity = changeRequestRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("check Id"));
+        changeRequestEntity.setStateLevel(stateLevel);
+        changeRequestEntity.setArchivedStatus(archivedStatus);
+        changeRequestRepository.save(changeRequestEntity);
+        return true;
+    }
+    @Transactional
+    public boolean updateChangeRequestsByStateLevel(Integer id, String stateLevel) {
+        ChangeRequest changeRequestEntity = changeRequestRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("check Id"));
+        changeRequestEntity.setStateLevel(stateLevel);
 
+        changeRequestRepository.save(changeRequestEntity);
+        return true;
+    }
 
 }
