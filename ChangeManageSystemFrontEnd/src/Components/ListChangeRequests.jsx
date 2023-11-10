@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ActionComponent from './ActionComponent';
 import { useNavigate } from 'react-router-dom';
+import { getCookie } from '../files/CookieManagement';
 
-const userid = document.cookie;
+const userid = getCookie("id");
 var page = 1;
 
 function ListChangeRequests(props) {

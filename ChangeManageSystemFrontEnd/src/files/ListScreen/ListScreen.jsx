@@ -7,6 +7,7 @@ import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
 import NavBar from "../../Components/NavBar";
 import user from "../UserFile";
+import { getCookie } from "../CookieManagement";
 
 const ListScreenApp = () => { 
   const[changeRequests, setChangeRequests] = useState([]);
@@ -22,9 +23,10 @@ const ListScreenApp = () => {
     
     const params = {
       archivedStatus: false,
-      id: user.id,
-      authorizationLevel: user.authorizationLevel.toString(),
+      id: parseInt(getCookie("id")),
+      authorizationLevel: getCookie("authorizationLevel"),
     }
+    console.log(params.authorizationLevel);
     const searchParams = new URLSearchParams(params);
     fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
     // fetch(`http://localhost:8080/changerequests?archivedStatus=false`, {method:"GET"})

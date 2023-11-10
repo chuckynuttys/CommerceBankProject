@@ -3,6 +3,7 @@ import {Form, Button} from 'react-bootstrap';
 import {Formik, Field, ErrorMessage} from 'formik';
 import { useNavigate } from 'react-router-dom';
 import user from '../files/UserFile';
+import { makeCookie } from '../files/CookieManagement';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -31,11 +32,15 @@ class LoginComponent extends Component {
       .then(data=>data.json())
       .then(data => {
         if (data.password == CurrentPassword) {
-              // document.cookie = "username=" + CurrentUsername;
-              // console.log(document.cookie);
-              user.username = data.username;
-              user.authorizationLevel = data.authorizationLevel;
-              user.id = data.id;
+              makeCookie("username", data.username);
+              makeCookie("id", data.id);
+              makeCookie("authorizationLevel", data.authorizationLevel);
+              // Code below will not work: Once the page is refreshed at any point, 
+              // whether forced or not by the user or system, it will reset the UserFile.
+              // Better to use document.cookies 
+              // user.username = data.username;
+              // user.authorizationLevel = data.authorizationLevel;
+              // user.id = data.id;
               this.props.handleSignIn(true);
         } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
