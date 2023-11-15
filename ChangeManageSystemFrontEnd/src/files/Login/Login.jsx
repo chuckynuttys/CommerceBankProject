@@ -84,7 +84,7 @@ const Login = () => {
       <div id="u15" className="ax_default paragraph ax_default_hidden" data-label="Invalid Password" style={{display: 'none', visibility: 'hidden'}}>
         <div id="u15_div" className=""></div>
         <div id="u15_text" className="text ">
-          <p><span>Invalid Password</span></p>
+          <p><span>Invalid UserID or Password</span></p>
         </div>
       </div>
 

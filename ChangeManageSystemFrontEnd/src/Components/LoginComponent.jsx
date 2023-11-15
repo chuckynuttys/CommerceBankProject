@@ -33,7 +33,9 @@ class LoginComponent extends Component {
         console.log(post.userId);
         console.log(post.password);
         if (post.username == CurrentUsername) {
+          document.getElementById("u15").setAttribute("style", "visibility: hidden");
           if (post.password == CurrentPassword) {
+            document.getElementById("u15").setAttribute("style", "visibility: hidden");
               document.cookie = "userId=" + CurrentUsername;
               console.log(document.cookie);
               this.props.handleSignIn(true);
@@ -43,6 +45,7 @@ class LoginComponent extends Component {
           // Logging for debugging below.
           console.log("Incorrect Password");
           console.log(CurrentPassword);
+          document.getElementById("u15").setAttribute("style", "visibility: visible");
           }
         } else {
           // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
@@ -50,7 +53,9 @@ class LoginComponent extends Component {
           // Logging for debugging below.
           console.log("Incorrect userId");
           console.log(CurrentUsername);
-        }
+          document.getElementById("u15").setAttribute("style", "visibility: visible");
+        } 
+        
       })
       .catch(error => {
         console.error(error);
@@ -63,31 +68,21 @@ class LoginComponent extends Component {
                       
                         <div id="u6" class="ax_default text_field" data-label="Input Field">
                           <div id="u6_div" class=""></div>
-                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="username"/>
+                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="username" placeholder='UserID'/>
                         </div>
                         {this.state.incorrectUserId && (
                     <div className="error-message">Incorrect userId</div>
                         )}
-                        <div id="u8" class="ax_default shape" data-label="Lower Label">
-                        <div id="u8_div" class=""></div>
-                        <div id="u8_text" class="text ">
-                          <p><span>UserID</span></p>
-                          </div>
-                        </div>
+                        
 
                         <div id="u10" class="ax_default text_field" data-label="Input Field">
                           <div id="u10_div" class=""></div>
-                          <input id="u10_input" type="text" class="u10_input" onChange = {this.changeValue} name="password"/>
+                          <input id="u10_input" type="text" class="u10_input" onChange = {this.changeValue} name="password" placeholder='Password'/>
                         </div>
                         {this.state.incorrectPassword && (
                     <div className="error-message">Incorrect Password</div>
                         )}
-                        <div id="u12" class="ax_default shape" data-label="Lower Label">
-                        <div id="u12_div" class=""></div>
-                        <div id="u12_text" class="text ">
-                            <p><span>Password</span></p>
-                          </div>
-                        </div>
+                        
                       
                       <button id="u13" class="ax_default primary_button" style={{cursor: 'pointer'}} type="submit"> 
                       <div id="u13_div" class=""></div>

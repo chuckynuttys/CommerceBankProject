@@ -230,8 +230,8 @@ input[type="submit"] {
   margin: 1em auto;
   height: 2em;
   font-size: 1.1rem;
-  color: rgb(121, 121, 121);
-  background-color: rgba(114, 212, 94, 1);
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 103, 71);
   border-color: white;
   
 }
