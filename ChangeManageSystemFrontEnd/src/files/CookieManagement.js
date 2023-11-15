@@ -1,13 +1,13 @@
 function makeCookie(keyName, keyValue) {
     document.cookie = keyName + "=" + keyValue;
-    console.log(document.cookie);
+    // console.log(document.cookie);
 }
 function getCookie(keyName) {
     const cookieValue = document.cookie
     .split("; ")
     .find((row) => row.startsWith(keyName + "="))
     ?.split("=")[1];
-    console.log(cookieValue);
+    // console.log(cookieValue);
     return cookieValue;
 }
 

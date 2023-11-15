@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useReducer } from 'react';
 import ActionComponent from './ActionComponent';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../files/CookieManagement';
@@ -11,13 +11,17 @@ function ListChangeRequests(props) {
            changeWindowStartDate, changeWindowStopDate, changeWindowStartTime, changeWindowStopTime, otherNeededDepartments, riskLevel, implementer,
            implementationStatus, implementationDate, implementationTime, stateLevel, archivedStatus, } = props.changeRequest;
     const indexNumber = props.index;
-    
+    const changeCount = props.changeCount;
     const navigate = useNavigate();
-
+    
       if(props.tabSet == 1) {
         return (
+          
           // tab 1 of List Change Requests
           <div id="u520-1" class="preeval" style={{width: '1317px', height: '60px', top: ((indexNumber - 1) * 120) + "px"}}>
+            {console.log(changeId)}
+            {console.log(indexNumber)}
+            {console.log(stateLevel)}
                           <div id="u521-1" class="ax_default box_1 u521" data-label="Full_Name" style={{width: '120px', height: '120px', left: '119px', top: '0px', visibility: 'inherit'}}>
                           <div id="u521-1_div" class="u521_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
                           <div id="u521-1_text" class="text u521_text" style={{visibility: 'inherit'}}>
@@ -87,7 +91,7 @@ function ListChangeRequests(props) {
                             </div>
                           </div>
                         
-                        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate}/>
+                        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount}/>
                         
                         </div>
         );

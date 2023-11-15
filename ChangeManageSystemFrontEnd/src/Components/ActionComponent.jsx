@@ -1,30 +1,36 @@
 import React, {Component} from "react";
 import user from "../files/UserFile";
 
+
 class ActionComponent extends Component {
 constructor(props) {
     super(props)
     this.state = {
       stateLevel: props.stateLevel,
       changeId: props.changeId,
+      count: 0,
+      count2: 100,
+      
     }
     this.handleClick = this.handleClick.bind(this);
+    
 }
+
 handleClick=(e)=>{
     
     const params = {
         stateLevel: this.state.stateLevel,
-        
     }
     
     if (e.target.value == "Freeze") {
         // Freeze 
-        params.stateLevel = "Freeze";
+        params.stateLevel = "Frozen";
     } else if (e.target.value == "Approve") {
         // Approve & Archive if user role is Operations, otherwise go to next department.
         switch (user.authorizationLevel) {
             case "departmentUser":
                 params.stateLevel = "Department";
+                
                 break;
             case "applicationUser":
                 params.stateLevel = "Application";
@@ -41,12 +47,16 @@ handleClick=(e)=>{
         // Unfreeze
         params.stateLevel = "Open";
     }
+    
     const searchParams = new URLSearchParams(params);
         fetch(`http://localhost:8080/changerequests/` + this.state.changeId + '?' + searchParams.toString(), {method: 'PATCH'});
+   // useReducer(this.reducer, 0);
+   this.state.stateLevel = params.stateLevel;
+   this.props.changeCount();
 }
 
 render() {
-
+//{console.log(this.props)}
 
 if (this.state.stateLevel == "Open") {
     return (

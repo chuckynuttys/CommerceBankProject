@@ -12,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,6 +22,8 @@ public class ChangeRequestService
 {
     private final CMUserRepository cmUserRepository;
     private final ChangeRequestRepository changeRequestRepository;
+
+
 
     @Transactional
     public ChangeRequest create(ChangeRequest changeRequest, String username) {
@@ -44,14 +43,16 @@ public class ChangeRequestService
             case "departmentUser":
                 // Only show Change Requests that are Frozen not from the User and Change Requests
                 // that are Open from the user
-                return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
-                        archivedStatus, id, "Open"),
-                                changeRequestRepository.findChangeRequestsNotFromUserWithCustomQuery(
-                                        archivedStatus, id, "Frozen"))
-                        .filter(Optional::isPresent)
-                        .map(Optional::get)
-                        .flatMap(List::stream)
-                        .collect(Collectors.toList()));
+                return
+                        Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
+                                                archivedStatus, id, "Open"),
+                                        changeRequestRepository.findChangeRequestsNotFromUserWithCustomQuery(
+                                                archivedStatus, id, "Frozen"))
+                                .filter(Optional::isPresent)
+                                .map(Optional::get)
+                                .flatMap(List::stream)
+                                .sorted(new IdComparator())
+                                .collect(Collectors.toList()));
 
             case "applicationUser":
                 // Only show Change Requests that are Department not from the User and Change Requests
@@ -63,9 +64,10 @@ public class ChangeRequestService
                         .filter(Optional::isPresent)
                         .map(Optional::get)
                         .flatMap(List::stream)
+                        .sorted(new IdComparator())
                         .collect(Collectors.toList()));
 
-            case "operationsUser":
+            case "operationUser":
                 // Show all change Requests except frozen ones from the User
                 return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
                                         archivedStatus, id, "Open"),
@@ -74,6 +76,7 @@ public class ChangeRequestService
                         .filter(Optional::isPresent)
                         .map(Optional::get)
                         .flatMap(List::stream)
+                        .sorted(new IdComparator())
                         .collect(Collectors.toList()));
 
             default:
@@ -107,4 +110,7 @@ public class ChangeRequestService
         return true;
     }
 
+
+
 }
+

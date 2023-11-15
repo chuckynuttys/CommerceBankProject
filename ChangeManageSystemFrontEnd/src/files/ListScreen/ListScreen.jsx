@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState, useReducer } from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
 import './ListScreen.css';
@@ -8,16 +8,24 @@ import ListChangeRequests from "../../Components/ListChangeRequests";
 import NavBar from "../../Components/NavBar";
 import user from "../UserFile";
 import { getCookie } from "../CookieManagement";
+import { useForceUpdate } from "../ForceUpdate";
+import { getSortOrder } from "../GetSortedOrder";
 
 const ListScreenApp = () => { 
   const[changeRequests, setChangeRequests] = useState([]);
+  const forceUpdate = useForceUpdate();
   var tabSet;
   var elementNumber;
   var element2Number;
   var navBarNumber;
   var index = 1;
+  var stateChanged = false;
+  const reducer = x => x + 1;
+  const [count, dispatch] = useReducer(reducer, 0);
+  const [count1, setCount1] = useState(0);
+  let orderByStateLevel = false;
   
-  
+
 
   useEffect(()=>{
     
@@ -26,25 +34,40 @@ const ListScreenApp = () => {
       id: parseInt(getCookie("id")),
       authorizationLevel: getCookie("authorizationLevel"),
     }
-    console.log(params.authorizationLevel);
+    // console.log(params.authorizationLevel);
     const searchParams = new URLSearchParams(params);
     fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
     // fetch(`http://localhost:8080/changerequests?archivedStatus=false`, {method:"GET"})
     .then(res => res.json())
     .then(res => {setChangeRequests(res)})
+    if (orderByStateLevel) {
+      changeRequests.sort(getSortOrder("stateLevel"));
+    }
 
 
   },[])
 
+  const changeCount = (e) => {
+    console.log("Success");
+    orderByStateLevel = true;
+    changeRequests.sort(getSortOrder("stateLevel"));
+    dispatch();
+    
+
+
+  }
+
   const handleClick = (e) => {
+    //console.log("Test1");
     if (e == "state") {
-      // Works, but the issue is the page needs to reload and also not sort immediately back the other way at the .map call down below.
-      // Might need to call above. 
-      console.log(changeRequests);
-      changeRequests.sort((a,b) => {
-        return a.changeId - b.changeId;
-      }).reverse();
-      console.log(changeRequests);
+      //console.log("Test2");
+      // console.log(changeRequests);
+      
+      
+      changeCount();
+      //console.log("Test3");
+      
+      // console.log(changeRequests);
     } else {
       if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
         // Tab 1
@@ -227,15 +250,15 @@ const ListScreenApp = () => {
               <div id="u518" class="ax_default box_1" data-label="What (Header)">
                 <div id="u518_div" class=""></div>
                 <div id="u518_text" class="text ">
-                  <p><span>What</span></p>
+                  <p><span>Who</span></p>
                 </div>
               </div>
 
               
               <div id="u519" class="ax_default box_1" data-label="Who (Header)">
                 <div id="u519_div" class=""></div>
-                <div id="u519_text" class="text ">
-                  <p><span>Who</span></p>
+                <div id="u519_text" class="text " onClick={(e) => {handleClick("state");changeCount()}} style={{cursor: 'pointer'}}>
+                  <p><span>State</span></p>
                 </div>
               </div>
               <div id="u532" class="ax_default box_1" data-label="Action (Header)">
@@ -245,8 +268,9 @@ const ListScreenApp = () => {
                 </div>
               </div>
               <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow": 'auto', height: '370px',}}>
-                
-              {changeRequests.sort((a,b) => {return parseFloat(a.changeId) - parseFloat(b.changeId)}).map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index}/>)}
+              {index = 1}
+              
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index} changeCount={changeCount}/>)}
               
               </div>
             </div>
@@ -318,8 +342,8 @@ const ListScreenApp = () => {
 
               
               <div id="u542" class="ax_default box_1" data-label="Risk Level (Header)">
-                <div id="u542_div" class="" onClick={() => handleClick("state")} style={{cursor: 'pointer'}}></div>
-                <div id="u542_text" class="text ">
+                <div id="u542_div" class="" ></div>
+                <div id="u542_text" class="text " onClick={(e) => {handleClick("state");dispatch()}} style={{cursor: 'pointer'}}>
                   <p><span>State</span></p>
                 </div>
               </div>

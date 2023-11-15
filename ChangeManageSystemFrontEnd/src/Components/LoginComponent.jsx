@@ -26,9 +26,15 @@ class LoginComponent extends Component {
       e.preventDefault();
       let CurrentPassword = this.password;
       let CurrentUsername = this.username;
+      
       CurrentPassword = CurrentPassword.replaceAll("\"", "");
       CurrentUsername = CurrentUsername.replaceAll("\"", "");
-      fetch(`http://localhost:8080/users?username=${CurrentUsername}`)
+      const params = {
+        username: CurrentUsername,
+      }
+      const searchParams = new URLSearchParams(params);
+
+      fetch(`http://localhost:8080/users?` + searchParams.toString(), {method: 'GET'})
       .then(data=>data.json())
       .then(data => {
         if (data.password == CurrentPassword) {
@@ -41,10 +47,13 @@ class LoginComponent extends Component {
               // user.username = data.username;
               // user.authorizationLevel = data.authorizationLevel;
               // user.id = data.id;
+
+
               this.props.handleSignIn(true);
         } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
           // Logging for debugging below.
+
           console.log("Incorrect Password");
           console.log(CurrentPassword);
           console.log(data.password);
