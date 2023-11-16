@@ -9,13 +9,13 @@ var navBarNumber;
 
 const Entry = () => {
   return (
-    <div>
+    <div className="bg">
     <form>
     <NavBar navBarNumber={1}/>
           <div className="menu">
              <h1> <img className = "logo" src={logo} alt="logo" /> </h1>
              <h2>Change Request Form</h2>
-             <fieldset>
+             <fieldset className="fs1">
               <label className= "labelInput" htmlFor="aId">
               <input 
               className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" placeholder="Application ID" />
@@ -44,6 +44,7 @@ const Entry = () => {
                 <p className = "button">How long will it take to perform the back-out in minutes</p>
               </label>
              </fieldset>
+             <div className="multiplechoicediv">
              <fieldset className="radioButton">
               <legend className="legendRadio">
                 Reason Type 
@@ -56,6 +57,21 @@ const Entry = () => {
                 <input className="inputRadio" type = "radio" name ="reasonType" value="Enhancement"/>
                 <p className="radioP">Enhancement</p>
               </label>
+             </fieldset>
+             <fieldset className="radioButton">
+              <legend className="legendRadio">
+                Other Needed Departments 
+              </legend>
+              <div className="radioElements">
+              <input className="inputCheck" type="checkbox" name ="devops" value="DevOps" id="changeTypeCheckBox"  />
+              <p className="checkP">DevOps</p>
+              <input className="inputCheck" type="checkbox" name="dba" value="DBA" id="dba" />
+              <p className="checkP">DBA</p>
+              <input className="inputCheck" type="checkbox" name="security" value="Security" id="security" />
+              <p className="checkP">Security</p>
+              <input className="inputCheck" type="checkbox" name="scheduling" value="Scheduling" id="scheduling" />
+              <p className="checkP">DBA</p>
+              </div>
              </fieldset>
              <fieldset className="radioButton">
               <legend className="legendRadio">
@@ -74,21 +90,7 @@ const Entry = () => {
                 <p className="radioP">Emergency</p>
               </label>
              </fieldset>
-             <fieldset className="radioButton">
-              <legend className="legendRadio">
-                Other Needed Departments 
-              </legend>
-              <div className="radioElements">
-              <input className="inputCheck" type="checkbox" name ="devops" value="DevOps" id="changeTypeCheckBox"  />
-              <p className="checkP">DevOps</p>
-              <input className="inputCheck" type="checkbox" name="dba" value="DBA" id="dba" />
-              <p className="checkP">DBA</p>
-              <input className="inputCheck" type="checkbox" name="security" value="Security" id="security" />
-              <p className="checkP">Security</p>
-              <input className="inputCheck" type="checkbox" name="scheduling" value="Scheduling" id="scheduling" />
-              <p className="checkP">DBA</p>
-              </div>
-             </fieldset>
+             </div>
              <fieldset className="doubleStyle">
               <div className="calDiv">
               <legend className="legendCal">Change Window Start Date</legend>

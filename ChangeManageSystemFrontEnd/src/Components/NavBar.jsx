@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {useNavigate} from 'react-router-dom';
-
+import '../css/navBar.css';
 
 
 const NavBar = (props) => {
@@ -13,31 +13,31 @@ const NavBar = (props) => {
     // NavBar for Entry
     return(
 
-        <div>
-            <div id="u171" className="ax_default button">
+        <div className="navbar">
+            <div id="u171" className="fourtotal">
                 <div id="u171_div" className=""></div>
-                <div id="u171_text" className="text ">
+                <div id="u171_text" className="navtext ">
                     <p><span>Submit Request</span></p>
                 </div>
             </div>
 
-            <div id="u172" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
+            <div id="u172" className="fourtotal" style={{cursor: 'pointer'}} onClick={() => handleClick("ListScreenApp")}>
             <div id="u172_div" className=""></div>
-                <div id="u172_text" className="text ">
+                <div id="u172_text" className="navtext ">
               <p><span>View Change Requests</span></p>
                 </div>
             </div>
 
-            <div id="u174" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("ArchivedChangesApp")}>
+            <div id="u174" className="fourtotal" style={{cursor: 'pointer'}} onClick={() => handleClick("ArchivedChangesApp")}>
             <div id="u174_div" className=""></div>
-            <div id="u174_text" className="text ">
-              <p><span>View Change Request Archive</span></p>
+            <div id="u174_text" className="navtext ">
+              <p><span>View Change Archive</span></p>
                 </div>
             </div>
 
-            <div id="u173" className="ax_default button" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
+            <div id="u173" className="fourtotal" style={{cursor: 'pointer'}} onClick={() => handleClick("Login")}>
             <div id="u173_div" className=""></div>
-            <div id="u173_text" className="text ">
+            <div id="u173_text" className="navtext ">
               <p><span>Log out</span></p>
                 </div>
             </div>
