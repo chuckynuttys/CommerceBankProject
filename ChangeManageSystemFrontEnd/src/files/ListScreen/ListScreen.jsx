@@ -147,7 +147,7 @@ const ListScreenApp = () => {
               <div id="u510" class="ax_default box_1" data-label="Change Number (Header)">
                 <div id="u510_div" class=""></div>
                 <div id="u510_text" class="text ">
-                  <p><span>Change_Number</span></p>
+                  <p><span>Change Number</span></p>
                 </div>
               </div>
 
@@ -229,7 +229,7 @@ const ListScreenApp = () => {
                 </div>
               </div>
 
-              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
+              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '700px',}}>
               
               {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index}/>)}
               
