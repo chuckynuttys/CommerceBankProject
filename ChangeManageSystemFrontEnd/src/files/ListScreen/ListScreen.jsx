@@ -34,10 +34,10 @@ const ListScreenApp = () => {
       id: parseInt(getCookie("id")),
       authorizationLevel: getCookie("authorizationLevel"),
     }
-    // console.log(params.authorizationLevel);
+    
     const searchParams = new URLSearchParams(params);
     fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
-    // fetch(`http://localhost:8080/changerequests?archivedStatus=false`, {method:"GET"})
+    
     .then(res => res.json())
     .then(res => {setChangeRequests(res)})
     if (orderByStateLevel) {
@@ -48,26 +48,35 @@ const ListScreenApp = () => {
   },[])
 
   const changeCount = (e) => {
-    console.log("Success");
-    orderByStateLevel = true;
-    changeRequests.sort(getSortOrder("stateLevel"));
-    dispatch();
+    if (e == "State") {
+      // Need to figure out how to sort by StateLevel properly.
+
+
+
+      
+    } else {
+      dispatch();
+    const params = {
+      archivedStatus: false,
+      id: parseInt(getCookie("id")),
+      authorizationLevel: getCookie("authorizationLevel"),
+    }
+    const searchParams = new URLSearchParams(params);
+    fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
+    
+    .then(res => res.json())
+    .then(res => {setChangeRequests(res)})
+    }
     
 
 
   }
 
   const handleClick = (e) => {
-    //console.log("Test1");
+    
     if (e == "state") {
-      //console.log("Test2");
-      // console.log(changeRequests);
+      console.log("Test2");
       
-      
-      changeCount();
-      //console.log("Test3");
-      
-      // console.log(changeRequests);
     } else {
       if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
         // Tab 1
@@ -257,7 +266,7 @@ const ListScreenApp = () => {
               
               <div id="u519" class="ax_default box_1" data-label="Who (Header)">
                 <div id="u519_div" class=""></div>
-                <div id="u519_text" class="text " onClick={(e) => {handleClick("state");changeCount()}} style={{cursor: 'pointer'}}>
+                <div id="u519_text" class="text " onClick={(e) => {handleClick("state")}} style={{cursor: 'pointer'}}>
                   <p><span>State</span></p>
                 </div>
               </div>
@@ -270,7 +279,7 @@ const ListScreenApp = () => {
               <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow": 'auto', height: '370px',}}>
               {index = 1}
               
-              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index} changeCount={changeCount}/>)}
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index} />)}
               
               </div>
             </div>
@@ -343,7 +352,7 @@ const ListScreenApp = () => {
               
               <div id="u542" class="ax_default box_1" data-label="Risk Level (Header)">
                 <div id="u542_div" class="" ></div>
-                <div id="u542_text" class="text " onClick={(e) => {handleClick("state");dispatch()}} style={{cursor: 'pointer'}}>
+                <div id="u542_text" class="text " onClick={(e) => {handleClick("state")}} style={{cursor: 'pointer'}}>
                   <p><span>State</span></p>
                 </div>
               </div>
@@ -366,7 +375,7 @@ const ListScreenApp = () => {
 
               <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
               {index = 1}
-              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={2} index={index}></ListChangeRequests>)}
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={2} index={index} />)}
                 
                 </div>
               </div>

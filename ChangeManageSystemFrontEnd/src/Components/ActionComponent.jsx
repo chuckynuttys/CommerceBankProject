@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import user from "../files/UserFile";
+import { getCookie } from "../files/CookieManagement";
+
 
 
 class ActionComponent extends Component {
@@ -17,7 +19,7 @@ constructor(props) {
 }
 
 handleClick=(e)=>{
-    
+    const authorizationLevel = getCookie("authorizationLevel");
     const params = {
         stateLevel: this.state.stateLevel,
     }
@@ -27,7 +29,7 @@ handleClick=(e)=>{
         params.stateLevel = "Frozen";
     } else if (e.target.value == "Approve") {
         // Approve & Archive if user role is Operations, otherwise go to next department.
-        switch (user.authorizationLevel) {
+        switch (authorizationLevel) {
             case "departmentUser":
                 params.stateLevel = "Department";
                 
@@ -35,9 +37,12 @@ handleClick=(e)=>{
             case "applicationUser":
                 params.stateLevel = "Application";
                 break;
-            case "operationsUser":
-                params.stateLevel = "Approved";
-                params.archivedStatus = "true";
+            case "operationUser":
+                if (this.stateLevel == "Application") {
+                    params.stateLevel = "Approved";
+                    params.archivedStatus = "true";
+                } 
+                
                 break;
         }
     } else if (e.target.value == "Deny") {
@@ -50,13 +55,22 @@ handleClick=(e)=>{
     
     const searchParams = new URLSearchParams(params);
         fetch(`http://localhost:8080/changerequests/` + this.state.changeId + '?' + searchParams.toString(), {method: 'PATCH'});
-   // useReducer(this.reducer, 0);
+   
+   
+   
+   
    this.state.stateLevel = params.stateLevel;
-   this.props.changeCount();
+   
+
+
+   //this.props.changeCount();
+   window.location.reload();
+   
+   
 }
 
 render() {
-//{console.log(this.props)}
+
 
 if (this.state.stateLevel == "Open") {
     return (
