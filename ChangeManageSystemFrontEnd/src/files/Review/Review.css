@@ -1645,7 +1645,7 @@ body {
     display:flex;
   }
   #u477 .text {
-    position:relative;
+    position:absolute;
     align-self:center;
     padding:2px 2px 2px 2px;
     box-sizing:border-box;
@@ -1685,7 +1685,7 @@ body {
     border-width:0px;
     position:absolute;
     left:245px;
-    top:60px;
+    top:68px;
     width:140px;
     height:41px;
     display:flex;
@@ -1729,7 +1729,7 @@ body {
     border-width:0px;
     position:absolute;
     left:1509px;
-    top:61px;
+    top:69px;
     width:140px;
     height:40px;
     display:flex;

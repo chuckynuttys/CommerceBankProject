@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,24 +18,17 @@ public class ChangeRequest {
     private Integer applicationId;
     private String description;
     private String reason;
-    private Integer reasonNumber; // Ticket number if a fix, Service Request number if an enhancement
+    private String reasonType;
     private String changeType;
     private String whyDescription;
     private String whatDescription;
-    private String backOutPlan;
-    private String backOutMinutes;
-    private String changeWindowStartDate;
-    private String changeWindowStopDate;
-    private String changeWindowStartTime;
-    private String changeWindowStopTime;
+    private String whoDescription;
+    private String whenDescription;
     private String otherNeededDepartments;
     private String riskLevel;
-    private String implementer;
-    private String implementationStatus;
-    private String implementationDate; // Must be between changeWindow Start and Stop Date/Time
-    private String implementationTime;
-    private String stateLevel; // Approval State level; Open, Frozen, Application, Department, Approved, Denied, Completed
-    private Boolean archivedStatus; // If it is Archived or not
+    private String Implementer;
+    private String ImplementationStatus;
+    private String stateLevel;
 
     @ManyToOne
     @JoinColumn(name = "id")
