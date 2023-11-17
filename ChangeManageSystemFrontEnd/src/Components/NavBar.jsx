@@ -6,7 +6,6 @@ import '../css/navBar.css';
 const NavBar = (props) => {
     const navigate = useNavigate();
     function handleClick(value) {
-        console.log(value);
         navigate("/" + value);
     }
     if (props.navBarNumber == 1) {

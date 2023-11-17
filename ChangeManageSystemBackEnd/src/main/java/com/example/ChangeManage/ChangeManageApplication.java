@@ -66,7 +66,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Robert Lukenbill",
-					null, null, null, "Unfrozen",
+					null, null, null, "Frozen",
 					false, null);
 			changeRequestService.create(newChangeRequest, "RL4");
 			newChangeRequest = new ChangeRequest(2, 2,
@@ -77,7 +77,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Robert Lukenbill",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "RL4");
 
@@ -89,7 +89,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Amariee Cooper",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "AC");
 			newChangeRequest = new ChangeRequest(4, 4,
@@ -100,7 +100,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Amariee Cooper",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "AC");
 
@@ -112,7 +112,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Grant Starrett",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "GS");
 			newChangeRequest = new ChangeRequest(6, 6,
@@ -123,7 +123,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Grant Starrett",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "GS");
 
@@ -135,7 +135,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Charles Strain",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "CS");
 			newChangeRequest = new ChangeRequest(8, 8,
@@ -146,7 +146,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Charles Strain",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "CS");
 
@@ -158,7 +158,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Brennan McKinney",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "BM");
 			newChangeRequest = new ChangeRequest(10, 10,
@@ -169,7 +169,7 @@ public class ChangeManageApplication {
 					"This is the backout Minutes",
 					"September 21st", "October 23rd", "5:00 PM",
 					"7:00 PM", "DevOps", "Low", "Brennan McKinney",
-					null, null, null, "Unfrozen",
+					null, null, null, "Open",
 					false, null);
 			changeRequestService.create(newChangeRequest, "BM");
 

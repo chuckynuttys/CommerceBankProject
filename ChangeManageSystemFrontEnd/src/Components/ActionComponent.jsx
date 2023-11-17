@@ -63,7 +63,7 @@ handleClick=(e)=>{
    
 
 
-   
+   //this.props.changeCount();
    window.location.reload();
    
    

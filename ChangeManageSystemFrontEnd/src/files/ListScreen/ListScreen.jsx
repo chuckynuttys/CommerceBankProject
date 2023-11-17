@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState, useReducer } from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
 import './ListScreen.css';
@@ -6,47 +6,97 @@ import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
 import NavBar from "../../Components/NavBar";
+import user from "../UserFile";
+import { getCookie } from "../CookieManagement";
+import { useForceUpdate } from "../ForceUpdate";
+import { getSortOrder } from "../GetSortedOrder";
 
 const ListScreenApp = () => { 
   const[changeRequests, setChangeRequests] = useState([]);
+  const forceUpdate = useForceUpdate();
   var tabSet;
   var elementNumber;
   var element2Number;
   var navBarNumber;
   var index = 1;
+  var stateChanged = false;
+  const reducer = x => x + 1;
+  const [count, dispatch] = useReducer(reducer, 0);
+  const [count1, setCount1] = useState(0);
+  let orderByStateLevel = false;
+  
+
 
   useEffect(()=>{
-    fetch(`http://localhost:8080/changerequests?archivedStatus=false`, {method:"GET"})
+    
+    const params = {
+      archivedStatus: false,
+      id: parseInt(getCookie("id")),
+      authorizationLevel: getCookie("authorizationLevel"),
+    }
+    
+    const searchParams = new URLSearchParams(params);
+    fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
+    
     .then(res => res.json())
     .then(res => {setChangeRequests(res)})
+    if (orderByStateLevel) {
+      changeRequests.sort(getSortOrder("stateLevel"));
+    }
+
+
   },[])
+
+  const changeCount = (e) => {
+    if (e == "State") {
+      // Need to figure out how to sort by StateLevel properly.
+
+
+
+      
+    } else {
+      dispatch();
+    const params = {
+      archivedStatus: false,
+      id: parseInt(getCookie("id")),
+      authorizationLevel: getCookie("authorizationLevel"),
+    }
+    const searchParams = new URLSearchParams(params);
+    fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
+    
+    .then(res => res.json())
+    .then(res => {setChangeRequests(res)})
+    }
+    
+
+
+  }
 
   const handleClick = (e) => {
     
-    
-    if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
-      // Tab 1
+    if (e == "state") {
+      console.log("Test2");
       
-      document.getElementById("u507_div").setAttribute("class", "selected");
-      document.getElementById("u506_div").setAttribute("class", "");
-      document.getElementById("u508_state0").setAttribute("style", "visibility: visible");
-      document.getElementById("u508_state1").setAttribute("style", "visibility: hidden");
-    } else if (document.getElementById("u506_div").getAttribute("class") == "" && e == "2") {
-      // Tab 2
-      
-      document.getElementById("u506_div").setAttribute("class", "selected");
-      document.getElementById("u507_div").setAttribute("class", "");
-      document.getElementById("u508_state1").setAttribute("style", "visibility: visible");
-      document.getElementById("u508_state0").setAttribute("style", "visibility: hidden");
+    } else {
+      if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
+        // Tab 1
+        
+        document.getElementById("u507_div").setAttribute("class", "selected");
+        document.getElementById("u506_div").setAttribute("class", "");
+        document.getElementById("u508_state0").setAttribute("style", "visibility: visible");
+        document.getElementById("u508_state1").setAttribute("style", "visibility: hidden");
+      } else if (document.getElementById("u506_div").getAttribute("class") == "" && e == "2") {
+        // Tab 2
+        
+        document.getElementById("u506_div").setAttribute("class", "selected");
+        document.getElementById("u507_div").setAttribute("class", "");
+        document.getElementById("u508_state1").setAttribute("style", "visibility: visible");
+        document.getElementById("u508_state0").setAttribute("style", "visibility: hidden");
+      }
     }
   }
-  
-  
-
     return (
     <div id="base" class="">
-
-      
       <div id="u492" class="ax_default image">
         <img id="u492_img" class="img " src={backgroundImg}/>
         <div id="u492_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
@@ -117,8 +167,6 @@ const ListScreenApp = () => {
 
       
       <div id="u504" class="ax_default" data-label="Tabs" data-left="297" data-top="304" data-width="1316" data-height="441" layer-opacity="1">
-
-        
         <div id="u505" class="ax_default" data-left="308" data-top="304" data-width="221" data-height="41" layer-opacity="1">
 
           
@@ -211,15 +259,15 @@ const ListScreenApp = () => {
               <div id="u518" class="ax_default box_1" data-label="What (Header)">
                 <div id="u518_div" class=""></div>
                 <div id="u518_text" class="text ">
-                  <p><span>What</span></p>
+                  <p><span>Who</span></p>
                 </div>
               </div>
 
               
               <div id="u519" class="ax_default box_1" data-label="Who (Header)">
                 <div id="u519_div" class=""></div>
-                <div id="u519_text" class="text ">
-                  <p><span>Who</span></p>
+                <div id="u519_text" class="text " onClick={(e) => {handleClick("state")}} style={{cursor: 'pointer'}}>
+                  <p><span>State</span></p>
                 </div>
               </div>
               <div id="u532" class="ax_default box_1" data-label="Action (Header)">
@@ -228,10 +276,10 @@ const ListScreenApp = () => {
                   <p><span>Action</span></p>
                 </div>
               </div>
-
-              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
+              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow": 'auto', height: '370px',}}>
+              {index = 1}
               
-              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index}/>)}
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index} />)}
               
               </div>
             </div>
@@ -303,8 +351,8 @@ const ListScreenApp = () => {
 
               
               <div id="u542" class="ax_default box_1" data-label="Risk Level (Header)">
-                <div id="u542_div" class=""></div>
-                <div id="u542_text" class="text ">
+                <div id="u542_div" class="" ></div>
+                <div id="u542_text" class="text " onClick={(e) => {handleClick("state")}} style={{cursor: 'pointer'}}>
                   <p><span>State</span></p>
                 </div>
               </div>
@@ -324,9 +372,10 @@ const ListScreenApp = () => {
                   <p><span>Change_Number</span></p>
                 </div>
               </div>
+
               <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
               {index = 1}
-              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={2} index={index}></ListChangeRequests>)}
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={2} index={index} />)}
                 
                 </div>
               </div>

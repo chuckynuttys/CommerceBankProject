@@ -22,9 +22,9 @@ class LoginComponent extends Component {
     }
     requestUser=(e)=>{
       e.preventDefault();
-      console.log(this.username);
       let CurrentPassword = this.password;
       let CurrentUsername = this.username;
+      
       CurrentPassword = CurrentPassword.replaceAll("\"", "");
       CurrentUsername = CurrentUsername.replaceAll("\"", "");
       fetch(`http://localhost:8080/users?username=${CurrentUsername}`)
@@ -45,6 +45,7 @@ class LoginComponent extends Component {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
           this.setState({ incorrectPassword: true, incorrectUserId: false });
           // Logging for debugging below.
+
           console.log("Incorrect Password");
           console.log(CurrentPassword);
           document.getElementById("u15").setAttribute("style", "visibility: visible");
