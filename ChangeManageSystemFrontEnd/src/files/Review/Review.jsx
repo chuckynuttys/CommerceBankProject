@@ -5,8 +5,11 @@ import './Review.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
+import { getCookie } from '../CookieManagement';
 var navBarNumber;
+
 const Review = () => {
+  let description = getCookie("description");
   return (
     <div id="base" class="">
 
@@ -59,7 +62,7 @@ const Review = () => {
         <div id="u446" class="ax_default box_1 u446" data-label="Reason">
           <div id="u446_div" class="u446_div"></div>
           <div id="u446_text" class="text u446_text">
-            <p><span>Reason</span></p>
+            <p><span>Reason</span></p> 
           </div>
         </div>
 
@@ -117,7 +120,7 @@ const Review = () => {
         <div id="u443-1" class="ax_default box_1 u443" data-label="Reason_Number" style={{width: '120px', height: '30px', left: '600px', top: '0px', visibility: 'inherit'}}>
           <div id="u443-1_div" class="u443_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u443-1_text" class="text u443_text" style={{visibility: 'inherit'}}>
-            <p><span>1</span></p>
+            <p><span>{getCookie("reasonNo")}</span></p>
           </div>
         </div>
 
@@ -133,15 +136,15 @@ const Review = () => {
         <div id="u445-1" class="ax_default box_1 u445" data-label="Description" style={{width: '120px', height: '30px', left: '360px', top: '0px', visibility: 'inherit'}}>
           <div id="u445-1_div" class="u445_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u445-1_text" class="text u445_text" style={{visibility: 'inherit'}}>
-            <p><span>Description</span></p>
+            <p><span>{getCookie("description")}</span></p>
           </div>
         </div>
 
-        
+    
         <div id="u446-1" class="ax_default box_1 u446" data-label="Reason" style={{width: '120px', height: '30px', left: '480px', top: '0px', visibility: 'inherit'}}>
           <div id="u446-1_div" class="u446_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u446-1_text" class="text u446_text" style={{visibility: 'inherit'}}>
-            <p><span>Fix</span></p>
+            <p><span>{getCookie("reasonType")}</span></p>
           </div>
         </div>
 
@@ -149,7 +152,7 @@ const Review = () => {
         <div id="u447-1" class="ax_default box_1 u447" data-label="Change Type" style={{width: '120px', height: '30px', left: '720px', top: '0px', visibility: 'inherit'}}>
           <div id="u447-1_div" class="u447_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u447-1_text" class="text u447_text" style={{visibility: 'inherit'}}>
-            <p><span>Planned</span></p>
+            <p><span>{getCookie("changeType")}</span></p>
           </div>
         </div>
 
@@ -157,7 +160,7 @@ const Review = () => {
         <div id="u448-1" class="ax_default box_1 u448" data-label="Application ID" style={{width: '120px', height: '30px', left: '240px', top: '0px', visibility: 'inherit'}}>
           <div id="u448-1_div" class="u448_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u448-1_text" class="text u448_text" style={{visibility: 'inherit'}}>
-            <p><span>ABC</span></p>
+            <p><span>{getCookie("appID")}</span></p>
           </div>
         </div>
 
@@ -165,7 +168,7 @@ const Review = () => {
         <div id="u449-1" class="ax_default box_1 u449" data-label="Why" style={{width: '120px', height: '30px', left: '840px', top: '0px', visibility: 'inherit'}}>
           <div id="u449-1_div" class="u449_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u449-1_text" class="text u449_text" style={{visibility: 'inherit'}}>
-            <p><span>Planned request</span></p>
+            <p><span>{getCookie("reason")}</span></p>
           </div>
         </div>
 
@@ -173,7 +176,7 @@ const Review = () => {
         <div id="u450-1" class="ax_default box_1 u450" data-label="What" style={{width: '120px', height: '30px', left: '960px', top: '0px', visibility: 'inherit'}}>
           <div id="u450-1_div" class="u450_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u450-1_text" class="text u450_text" style={{visibility: 'inherit'}}>
-            <p><span>Component</span></p>
+            <p><span>{getCookie("result")}</span></p>
           </div>
         </div>
 
@@ -199,7 +202,6 @@ const Review = () => {
     <div id="u453" class="ax_default image">
       <img id="u453_img" class="img " src={logo}/>
       <div id="u453_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
-        <p></p>
       </div>
     </div>
 
@@ -528,7 +530,7 @@ const Review = () => {
         <div id="u487-1" class="ax_default box_1 u487" data-label="R5" style={{width: '120px', height: '30px', left: '0px', top: '0px', visiblity: 'inherit'}}>
           <div id="u487-1_div" class="u487_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u487-1_text" class="text u487_text" style={{visibility: 'inherit'}}>
-            <p><span>Description on backing out</span></p>
+            <p><span>{getCookie("backOutPlan")}</span></p>
           </div>
         </div>
 
@@ -536,7 +538,7 @@ const Review = () => {
         <div id="u488-1" class="ax_default box_1 u488" data-label="R6" style={{width: '120px', height: '30px', left: '120px', top: '0px', visibility: 'inherit'}}>
           <div id="u488-1_div" class="u488_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u488-1_text" class="text u488_text" style={{visibility: 'inherit'}}>
-            <p><span>2</span></p>
+            <p><span>{getCookie("backOutMinutes")}</span></p>
           </div>
         </div>
 
@@ -544,7 +546,7 @@ const Review = () => {
         <div id="u489-1" class="ax_default box_1 u489" data-label="R7" style={{width: '120px', height: '30px', left: '240px', top: '0px', visibility: 'inherit'}}>
           <div id="u489-1_div" class="u489_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u489-1_text" class="text u489_text" style={{visibility: 'inherit'}}>
-            <p><span>DevOps</span></p>
+            <p><span>{getCookie("changeDepartment")}</span></p>
           </div>
         </div>
 

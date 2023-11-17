@@ -10,6 +10,7 @@ class EntryPageComponent extends Component{
         this.state = {
             appId:'',
             description:'',
+            reasonNo:'',
             temp:'',
             reason:'',
             result:'',
@@ -26,6 +27,11 @@ class EntryPageComponent extends Component{
         this.handleValue = this.handleValue.bind(this);
         
     };
+
+    removeQuote=(x) => {
+      return x.replaceAll("\"", "");
+    }
+
     getCheckBox=(e)=> {
       let x = false;
       //const form = document.querySelector('form');
@@ -47,6 +53,7 @@ class EntryPageComponent extends Component{
         this.startDate = document.getElementById("startDateInput").value;
         this.stopDate = document.getElementById("stopDateInput").value;
         this.getCheckBox();
+        let value = 0;
         var fix = document.getElementById("fix");
         var enhance = document.getElementById("enhance");
         var planned = document.getElementById("planned");
@@ -54,9 +61,11 @@ class EntryPageComponent extends Component{
         var emergency = document.getElementById("emergency");
         if (fix.checked == true) {
           this.reasonType = fix.value;
+          value = 1;
         }
         if (enhance.checked == true) {
           this.reasonType = enhance.value;
+          value = 2;
         }
         if (planned.checked == true) {
           this.changeType = planned.value;
@@ -67,17 +76,19 @@ class EntryPageComponent extends Component{
         if (emergency.checked == true) {
           this.changeType = emergency.value;
         }
-        document.cookie = "appID=" + this.appId + "; path=/;";
-        document.cookie = "description=" + this.description + "; path=/;";
-        document.cookie = "reason=" + this.reason + "; path=/;";
-        document.cookie = "result=" + this.result + "; path=/;";
-        document.cookie = "backOutPlan=" + this.backOutPlan + "; path=/;";
-        document.cookie = "backOutMinutes=" + this.backOutMinutes + "; path=/;";
-        document.cookie = "reasonType= " + this.reasonType + "; path=/;";
-        document.cookie = "changeType= " + this.changeType + "; path=/;";
-        document.cookie = "changeDepartment= " + this.changeDepartment + "; path=/;";
-        document.cookie = "startDate= " + this.startDate + "; path=/;";
-        document.cookie = "changeWindowStopDate= " + this.stopDate + "; path=/;";
+        this.reasonNo=value;
+        document.cookie = "appID=" + this.removeQuote(this.appId) + "; path=/;";
+        document.cookie = "reasonNo=" + this.reasonNo + "; path=/;";
+        document.cookie = "description=" + this.removeQuote(this.description) + "; path=/";
+        document.cookie = "reason=" + this.removeQuote(this.reason) + "; path=/;";
+        document.cookie = "result=" + this.removeQuote(this.result) + "; path=/;";
+        document.cookie = "backOutPlan=" + this.removeQuote(this.backOutPlan) + "; path=/;";
+        document.cookie = "backOutMinutes=" + this.removeQuote(this.backOutMinutes) + "; path=/;";
+        document.cookie = "reasonType= " + this.removeQuote(this.reasonType) + "; path=/;";
+        document.cookie = "changeType= " + this.removeQuote(this.changeType) + "; path=/;";
+        document.cookie = "changeDepartment= " + this.removeQuote(this.changeDepartment) + "; path=/;";
+        document.cookie = "startDate= " + this.removeQuote(this.startDate) + "; path=/;";
+        document.cookie = "changeWindowStopDate= " + this.removeQuote(this.stopDate) + "; path=/;";
         console.log(document.cookie);
         let x = true;
         this.props.execute(true);
