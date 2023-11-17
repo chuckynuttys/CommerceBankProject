@@ -5,40 +5,46 @@ import './Entry.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
+var navBarNumber;
+
 const Entry = () => {
   return (
+    <div className="bg">
     <form>
+    <NavBar navBarNumber={1}/>
           <div className="menu">
              <h1> <img className = "logo" src={logo} alt="logo" /> </h1>
              <h2>Change Request Form</h2>
-             <fieldset>
+             <fieldset className="fs1">
               <label className= "labelInput" htmlFor="aId">
-              <input className="inputLabelTopPage" id="aId" name = "aID" rows="9" cols="50" placeholder="Application ID" />
+              <input 
+              className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" placeholder="Application ID" />
               <p className = "button">Three character ID of the application team implementing the change</p>
               </label>
               <label className= "labelInput" htmlFor="descr">
-              <textarea rows="3" cols="30" placeholder="Description" id="descr"></textarea>
+              <textarea id="description" name = "description" rows="3" cols="30" placeholder="Description"></textarea>
               <p className = "button">80 Character description of what the change is</p>
               </label>
               <label className= "labelInput"  htmlFor="why">
-             <textarea rows="3" cols="30" placeholder="Why" id="why"></textarea>
+             <textarea rows="3" cols="30" placeholder="Why" name = "why" id="why"></textarea>
               <p className = "button">Why is the change needed</p>
               </label>
              </fieldset>
              <fieldset className="fs2">
              <label className= "labelInput" htmlFor="whatIs">
-                <input className="inputLabelTopPage" id="whatIs" name="whatIs" rows='9' cols = '50' placeholder="What is changing?" />
+                <input className="inputLabelTopPage" id="whatIsChanging" name="whatIsChanging" rows='9' cols = '50' placeholder="What is changing?" />
                 <p className = "button">New version of software, server configuration changes, etc..</p>
               </label>
               <label className= "labelInput" htmlFor="backOut">
-              <textarea rows="3" cols="30" placeholder="Back-Out Plan" id="backOut"></textarea>
+              <textarea rows="3" cols="30" placeholder="Back-Out Plan" id="backOutPlan" name = "backOutPlan"></textarea>
               <p className = "button">Description of what it takes to revert the change</p>
               </label>
               <label className= "labelInput" htmlFor="backOutMins">
-                <input className="inputLabelTopPage" id="backOutMins" name="backOutMins" rows='9' cols = '50' placeholder="Back-Out Minutes" />
+                <input className="inputLabelTopPage" id="backOutMinutes" name="backOutMinutes" rows='9' cols = '50' placeholder="Back-Out Minutes" />
                 <p className = "button">How long will it take to perform the back-out in minutes</p>
               </label>
              </fieldset>
+             <div className="multiplechoicediv">
              <fieldset className="radioButton">
               <legend className="legendRadio">
                 Reason Type 
@@ -51,6 +57,21 @@ const Entry = () => {
                 <input className="inputRadio" type = "radio" name ="reasonType" value="Enhancement"/>
                 <p className="radioP">Enhancement</p>
               </label>
+             </fieldset>
+             <fieldset className="radioButton">
+              <legend className="legendRadio">
+                Other Needed Departments 
+              </legend>
+              <div className="radioElements">
+              <input className="inputCheck" type="checkbox" name ="devops" value="DevOps" id="changeTypeCheckBox"  />
+              <p className="checkP">DevOps</p>
+              <input className="inputCheck" type="checkbox" name="dba" value="DBA" id="dba" />
+              <p className="checkP">DBA</p>
+              <input className="inputCheck" type="checkbox" name="security" value="Security" id="security" />
+              <p className="checkP">Security</p>
+              <input className="inputCheck" type="checkbox" name="scheduling" value="Scheduling" id="scheduling" />
+              <p className="checkP">DBA</p>
+              </div>
              </fieldset>
              <fieldset className="radioButton">
               <legend className="legendRadio">
@@ -69,21 +90,7 @@ const Entry = () => {
                 <p className="radioP">Emergency</p>
               </label>
              </fieldset>
-             <fieldset className="radioButton">
-              <legend className="legendRadio">
-                Other Needed Departments 
-              </legend>
-              <div className="radioElements">
-              <input className="inputCheck" type="checkbox" name ="devops" value="DevOps" id="changeTypeCheckBox"  />
-              <p className="checkP">DevOps</p>
-              <input className="inputCheck" type="checkbox" name="dba" value="DBA" id="dba" />
-              <p className="checkP">DBA</p>
-              <input className="inputCheck" type="checkbox" name="security" value="Security" id="security" />
-              <p className="checkP">Security</p>
-              <input className="inputCheck" type="checkbox" name="scheduling" value="Scheduling" id="scheduling" />
-              <p className="checkP">DBA</p>
-              </div>
-             </fieldset>
+             </div>
              <fieldset className="doubleStyle">
               <div className="calDiv">
               <legend className="legendCal">Change Window Start Date</legend>
@@ -101,7 +108,7 @@ const Entry = () => {
              </fieldset>
           </div>
           </form>
+          </div>
   );
-};
-
+  };
 export default Entry;

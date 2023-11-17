@@ -15,13 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 public class CMUserController {
 
     private final CMUserService cmUserService;
+    private final CMUserRepository cmUserRepository;
 
+    @CrossOrigin
     @PostMapping("/users")
     public ResponseEntity<?> save(@RequestBody CMUser cmuser){
 
@@ -32,13 +33,18 @@ public class CMUserController {
 
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<CMUser> getUser(@PathVariable int id) {
-        Optional<CMUser> user = cmUserService.getCMUserById(id);
-        if (!user.isPresent()) {
-            throw new UserNotFoundException(String.format("UserId[%d] not found", id));
+    @CrossOrigin(origins = "htttp://localhost:3000")
+    @GetMapping("/users")
+    public ResponseEntity<CMUser> getUser(@RequestParam(required = true) String username) {
+        username = username.replaceAll("\"", "");
+        System.out.println("Get Test; username:" + username);
+        CMUser user = cmUserService.getCMUserByUserId(username);
+        if (user == null) {
+            throw new UserNotFoundException(String.format("UserId[%s] not found", username));
+        } else {
+            System.out.println("UserID: " + user.getUsername());
+            return new ResponseEntity(user, HttpStatus.OK);
         }
-        return new ResponseEntity(user, HttpStatus.OK);
     }
 
 }

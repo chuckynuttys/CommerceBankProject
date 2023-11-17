@@ -1,12 +1,48 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
 import './ListScreen.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import ListChangeRequests from "../../Components/ListChangeRequests";
-class ListScreenApp extends Component { 
-  render() {
+import NavBar from "../../Components/NavBar";
+
+const ListScreenApp = () => { 
+  const[changeRequests, setChangeRequests] = useState([]);
+  var tabSet;
+  var elementNumber;
+  var element2Number;
+  var navBarNumber;
+  var index = 1;
+
+  useEffect(()=>{
+    fetch(`http://localhost:8080/changerequests?archivedStatus=false`, {method:"GET"})
+    .then(res => res.json())
+    .then(res => {setChangeRequests(res)})
+  },[])
+
+  const handleClick = (e) => {
+    
+    
+    if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
+      // Tab 1
+      
+      document.getElementById("u507_div").setAttribute("class", "selected");
+      document.getElementById("u506_div").setAttribute("class", "");
+      document.getElementById("u508_state0").setAttribute("style", "visibility: visible");
+      document.getElementById("u508_state1").setAttribute("style", "visibility: hidden");
+    } else if (document.getElementById("u506_div").getAttribute("class") == "" && e == "2") {
+      // Tab 2
+      
+      document.getElementById("u506_div").setAttribute("class", "selected");
+      document.getElementById("u507_div").setAttribute("class", "");
+      document.getElementById("u508_state1").setAttribute("style", "visibility: visible");
+      document.getElementById("u508_state0").setAttribute("style", "visibility: hidden");
+    }
+  }
+  
+  
+
     return (
     <div id="base" class="">
 
@@ -28,36 +64,14 @@ class ListScreenApp extends Component {
 
       
       <div id="u494" class="ax_default box_3">
-        <div id="u494_div" class=""></div>
+        <div id="u494_div" class="">
+        </div>
         <div id="u494_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
           <p></p>
         </div>
       </div>
-
       
-      <div id="u495" class="ax_default button">
-        <div id="u495_div" class=""></div>
-        <div id="u495_text" class="text ">
-          <p><span>Submit Request</span></p>
-        </div>
-      </div>
-
       
-      <div id="u496" class="ax_default button">
-        <div id="u496_div" class=""></div>
-        <div id="u496_text" class="text ">
-          <p><span>Log out</span></p>
-        </div>
-      </div>
-
-      
-      <div id="u497" class="ax_default button">
-        <div id="u497_div" class=""></div>
-        <div id="u497_text" class="text ">
-          <p><span>View Change Request Archive</span></p>
-        </div>
-      </div>
-
       
       <div id="u498" class="ax_default box_2">
         <div id="u498_div" class=""></div>
@@ -67,12 +81,7 @@ class ListScreenApp extends Component {
       </div>
 
       
-      <div id="u499" class="ax_default button">
-        <div id="u499_div" class=""></div>
-        <div id="u499_text" class="text ">
-          <p><span>View Change Requests</span></p>
-        </div>
-      </div>
+      <NavBar navBarNumber={3}/>
 
       
       <div id="u500" class="ax_default image">
@@ -113,7 +122,7 @@ class ListScreenApp extends Component {
         <div id="u505" class="ax_default" data-left="308" data-top="304" data-width="221" data-height="41" layer-opacity="1">
 
           
-          <div id="u506" class="ax_default box_3" data-label="Tab Label 2" selectiongroup="Tabs">
+          <div id="u506" class="ax_default box_3" data-label="Tab Label 2" selectiongroup="Tabs" onClick={() => handleClick(2)} style={{cursor: 'pointer'}} >
             <div id="u506_div" class=""></div>
             <div id="u506_text" class="text ">
               <p><span>Tab 2</span></p>
@@ -121,7 +130,7 @@ class ListScreenApp extends Component {
           </div>
 
           
-          <div id="u507" class="ax_default box_3 selected" data-label="Tab Label 1" selectiongroup="Tabs">
+          <div id="u507" class="ax_default box_3 selected" data-label="Tab Label 1" selectiongroup="Tabs" onClick={() => handleClick(1)} style={{cursor: 'pointer'}} >
             <div id="u507_div" class="selected"></div>
             <div id="u507_text" class="text ">
               <p><span>Tab 1</span></p>
@@ -213,22 +222,22 @@ class ListScreenApp extends Component {
                   <p><span>Who</span></p>
                 </div>
               </div>
-              
-              {/* <ListChangeRequests page={1}/> */}
-              
-              
               <div id="u532" class="ax_default box_1" data-label="Action (Header)">
                 <div id="u532_div" class=""></div>
                 <div id="u532_text" class="text ">
                   <p><span>Action</span></p>
                 </div>
               </div>
+
+              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
+              
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index}/>)}
+              
+              </div>
             </div>
           </div>
           <div id="u508_state1" class="panel_state" data-label="State2" style={{visibility: 'hidden'}}>
             <div id="u508_state1_content" class="panel_state_content">
-
-              
               <div id="u534" class="ax_default box_1" data-label="Window Start Date (Header)">
                 <div id="u534_div" class=""></div>
                 <div id="u534_text" class="text ">
@@ -315,8 +324,11 @@ class ListScreenApp extends Component {
                   <p><span>Change_Number</span></p>
                 </div>
               </div>
-              {/* <ListChangeRequests page={2}/> */}
-
+              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
+              {index = 1}
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={2} index={index}></ListChangeRequests>)}
+                
+                </div>
               </div>
             </div>
           </div>
@@ -324,6 +336,4 @@ class ListScreenApp extends Component {
       </div>
     );
   }
-}
-
 export default ListScreenApp;

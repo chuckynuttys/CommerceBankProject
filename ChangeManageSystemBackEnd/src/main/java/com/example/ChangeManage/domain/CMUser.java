@@ -21,8 +21,9 @@ public class CMUser {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String userId;
+    private String username;
     private String password;
+    // Authorization level values: user, departmentUser, applicationUser, operationsUser
     private String authorizationLevel;
 
     @OneToMany(mappedBy = "user")

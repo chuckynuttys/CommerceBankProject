@@ -1,50 +1,77 @@
-
-body {
-  background-image: url('../../Images/BackgroundImg.jpg');
-  padding: 20px;
-  margin: auto;
-  position: relative;
-  size: auto;
-  height: auto;
-  width: auto;
-}
-
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-
+.multiplechoicediv{
+  width: 100%;
+  height: 100%;
+}
+.bg{
+  background-image: url('/././src/Images/BackgroundImg.jpg');
+  background-size: cover;
+  z-index: -1;
+}
+h1{
+  margin-top: 2px;
+}
 .menu {
   width: 80%;
   background-color: rgba(242, 242, 242, 1);
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
-  padding-right: 40px;
+  padding-right: 20px;
+  padding-top: 0px;
+  padding-bottom:0px;
   max-width: 900px;
   overflow: hidden;
+  height: 95%;
 }
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+ .fs1{
+  display: block;
+  position: relative;
+  border: none;
+  padding-top: 0px;
+  margin-right: auto;
+  padding-left: 5%;
+  margin: auto;
+  height: auto;
+  float: left;
+  margin-bottom:25px;
+ width: 40%;
+ padding-left: 5%;
+  
+}
+
 fieldset{
   display: block;
   position: relative;
   border: none;
   padding-top: 0px;
   margin-right: auto;
-  padding-left: 0;
   padding-right: 0;
   margin: auto;
-  width: 50%;
   height: auto;
   float: left;
   margin-bottom:25px;
-  padding: 0px;
+  
 }
+
+.fs2{
+  float: right;
+  position: right;
+  padding: 0%;
+  padding-right: 5%;
+  width: 40%;
+  margin-bottom:35px;
+}
+
 h2{
   font-size: 28;
   font-weight: bold;
@@ -58,10 +85,11 @@ h2{
   display: block;
   margin: 0.7rem 0;
   font-size: 12px;
-  margin-right: auto; 
+  margin-right: 0px; 
   margin-top: 25px;
   margin-bottom: 0px;
   height: 120px;
+  width: 100%;
   
 }
 
@@ -69,10 +97,12 @@ h2{
   display: block;
   margin: 0.7rem 0;
   font-size: 12px;
-  margin-right: auto; 
+  margin-right: 0px; 
   margin-top: 30px;
   margin-bottom: 0px;
   height: 100px;
+  width: 100%;
+  
 }
 
 .inputLabelTopPage{
@@ -80,7 +110,7 @@ h2{
   font-size: 16px;
   top: 0;
   display: block;
-  width: 80%;
+  width: 100%;
   position: relative;
   background-color: rgb(231,231,231);
   border: 1px solid rgb(231,231,231);
@@ -96,12 +126,14 @@ h2{
       width: 8%;
       margin-top: 0px;
       color: rgb(121, 121, 121);
+      text-align: center;
 }
 
 .button{
   margin-top: 8px;
   font-size: 12px;
   margin-bottom: auto;
+  width:80%;
 }
 
 textarea{
@@ -109,7 +141,7 @@ textarea{
   border: 1px solid rgb(231,231,231);
   padding: 5%;
   top:10px;
-  width: 80%;
+  width: 100%;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -121,10 +153,13 @@ textarea{
   font-weight: lighter;
   font-family: 'Roboto';
   margin-bottom: 0%;
+  text-align: center;
 }
 
 .labelRadio{
-    width: 500px;
+  display: inline-block;
+    width: 100%;
+    margin-left: 30%;
 }
 .redio-wrap label{
   display: inline-block;
@@ -139,10 +174,12 @@ textarea{
 
 .radioButton{
   display: inline-block;
-  width: 33%;
+  width: 30%;
   height: auto;
   margin-bottom: 0px;
   padding-bottom: 0%;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .radioP{
   position: relative;
@@ -152,10 +189,11 @@ textarea{
   margin-left: 4px;
   margin-top: 0px;
   size: auto;
-  width: 80%;
+  width: auto;
   font-size: 20px;
   font-family: 'Roboto';
   height: 1rem 0; 
+  text-align: center;
 }
 
 .inputCheck{
@@ -181,7 +219,8 @@ textarea{
   margin-top: 0px;
   margin-bottom: 15px;
   top:100%;
-
+  margin-left: 25%;
+  width: auto;
 }
 
 .inputCalender{
@@ -203,14 +242,21 @@ textarea{
 
 input[type="submit"] {
   display: block;
-  width: 5em;
+  width: 15em;
   margin: 1em auto;
   height: 2em;
   font-size: 1.1rem;
-  color: rgb(121, 121, 121);
-  background-color: rgba(114, 212, 94, 1);
-  border-color: white;
+  font-weight: bold;
+  font-family: Arial;
+  color: rgb(255, 255, 255);
+  background-color:#006747;
+  border: 2px solid #006747;
   
+}
+input[type="submit"]:hover {
+  background-color: black;
+  border: 2px solid #000000;
+  cursor: pointer;
 }
 .Submit{
   position: relative;
