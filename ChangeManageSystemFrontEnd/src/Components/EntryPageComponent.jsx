@@ -24,6 +24,7 @@ class EntryPageComponent extends Component{
         //methods go here for declaration
         this.saveCookies = this.saveCookies.bind(this);
         this.handleValue = this.handleValue.bind(this);
+        
     };
     getCheckBox=(e)=> {
       let x = false;
@@ -66,19 +67,21 @@ class EntryPageComponent extends Component{
         if (emergency.checked == true) {
           this.changeType = emergency.value;
         }
-        document.cookie = "appID=" + this.appId;
-        document.cookie = "description=" + this.description;
-        document.cookie = "reason=" + this.reason;
-        document.cookie = "result=" + this.result;
-        document.cookie = "backOutPlan=" + this.backOutPlan;
-        document.cookie = "backOutMinutes=" + this.backOutMinutes;
-        document.cookie = "reasonType= " + this.reasonType;
-        document.cookie = "changeType= " + this.changeType;
-        document.cookie = "changeDepartment= " + this.changeDepartment;
-        document.cookie = "startDate= " + this.startDate;
-        document.cookie = "changeWindowStopDate= " + this.stopDate;
+        document.cookie = "appID=" + this.appId + "; path=/;";
+        document.cookie = "description=" + this.description + "; path=/;";
+        document.cookie = "reason=" + this.reason + "; path=/;";
+        document.cookie = "result=" + this.result + "; path=/;";
+        document.cookie = "backOutPlan=" + this.backOutPlan + "; path=/;";
+        document.cookie = "backOutMinutes=" + this.backOutMinutes + "; path=/;";
+        document.cookie = "reasonType= " + this.reasonType + "; path=/;";
+        document.cookie = "changeType= " + this.changeType + "; path=/;";
+        document.cookie = "changeDepartment= " + this.changeDepartment + "; path=/;";
+        document.cookie = "startDate= " + this.startDate + "; path=/;";
+        document.cookie = "changeWindowStopDate= " + this.stopDate + "; path=/;";
         console.log(document.cookie);
         let x = true;
+        this.props.execute(true);
+       
     }
 
     handleValue = (e, val) => {
