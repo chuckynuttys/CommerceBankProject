@@ -90,7 +90,7 @@ function ListChangeRequests(props) {
                             </div>
                           </div>
                         
-                        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} />
+                        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet}/>
                         
                         </div>
         );
@@ -169,7 +169,7 @@ function ListChangeRequests(props) {
             </div>
           </div>
 
-          <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} />
+          <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet}/>
 
         </div>
         )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Form} from 'react-bootstrap';
+import { makeCookie } from '../files/CookieManagement';
 
 
 
@@ -32,13 +33,15 @@ class LoginComponent extends Component {
         return data.json();
       })
       .then(post => {
-        console.log(post.userId);
+        console.log(post.username);
         console.log(post.password);
         if (post.username == CurrentUsername) {
           document.getElementById("u15").setAttribute("style", "visibility: hidden");
           if (post.password == CurrentPassword) {
             document.getElementById("u15").setAttribute("style", "visibility: hidden");
-              document.cookie = "userId=" + CurrentUsername;
+              
+              makeCookie("id", post.id);
+              makeCookie("authorizationLevel", post.authorizationLevel);
               console.log(document.cookie);
               this.props.handleSignIn(true);
           } else {

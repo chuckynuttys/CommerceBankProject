@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import user from "../files/UserFile";
 import { getCookie } from "../files/CookieManagement";
+import { left } from "@popperjs/core";
 
 
 
@@ -70,32 +71,49 @@ handleClick=(e)=>{
 }
 
 render() {
-
-
 if (this.state.stateLevel == "Open") {
-    return (
     // Display the following options:
     // Freeze
     // Edit
-    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '120px', height: '120px', left: '1197px', top: '0px', visibility: 'inherit'}}>
-        <div id="u531-1_div" class="u531_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
-        <div id="u531-1_text" class="text u531_text">
-            <ul>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Freeze">Freeze</button>
-            </ul>
-        </div>
-    </div>
-    )
-    
-} else if (this.state.stateLevel == "Frozen") {
+    if (this.props.tabSet == 1) {
+        var left1 = '1163px';
+        var left2 = '0px';
+        var width = '135px';
+    } else {
+        var left1 = '1019px';
+        var left2 = '63px';
+        var width = '273px';
+        
+    }
     return (
+        <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+            <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+            <div id="u531-1_text" class="text u531_text" style={{ visibility: 'inherit', left: left2,}}>
+                <ul>
+                    <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Freeze">Freeze</button>
+                </ul>
+            </div>
+        </div>
+    )
+} else if (this.state.stateLevel == "Frozen") {
     // Display the following options:
     // (Application) Approve
     // Deny
     // Unfreeze
-    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '120px', height: '120px', left: '1197px', top: '0px', visibility: 'inherit'}}>
-        <div id="u531-1_div" class="u531_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
-        <div id="u531-1_text" class="text u531_text">
+    if (this.props.tabSet == 1) {
+        var left1 = '1163px';
+        var left2 = '0px';
+        var width = '135px';
+    } else {
+        var left1 = '1019px';
+        var left2 = '63px';
+        var width = '273px';
+        
+    }
+    return (
+    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+        <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+        <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
             <ul>
                 <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
                 <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
@@ -105,14 +123,24 @@ if (this.state.stateLevel == "Open") {
     </div>
     )
 } else if (this.state.stateLevel == "Application Approval") {
-    return (
     // Display the following options:
     // (Department) Approve
     // Deny
     // Unfreeze
-    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '120px', height: '120px', left: '1197px', top: '0px', visibility: 'inherit'}}>
-        <div id="u531-1_div" class="u531_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
-        <div id="u531-1_text" class="text u531_text">
+    if (this.props.tabSet == 1) {
+        var left1 = '1163px';
+        var left2 = '0px';
+        var width = '135px';
+    } else {
+        var left1 = '1019px';
+        var left2 = '63px';
+        var width = '273px';
+        
+    }
+    return (
+    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+        <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+        <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
             <ul>
                 <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
                 <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
@@ -122,15 +150,25 @@ if (this.state.stateLevel == "Open") {
     </div>
     )
 } else {
-    return (
     // Department Approval
     // Display the following options:
     // (Operations) Approve
     // Deny
     // Unfreeze
-    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '120px', height: '120px', left: '1197px', top: '0px', visibility: 'inherit'}}>
-        <div id="u531-1_div" class="u531_div" style={{width: '120px', height: '120px', visibility: 'inherit'}}></div>
-        <div id="u531-1_text" class="text u531_text">
+    if (this.props.tabSet == 1) {
+        var left1 = '1163px';
+        var left2 = '0px';
+        var width = '135px';
+    } else {
+        var left1 = '1019px';
+        var left2 = '63px';
+        var width = '273px';
+        
+    }
+    return (
+    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+        <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+        <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
             <ul>
                 <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
                 <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
