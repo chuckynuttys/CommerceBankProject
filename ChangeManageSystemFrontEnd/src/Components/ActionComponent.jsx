@@ -32,17 +32,20 @@ handleClick=(e)=>{
         // Approve & Archive if user role is Operations, otherwise go to next department.
         switch (authorizationLevel) {
             case "departmentUser":
-                params.stateLevel = "Department";
+                params.stateLevel = "Department Approved";
                 
                 break;
             case "applicationUser":
-                params.stateLevel = "Application";
+                
+                params.stateLevel = "Application Approved";
+                
+                
                 break;
             case "operationUser":
-                if (this.stateLevel == "Application") {
+                
                     params.stateLevel = "Approved";
                     params.archivedStatus = "true";
-                } 
+                
                 
                 break;
         }
@@ -122,7 +125,7 @@ if (this.state.stateLevel == "Open") {
         </div>
     </div>
     )
-} else if (this.state.stateLevel == "Application Approval") {
+} else if (this.state.stateLevel == "Application Approved") {
     // Display the following options:
     // (Department) Approve
     // Deny

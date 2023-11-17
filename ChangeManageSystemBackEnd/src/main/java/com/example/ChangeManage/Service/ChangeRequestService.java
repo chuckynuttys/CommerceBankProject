@@ -60,7 +60,7 @@ public class ChangeRequestService
                 return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
                                         archivedStatus, id, "Open"),
                                 changeRequestRepository.findChangeRequestsNotFromUserWithCustomQuery(
-                                        archivedStatus, id, "Department"))
+                                        archivedStatus, id, "Department Approved"))
                         .filter(Optional::isPresent)
                         .map(Optional::get)
                         .flatMap(List::stream)
