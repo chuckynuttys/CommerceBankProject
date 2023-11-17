@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Form, Button} from 'react-bootstrap';
-import {Formik, Field, ErrorMessage} from 'formik';
-import { useNavigate } from 'react-router-dom';
+import {Form} from 'react-bootstrap';
+
+
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -28,50 +28,65 @@ class LoginComponent extends Component {
       CurrentPassword = CurrentPassword.replaceAll("\"", "");
       CurrentUsername = CurrentUsername.replaceAll("\"", "");
       fetch(`http://localhost:8080/users?username=${CurrentUsername}`)
-      .then(data=>data.json())
-      .then(data => {
-        if (data.password == CurrentPassword) {
-              document.cookie = "username=" + CurrentUsername;
+      .then(data=> {
+        return data.json();
+      })
+      .then(post => {
+        console.log(post.userId);
+        console.log(post.password);
+        if (post.username == CurrentUsername) {
+          document.getElementById("u15").setAttribute("style", "visibility: hidden");
+          if (post.password == CurrentPassword) {
+            document.getElementById("u15").setAttribute("style", "visibility: hidden");
+              document.cookie = "userId=" + CurrentUsername;
               console.log(document.cookie);
               this.props.handleSignIn(true);
-        } else {
+          } else {
           // Error for incorrect password. Change the Div Tag to shown for the incorrect Password field here.
+          this.setState({ incorrectPassword: true, incorrectUserId: false });
           // Logging for debugging below.
           console.log("Incorrect Password");
           console.log(CurrentPassword);
-          console.log(data.password);
-        }
+          document.getElementById("u15").setAttribute("style", "visibility: visible");
+          }
+        } else {
+          // Error for incorrect userID. Change the div tag to shown for the incorrect userID field here.
+          this.setState({ incorrectUserId: true, incorrectPassword: false });
+          // Logging for debugging below.
+          console.log("Incorrect userId");
+          console.log(CurrentUsername);
+          document.getElementById("u15").setAttribute("style", "visibility: visible");
+        } 
+        
       })
+      .catch(error => {
+        console.error(error);
+        this.setState({ incorrectUserId: true, incorrectPassword: false });
+    });
     }
     render() {
         return (
                     <Form onSubmit={this.requestUser}>
-                        <div id="u6" className="ax_default text_field" data-label="Input Field">
-                          <div id="u6_div" className=""></div>
-                          <input id="u6_input" type="text" className="u6_input" onChange = {this.changeValue} name="username"/>
+                        <div id="u6" class="ax_default text_field" data-label="Input Field">
+                          <div id="u6_div" class=""></div>
+                          <input id="u6_input" type="text" class="u6_input" onChange = {this.changeValue} name="username" placeholder='UserID'/>
                         </div>
+                        {this.state.incorrectUserId && (
+                    <div className="error-message">Incorrect userId</div>
+                        )}
+                        
 
-                        <div id="u8" className="ax_default shape" data-label="Lower Label">
-                        <div id="u8_div" className=""></div>
-                        <div id="u8_text" className="text ">
-                          <p><span>username</span></p>
-                          </div>
+                        <div id="u10" class="ax_default text_field" data-label="Input Field">
+                          <div id="u10_div" class=""></div>
+                          <input id="u10_input" type="text" class="u10_input" onChange = {this.changeValue} name="password" placeholder='Password'/>
                         </div>
-                      
-                        <div id="u10" className="ax_default text_field" data-label="Input Field">
-                          <div id="u10_div" className=""></div>
-                          <input id="u10_input" type="text" className="u10_input" onChange = {this.changeValue} name="password"/>
-                        </div>
-                        <div id="u12" className="ax_default shape" data-label="Lower Label">
-                        <div id="u12_div" className=""></div>
-                        <div id="u12_text" className="text ">
-                            <p><span>Password</span></p>
-                          </div>
-                        </div>
-                      
-                      <button id="u13" className="ax_default primary_button" style={{cursor: 'pointer'}} type="submit"> 
-                      <div id="u13_div" className=""></div>
-                      <div id="u13_text" className="text ">
+                        {this.state.incorrectPassword && (
+                    <div className="error-message">Incorrect Password</div>
+                        )}
+
+                    <button id="u13" class="ax_default primary_button" style={{cursor: 'pointer'}} type="submit"> 
+                      <div id="u13_div" class=""></div>
+                      <div id="u13_text" class="text ">
                         <p><span>Log In</span></p>
                         </div>
                       </button>
