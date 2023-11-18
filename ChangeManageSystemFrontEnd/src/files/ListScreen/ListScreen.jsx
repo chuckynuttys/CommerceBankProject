@@ -26,57 +26,68 @@ const ListScreenApp = () => {
   let orderByStateLevel = false;
   
 
+  const fetchRequest = () => {
+    if (orderByStateLevel) {
+      changeRequests.sort(getSortOrder("stateLevel"));
+    } else {
+      const params = {
+        archivedStatus: false,
+        id: parseInt(getCookie("id")),
+        authorizationLevel: getCookie("authorizationLevel"),
+      }
+      
+      const searchParams = new URLSearchParams(params);
+      fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
+      
+      .then(res => res.json())
+      .then(res => {setChangeRequests(res)})
+    }
+    
+    
+  }
 
   useEffect(()=>{
     
-    const params = {
-      archivedStatus: false,
-      id: parseInt(getCookie("id")),
-      authorizationLevel: getCookie("authorizationLevel"),
-    }
-    
-    const searchParams = new URLSearchParams(params);
-    fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
-    
-    .then(res => res.json())
-    .then(res => {setChangeRequests(res)})
-    if (orderByStateLevel) {
-      changeRequests.sort(getSortOrder("stateLevel"));
-    }
+    fetchRequest();
 
 
   },[])
 
   const changeCount = (e) => {
-    if (e == "State") {
+    console.log(e);
+    if (e === "state") {
       // Need to figure out how to sort by StateLevel properly.
-
-
-
+      orderByStateLevel = true;
+      console.log("Ordering by State");
+      fetchRequest();
       
     } else {
-      dispatch();
-    const params = {
-      archivedStatus: false,
-      id: parseInt(getCookie("id")),
-      authorizationLevel: getCookie("authorizationLevel"),
-    }
-    const searchParams = new URLSearchParams(params);
-    fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
+      orderByStateLevel = false;
+      console.log("Ordering by changeId");
+      fetchRequest();
+    //   dispatch();
+    // const params = {
+    //   archivedStatus: false,
+    //   id: parseInt(getCookie("id")),
+    //   authorizationLevel: getCookie("authorizationLevel"),
+    // }
+    // const searchParams = new URLSearchParams(params);
+    // fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
     
-    .then(res => res.json())
-    .then(res => {setChangeRequests(res)})
-    }
-    
+    // .then(res => res.json())
+    // .then(res => {setChangeRequests(res)})
 
 
+    }
   }
 
   const handleClick = (e) => {
     
-    if (e == "state") {
-      console.log("Test2");
+    if (e === "state") {
+      changeCount(e);
       
+    } else if (e === "changeId") {
+      changeCount(e);
     } else {
       if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
         // Tab 1
@@ -194,7 +205,7 @@ const ListScreenApp = () => {
               
               <div id="u510" class="ax_default box_1" data-label="Change Number (Header)">
                 <div id="u510_div" class=""></div>
-                <div id="u510_text" class="text ">
+                <div id="u510_text" class="text " onClick={() => {handleClick("changeId")}} style={{cursor: 'pointer'}}>
                   <p><span>Change Number</span></p>
                 </div>
               </div>
@@ -266,7 +277,7 @@ const ListScreenApp = () => {
               
               <div id="u519" class="ax_default box_1" data-label="Who (Header)">
                 <div id="u519_div" class=""></div>
-                <div id="u519_text" class="text " onClick={(e) => {handleClick("state")}} style={{cursor: 'pointer'}}>
+                <div id="u519_text" class="text " onClick={() => {handleClick("state")}} style={{cursor: 'pointer'}}>
                   <p><span>State</span></p>
                 </div>
               </div>
@@ -352,7 +363,7 @@ const ListScreenApp = () => {
               
               <div id="u542" class="ax_default box_1" data-label="Risk Level (Header)">
                 <div id="u542_div" class="" ></div>
-                <div id="u542_text" class="text " onClick={(e) => {handleClick("state")}} style={{cursor: 'pointer'}}>
+                <div id="u542_text" class="text " onClick={() => {handleClick("state")}} style={{cursor: 'pointer'}}>
                   <p><span>State</span></p>
                 </div>
               </div>
@@ -368,7 +379,7 @@ const ListScreenApp = () => {
               
               <div id="u544" class="ax_default box_1" data-label="Change Number (Header)">
                 <div id="u544_div" class=""></div>
-                <div id="u544_text" class="text ">
+                <div id="u544_text" class="text " onClick={(e) => {handleClick("changeId")}} style={{cursor: 'pointer'}}>
                   <p><span>Change_Number</span></p>
                 </div>
               </div>
