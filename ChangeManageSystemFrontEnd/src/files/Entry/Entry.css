@@ -3,18 +3,22 @@
   margin-left: auto;
   margin-right: auto;
 }
-.multiplechoicediv{
+
+.multiplechoicediv {
   width: 100%;
   height: 100%;
 }
-.bg{
+
+.bg {
   background-image: url('/././src/Images/BackgroundImg.jpg');
   background-size: cover;
   z-index: -1;
 }
-h1{
+
+h1 {
   margin-top: 2px;
 }
+
 .menu {
   width: 80%;
   background-color: rgba(242, 242, 242, 1);
@@ -23,17 +27,19 @@ h1{
   padding: 20px;
   padding-right: 20px;
   padding-top: 0px;
-  padding-bottom:0px;
+  padding-bottom: 0px;
   max-width: 900px;
   overflow: hidden;
   height: 95%;
 }
+
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
- .fs1{
+
+.fs1 {
   display: block;
   position: relative;
   border: none;
@@ -43,13 +49,13 @@ img {
   margin: auto;
   height: auto;
   float: left;
-  margin-bottom:25px;
- width: 40%;
- padding-left: 5%;
-  
+  margin-bottom: 25px;
+  width: 40%;
+  padding-left: 5%;
+
 }
 
-fieldset{
+fieldset {
   display: block;
   position: relative;
   border: none;
@@ -59,20 +65,20 @@ fieldset{
   margin: auto;
   height: auto;
   float: left;
-  margin-bottom:25px;
-  
+  margin-bottom: 25px;
+
 }
 
-.fs2{
+.fs2 {
   float: right;
   position: right;
   padding: 0%;
   padding-right: 5%;
   width: 40%;
-  margin-bottom:35px;
+  margin-bottom: 35px;
 }
 
-h2{
+h2 {
   font-size: 28;
   font-weight: bold;
   font-family: Arial;
@@ -81,98 +87,99 @@ h2{
   color: rgb(121, 121, 121);
 }
 
-.labelInput{
+.labelInput {
   display: block;
   margin: 0.7rem 0;
   font-size: 12px;
-  margin-right: 0px; 
+  margin-right: 0px;
   margin-top: 25px;
   margin-bottom: 0px;
   height: 120px;
   width: 100%;
-  
+
 }
 
-.labelInput:first-of-type{
+.labelInput:first-of-type {
   display: block;
   margin: 0.7rem 0;
   font-size: 12px;
-  margin-right: 0px; 
+  margin-right: 0px;
   margin-top: 30px;
   margin-bottom: 0px;
   height: 100px;
   width: 100%;
-  
+
 }
 
-.inputLabelTopPage{
+.inputLabelTopPage {
   padding: 5%;
   font-size: 16px;
   top: 0;
   display: block;
   width: 100%;
   position: relative;
-  background-color: rgb(231,231,231);
-  border: 1px solid rgb(231,231,231);
+  background-color: rgb(231, 231, 231);
+  border: 1px solid rgb(231, 231, 231);
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
 
-.inputRadio{
-      position: relative;
-      display: inline-block;
-      margin-right: auto;
-      size: 45%;
-      width: 8%;
-      margin-top: 0px;
-      color: rgb(121, 121, 121);
-      text-align: center;
+.inputRadio {
+  position: relative;
+  display: inline-block;
+  margin-right: auto;
+  size: 45%;
+  width: 8%;
+  margin-top: 0px;
+  color: rgb(121, 121, 121);
+  text-align: center;
 }
 
-.button{
+.button {
   margin-top: 8px;
   font-size: 12px;
   margin-bottom: auto;
-  width:80%;
+  width: 80%;
 }
 
-textarea{
-  background-color: rgb(231,231,231);
-  border: 1px solid rgb(231,231,231);
+textarea {
+  background-color: rgb(231, 231, 231);
+  border: 1px solid rgb(231, 231, 231);
   padding: 5%;
-  top:10px;
+  top: 10px;
   width: 100%;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
 
-.legendRadio{
+.legendRadio {
   font-size: 17 px;
-  color:rgb(121, 121, 121);
+  color: rgb(121, 121, 121);
   font-weight: lighter;
   font-family: 'Roboto';
   margin-bottom: 0%;
   text-align: center;
 }
 
-.labelRadio{
+.labelRadio {
   display: inline-block;
-    width: 100%;
-    margin-left: 30%;
+  width: 100%;
+  margin-left: 30%;
 }
-.redio-wrap label{
+
+.redio-wrap label {
   display: inline-block;
   margin-right: 10px;
   width: auto;
 }
 
-.redio-wrap label:first-child{
+.redio-wrap label:first-child {
   width: 140px;
   margin-right: 40px;
 }
 
-.radioButton{
+.radioButton {
   display: inline-block;
   width: 30%;
   height: auto;
@@ -181,10 +188,11 @@ textarea{
   padding-left: 10px;
   padding-right: 10px;
 }
-.radioP{
+
+.radioP {
   position: relative;
   display: inline-block;
-  left:0px;
+  left: 0px;
   margin-bottom: 0%;
   margin-left: 4px;
   margin-top: 0px;
@@ -192,45 +200,45 @@ textarea{
   width: auto;
   font-size: 20px;
   font-family: 'Roboto';
-  height: 1rem 0; 
+  height: 1rem 0;
   text-align: center;
 }
 
-.inputCheck{
+.inputCheck {
   display: inline-block;
   width: 10%;
   margin: 0px;
 
 }
 
-.checkP{
+.checkP {
   display: inline-block;
   margin-left: 4px;
   margin: none;
   width: 85%;
-  height:auto;
+  height: auto;
   margin-top: 0px;
   margin-bottom: 0px;
   font-family: 'Roboto';
   font-size: 20px;
 }
 
-.radioElements{
+.radioElements {
   margin-top: 0px;
   margin-bottom: 15px;
-  top:100%;
+  top: 100%;
   margin-left: 25%;
   width: auto;
 }
 
-.inputCalender{
+.inputCalender {
   width: 40%;
   display: flex;
   justify-content: center;
   margin-left: 30%;
 }
 
-.doubleStyle{
+.doubleStyle {
   width: 100%;
   height: 50px;
   margin-left: auto;
@@ -249,28 +257,32 @@ input[type="submit"] {
   font-weight: bold;
   font-family: Arial;
   color: rgb(255, 255, 255);
-  background-color:#006747;
+  background-color: #006747;
   border: 2px solid #006747;
-  
+
 }
+
 input[type="submit"]:hover {
   background-color: black;
   border: 2px solid #000000;
   cursor: pointer;
 }
-.Submit{
+
+.Submit {
   position: relative;
   margin: auto;
   width: 100%;
   padding: 10px;
 }
-.calDiv{
+
+.calDiv {
   width: 50%;
   margin: auto;
   display: inline-block;
 }
-.legendCal{
-  width:100%;
+
+.legendCal {
+  width: 100%;
   display: flex;
   justify-content: center;
 }

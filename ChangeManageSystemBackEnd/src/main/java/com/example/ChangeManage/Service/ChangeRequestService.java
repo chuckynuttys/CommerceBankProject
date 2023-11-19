@@ -108,6 +108,20 @@ public class ChangeRequestService
         changeRequestRepository.save(changeRequestEntity);
         return true;
     }
+    @Transactional
+    public boolean updateChangeRequestImplementation(Integer id, String stateLevel, String implementationStatus,
+                                                     String implementationTime, String implementationDate,
+                                                     boolean archivedStatus) {
+        ChangeRequest changeRequestEntity = changeRequestRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Check Id"));
+        changeRequestEntity.setStateLevel(stateLevel);
+        changeRequestEntity.setImplementationStatus(implementationStatus);
+        changeRequestEntity.setImplementationTime(implementationTime);
+        changeRequestEntity.setImplementationDate(implementationDate);
+        changeRequestEntity.setArchivedStatus(archivedStatus);
+        changeRequestRepository.save(changeRequestEntity);
+        return true;
+    }
 
 
 

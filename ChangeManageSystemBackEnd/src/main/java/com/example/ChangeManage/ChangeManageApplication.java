@@ -134,14 +134,17 @@ public class ChangeManageApplication {
 				changeRequest.setBackOutPlan("This is a sentence that is 80 characters long " +
 						"and includes spaces and periods...");
 				changeRequest.setBackOutMinutes("20 Minutes");
-				changeRequest.setChangeWindowStartDate("September 21st");
-				changeRequest.setChangeWindowStopDate("October 23rd");
+				changeRequest.setChangeWindowStartDate("September 21st 2023");
+				changeRequest.setChangeWindowStopDate("October 23rd 2023");
 				changeRequest.setChangeWindowStartTime("5:00 PM");
 				changeRequest.setChangeWindowStopTime("7:00 PM");
 				changeRequest.setOtherNeededDepartments("DevOps");
 				changeRequest.setRiskLevel("Low");
 				changeRequest.setStateLevel("Open");
 				changeRequest.setArchivedStatus(false);
+				if (i == 2) {
+					changeRequest.setStateLevel("Application Approved");
+				}
 
 
 
