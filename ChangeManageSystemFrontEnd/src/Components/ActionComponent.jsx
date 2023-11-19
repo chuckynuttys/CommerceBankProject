@@ -13,11 +13,21 @@ constructor(props) {
       changeId: props.changeId,
       count: 0,
       count2: 100,
+      childState: false,
+      userId: props.currentUserId,
       
     }
     this.handleClick = this.handleClick.bind(this);
     
 }
+componentDidUpdate(prevProps) {
+    if (prevProps.stateLevel !== this.props.stateLevel) {
+      this.setState({ childState: !this.state.childState });
+      this.setState({ stateLevel: this.props.stateLevel});
+      
+    }
+  }
+
 
 handleClick=(e)=>{
     const authorizationLevel = getCookie("authorizationLevel");
@@ -33,154 +43,185 @@ handleClick=(e)=>{
         switch (authorizationLevel) {
             case "departmentUser":
                 params.stateLevel = "Department Approved";
-                
                 break;
             case "applicationUser":
-                
                 params.stateLevel = "Application Approved";
-                
-                
                 break;
             case "operationUser":
-                
                     params.stateLevel = "Approved";
                     params.archivedStatus = "true";
-                
-                
                 break;
         }
     } else if (e.target.value == "Deny") {
         // Deny & Archive
-        params.stateLevel = "Deny";
+        params.stateLevel = "Denied";
+        params.archivedStatus = "true";
     } else {
         // Unfreeze
         params.stateLevel = "Open";
     }
-    
     const searchParams = new URLSearchParams(params);
-        fetch(`http://localhost:8080/changerequests/` + this.state.changeId + '?' + searchParams.toString(), {method: 'PATCH'});
-   
-   
-   
-   
-   this.state.stateLevel = params.stateLevel;
-   
-
-
-   //this.props.changeCount();
-   window.location.reload();
-   
-   
+    fetch(`http://localhost:8080/changerequests/` + this.state.changeId + '?' + searchParams.toString(), {method: 'PATCH'});
+    window.location.reload();
 }
 
 render() {
-if (this.state.stateLevel == "Open") {
-    // Display the following options:
-    // Freeze
-    // Edit
-    if (this.props.tabSet == 1) {
-        var left1 = '1163px';
-        var left2 = '0px';
-        var width = '135px';
-    } else {
-        var left1 = '1019px';
-        var left2 = '63px';
-        var width = '273px';
+    
+    if (this.state.stateLevel == "Open") {
+        // Display the following options:
+        // Freeze
+        // Edit
+        if (this.props.tabSet == 1) {
+            var left1 = '1163px';
+            var left2 = '0px';
+            var width = '135px';
+        } else {
+            var left1 = '1019px';
+            var left2 = '63px';
+            var width = '273px';
+            
+        }
+        if (this.state.userId == getCookie("id")) {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{ visibility: 'inherit', left: left2,}}>
+                        <ul>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Freeze">Freeze</button>
+                        </ul>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{ visibility: 'inherit', left: left2,}}>
+                        
+                    </div>
+                </div>
+            )
+        }
+    } else if (this.state.stateLevel == "Frozen") {
+        // Display the following options:
+        // (Application) Approve
+        // Deny
+        // Unfreeze
+        if (this.props.tabSet == 1) {
+            var left1 = '1163px';
+            var left2 = '0px';
+            var width = '135px';
+        } else {
+            var left1 = '1019px';
+            var left2 = '63px';
+            var width = '273px';
+            
+        }
+
+        if (this.state.userId == getCookie("id")) {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
+                        <ul>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Unfreeze">Unfreeze</button>
+                        </ul>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
+                        <ul>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
+                        </ul>
+                    </div>
+                </div>
+                )
+        }
         
-    }
-    return (
-        <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
-            <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
-            <div id="u531-1_text" class="text u531_text" style={{ visibility: 'inherit', left: left2,}}>
-                <ul>
-                    <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Freeze">Freeze</button>
-                </ul>
-            </div>
-        </div>
-    )
-} else if (this.state.stateLevel == "Frozen") {
-    // Display the following options:
-    // (Application) Approve
-    // Deny
-    // Unfreeze
-    if (this.props.tabSet == 1) {
-        var left1 = '1163px';
-        var left2 = '0px';
-        var width = '135px';
+    } else if (this.state.stateLevel == "Application Approved") {
+        // Display the following options:
+        // (Department) Approve
+        // Deny
+        // Unfreeze
+        if (this.props.tabSet == 1) {
+            var left1 = '1163px';
+            var left2 = '0px';
+            var width = '135px';
+        } else {
+            var left1 = '1019px';
+            var left2 = '63px';
+            var width = '273px';
+            
+        }
+        if (this.state.userId == getCookie("id")) {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
+                        <ul>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Unfreeze">Unfreeze</button>
+                        </ul>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
+                        <ul>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
+                        </ul>
+                    </div>
+                </div>
+                )
+        }
     } else {
-        var left1 = '1019px';
-        var left2 = '63px';
-        var width = '273px';
-        
-    }
-    return (
-    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
-        <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
-        <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
-            <ul>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Unfreeze">Unfreeze</button>
-            </ul>
-        </div>
-    </div>
-    )
-} else if (this.state.stateLevel == "Application Approved") {
-    // Display the following options:
-    // (Department) Approve
-    // Deny
-    // Unfreeze
-    if (this.props.tabSet == 1) {
-        var left1 = '1163px';
-        var left2 = '0px';
-        var width = '135px';
-    } else {
-        var left1 = '1019px';
-        var left2 = '63px';
-        var width = '273px';
-        
-    }
-    return (
-    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
-        <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
-        <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
-            <ul>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Unfreeze">Unfreeze</button>
-            </ul>
-        </div>
-    </div>
-    )
-} else {
-    // Department Approval
-    // Display the following options:
-    // (Operations) Approve
-    // Deny
-    // Unfreeze
-    if (this.props.tabSet == 1) {
-        var left1 = '1163px';
-        var left2 = '0px';
-        var width = '135px';
-    } else {
-        var left1 = '1019px';
-        var left2 = '63px';
-        var width = '273px';
-        
-    }
-    return (
-    <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
-        <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
-        <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
-            <ul>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
-                <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Unfreeze">Unfreeze</button>
-            </ul>
-        </div>
-    </div>
-    )
-    }
+        // Department Approval
+        // Display the following options:
+        // (Operations) Approve
+        // Deny
+        // Unfreeze
+        if (this.props.tabSet == 1) {
+            var left1 = '1163px';
+            var left2 = '0px';
+            var width = '135px';
+        } else {
+            var left1 = '1019px';
+            var left2 = '63px';
+            var width = '273px';
+        }
+        if (this.state.userId == getCookie("id")) {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
+                        <ul>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Unfreeze">Unfreeze</button>
+                        </ul>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div id="u531-1" class="ax_default box_1 u531" data-label="Action" style={{width: '135px', height: '70px', left: left1, top: '0px', visibility: 'inherit'}}>
+                    <div id="u531-1_div" class="u531_div" style={{width: width, height: '70px', visibility: 'inherit'}}></div>
+                    <div id="u531-1_text" class="text u531_text" style={{visibility: 'inherit', left: left2}}>
+                        <ul>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Approve">Approve</button>
+                            <button onClick={this.handleClick} style={{cursor: 'pointer'}} value="Deny">Deny</button>
+                        </ul>
+                    </div>
+                </div>
+                )
+            }
+        }
     }
 }
 export default ActionComponent;

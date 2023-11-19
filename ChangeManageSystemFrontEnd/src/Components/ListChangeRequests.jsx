@@ -1,7 +1,8 @@
-import React, { Component, useReducer } from 'react';
+import React, { Component, useReducer, useEffect } from 'react';
 import ActionComponent from './ActionComponent';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../files/CookieManagement';
+import { useForceUpdate } from '../files/ForceUpdate';
 
 const userid = getCookie("id");
 var page = 1;
@@ -13,7 +14,8 @@ function ListChangeRequests(props) {
     const indexNumber = props.index;
     const changeCount = props.changeCount;
     const navigate = useNavigate();
-    
+    useEffect(() => {
+    }, [props.stateLevel]);
     
 
       if(props.tabSet == 1) {
@@ -90,7 +92,8 @@ function ListChangeRequests(props) {
                             </div>
                           </div>
                         
-                        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet}/>
+                        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet} 
+                        currentUserId={props.changeRequest.user.id}/>
                         
                         </div>
         );
@@ -169,7 +172,7 @@ function ListChangeRequests(props) {
             </div>
           </div>
 
-          <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet}/>
+          <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet} currentUserId={props.changeRequest.user.id}/>
 
         </div>
         )

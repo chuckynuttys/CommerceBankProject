@@ -25,64 +25,49 @@ const ListScreenApp = () => {
   const [count1, setCount1] = useState(0);
   let orderByStateLevel = false;
   
-
+  // Does not work. Cannot fetch again new data without refreshing. Might be a way, I do not know.
+  // const callbackFunction = (params, changeId) => {
+  //   // Handle patch here
+  //   console.log("Testing callbackFunction");
+  //   const searchParams = new URLSearchParams(params);
+  //   fetch(`http://localhost:8080/changerequests/` + changeId + '?' + searchParams.toString(), {method: 'PATCH'});
+  //   fetchRequest();  
+  // } 
+  
   const fetchRequest = () => {
     if (orderByStateLevel) {
       changeRequests.sort(getSortOrder("stateLevel"));
+      dispatch();
     } else {
       const params = {
         archivedStatus: false,
         id: parseInt(getCookie("id")),
         authorizationLevel: getCookie("authorizationLevel"),
       }
-      
       const searchParams = new URLSearchParams(params);
       fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
-      
       .then(res => res.json())
       .then(res => {setChangeRequests(res)})
+      
     }
-    
-    
   }
 
   useEffect(()=>{
-    
     fetchRequest();
-
-
   },[])
 
   const changeCount = (e) => {
-    console.log(e);
     if (e === "state") {
-      // Need to figure out how to sort by StateLevel properly.
       orderByStateLevel = true;
-      console.log("Ordering by State");
       fetchRequest();
       
     } else {
       orderByStateLevel = false;
-      console.log("Ordering by changeId");
       fetchRequest();
-    //   dispatch();
-    // const params = {
-    //   archivedStatus: false,
-    //   id: parseInt(getCookie("id")),
-    //   authorizationLevel: getCookie("authorizationLevel"),
-    // }
-    // const searchParams = new URLSearchParams(params);
-    // fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), {method: 'GET'})
-    
-    // .then(res => res.json())
-    // .then(res => {setChangeRequests(res)})
-
-
     }
   }
 
   const handleClick = (e) => {
-    
     if (e === "state") {
       changeCount(e);
       
@@ -91,14 +76,12 @@ const ListScreenApp = () => {
     } else {
       if (document.getElementById("u507_div").getAttribute("class") == "" && e == "1") {
         // Tab 1
-        
         document.getElementById("u507_div").setAttribute("class", "selected");
         document.getElementById("u506_div").setAttribute("class", "");
         document.getElementById("u508_state0").setAttribute("style", "visibility: visible");
         document.getElementById("u508_state1").setAttribute("style", "visibility: hidden");
       } else if (document.getElementById("u506_div").getAttribute("class") == "" && e == "2") {
         // Tab 2
-        
         document.getElementById("u506_div").setAttribute("class", "selected");
         document.getElementById("u507_div").setAttribute("class", "");
         document.getElementById("u508_state1").setAttribute("style", "visibility: visible");
@@ -114,7 +97,6 @@ const ListScreenApp = () => {
           <p></p>
         </div>
       </div>
-
       
       <div id="u493" class="ax_default box_3">
         <div id="u493_div" class=""></div>
@@ -122,7 +104,6 @@ const ListScreenApp = () => {
           <p></p>
         </div>
       </div>
-
       
       <div id="u494" class="ax_default box_3">
         <div id="u494_div" class="">
@@ -132,18 +113,14 @@ const ListScreenApp = () => {
         </div>
       </div>
       
-      
-      
       <div id="u498" class="ax_default box_2">
         <div id="u498_div" class=""></div>
         <div id="u498_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
           <p></p>
         </div>
       </div>
-
       
       <NavBar navBarNumber={3}/>
-
       
       <div id="u500" class="ax_default image">
         <img id="u500_img" class="img " src={logo}/>
@@ -151,7 +128,6 @@ const ListScreenApp = () => {
           <p></p>
         </div>
       </div>
-
       
       <div id="u501" class="ax_default label ax_default_hidden" data-label="Updated Employee Value" style={{display: 'none', visibility: 'hidden'}}>
         <div id="u501_div" class=""></div>
@@ -287,10 +263,10 @@ const ListScreenApp = () => {
                   <p><span>Action</span></p>
                 </div>
               </div>
-              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '700px',}}>
+              <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
               {index = 1}
               
-              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index} />)}
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={1} index={index}/>)}
               
               </div>
             </div>
@@ -386,7 +362,7 @@ const ListScreenApp = () => {
 
               <div id="u520" class="ax_default" data-label="Table Repeater" style={{"overflow-x": 'hidden', height: '370px',}}>
               {index = 1}
-              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={2} index={index} />)}
+              {changeRequests.map(changeRequest => <ListChangeRequests key={index++} changeRequest={changeRequest} tabSet={2} index={index}/>)}
                 
                 </div>
               </div>
