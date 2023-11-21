@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import {Formik, Field, ErrorMessage} from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { getCookie } from '../files/CookieManagement';
 
 class EntryPageComponent extends Component{
     
@@ -14,22 +15,169 @@ class EntryPageComponent extends Component{
             temp:'',
             reason:'',
             result:'',
+            username:'',
             backOutPlan:'',
             backOutMinutes:'',
             reasonType:'',
             changeType:'', 
             changeDepartment:'',
             startDate:'',
+            startTime:'',
             stopDate:'',
+            stopTime:'',
+            timeOfDay:'',
         }
         //methods go here for declaration
         this.saveCookies = this.saveCookies.bind(this);
         this.handleValue = this.handleValue.bind(this);
+        this.convertDateValueToDate = this.convertDateValueToDate.bind(this);
+        this.restoreValues = this.restoreValues.bind(this);
         
     };
 
     removeQuote=(x) => {
       return x.replaceAll("\"", "");
+    }
+
+    formatDate=(day, month, year, value) => {
+      let newDay = this.convertDateValueToDate(day, "Day", null);
+      let newMonth = this.convertDateValueToDate(month, "Month", null);
+      let newYear = this.convertDateValueToDate(year, "Year", null);
+      if (value == 1) 
+        this.startDate = newMonth + " " + newDay + ", " + newYear;
+      if (value == 2)
+        this.stopDate = newMonth + " " + newDay + ", " + newYear;
+    }
+
+    formatTime=(hour, minute, value) => {
+      let newHour = this.convertDateValueToDate(hour, "Hour", null);
+      let newMinute = this.convertDateValueToDate(minute, "Minute", null);
+      if (value == 1) 
+        this.startTime = newHour + ":" + newMinute + this.timeOfDay;
+      if (value == 2)
+        this.stopTime = newHour + ":" + newMinute + this.timeOfDay;
+    }
+
+    
+
+    convertDateValueToDate = (date, type, amOrpm) => {
+      switch (type) {
+        case "Year":
+          return date.toString();
+    
+        case "Month":
+          switch (date) {
+            case 0:
+              return "January";
+            case 1:
+              return "Febuary";
+            case 2:
+              return "March";
+            case 3:
+              return "April";
+            case 4:
+              return "May";
+            case 5:
+              return "June";
+            case 6:
+              return "July";
+            case 7:
+              return "August";
+            case 8:
+              return "September";
+            case 9:
+              return "October";
+            case 10:
+              return "November";
+            case 11:
+              return "December";
+          }
+        case "Day":
+          switch (date) {
+            case 1:
+              return "1st";
+            case 2:
+              return "2nd";
+            case 3:
+              return "3rd";
+            case 4:
+              return "4th";
+            case 5:
+              return "5th";
+            case 6:
+              return "6th";
+            case 7:
+              return "7th";
+            case 8:
+              return "8th";
+            case 9:
+              return "9th";
+            case 10:
+              return "10th";
+            case 11:
+              return "11th";
+            case 12:
+              return "12th";
+            case 13:
+              return "13th";
+            case 14:
+              return "14th";
+            case 15:
+              return "15th";
+            case 16:
+              return "16th";
+            case 17:
+              return "17th";
+            case 18:
+              return "18th";
+            case 19:
+              return "19th";
+            case 20:
+              return "20th";
+            case 21:
+              return "21st";
+            case 22:
+              return "22nd";
+            case 23:
+              return "23rd";
+            case 24:
+              return "24th";
+            case 25:
+              return "25th";
+            case 26:
+              return "26th";
+            case 27:
+              return "27th";
+            case 28:
+              return "28th";
+            case 29:
+              return "29th";
+            case 30:
+              return "30th";
+            default:
+              return "31st";
+          }
+        case "Hour":
+          date = parseInt(date);
+          if (date == 0) {
+            date = 12;
+            this.timeOfDay = " PM";
+            return date.toString();
+          } else if (date > 12) {
+            date = date - 12;
+            this.timeOfDay = " PM";
+            return date.toString();
+          } else {
+            this.timeOfDay = " AM";
+            return date.toString();
+          }
+        case "Minute":
+          if (amOrpm == "AM") {
+            return date.toString();
+          } else {
+            return date.toString();
+          }
+      }
     }
 
     getCheckBox=(e)=> {
@@ -52,6 +200,17 @@ class EntryPageComponent extends Component{
         e.preventDefault();
         this.startDate = document.getElementById("startDateInput").value;
         this.stopDate = document.getElementById("stopDateInput").value;
+        console.log(this.startDate);
+        
+        const startDate = new Date(this.startDate);
+        const stopDate = new Date(this.stopDate);
+        const startTime = new Date(this.startDate);
+        const stopTime = new Date(this.stopDate);
+        console.log(startDate.getDate());
+        this.formatTime(startDate.getHours(), startDate.getMinutes(), 1);
+        this.formatTime(stopDate.getHours(), stopDate.getMinutes(), 2);
+        this.formatDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), 1);
+        this.formatDate(stopDate.getDate(), stopDate.getMonth(), stopDate.getFullYear(), 2);
         this.getCheckBox();
         let value = 0;
         var fix = document.getElementById("fix");
@@ -88,7 +247,9 @@ class EntryPageComponent extends Component{
         document.cookie = "changeType= " + this.removeQuote(this.changeType) + "; path=/;";
         document.cookie = "changeDepartment= " + this.removeQuote(this.changeDepartment) + "; path=/;";
         document.cookie = "startDate= " + this.removeQuote(this.startDate) + "; path=/;";
-        document.cookie = "changeWindowStopDate= " + this.removeQuote(this.stopDate) + "; path=/;";
+        document.cookie = "stopDate= " + this.removeQuote(this.stopDate) + "; path=/;";
+        document.cookie = "startTime= " + this.removeQuote(this.startTime) + "; path=/;"
+        document.cookie = "stopTime= " + this.removeQuote(this.stopTime) + "; path=/;"
         console.log(document.cookie);
         let x = true;
         this.props.execute(true);
@@ -120,7 +281,12 @@ class EntryPageComponent extends Component{
         
     };
     
-   
+   restoreValues = (placeholder, cookieName) => {
+      if (getCookie(cookieName) == undefined) {
+        return placeholder;
+      }
+      return getCookie(cookieName);
+   }
 
     render() { 
         return (
@@ -128,7 +294,7 @@ class EntryPageComponent extends Component{
           <fieldset>
               <label className= "labelInput" htmlFor="aId">
               <input 
-              className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" onChange={e => this.handleValue(e, 0) } placeholder="Application ID" />
+              className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" onChange={e => this.handleValue(e, 0) } placeholder={this.restoreValues("Application ID", "appID")} />
               <p className = "button">Three character ID of the application team implementing the change</p>
               </label>
               <label className= "labelInput" htmlFor="descr">

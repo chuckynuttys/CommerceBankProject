@@ -2,6 +2,7 @@ import React from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
 import './Review.css';
+import { useNavigate } from "react-router-dom";
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
@@ -9,8 +10,14 @@ import { getCookie } from '../CookieManagement';
 var navBarNumber;
 
 const Review = () => {
+  const navigate = useNavigate();
+  const toEntry = (e) => {
+    navigate("/Entry");
+  }
+  
   let description = getCookie("description");
   return (
+    <form>
     <div id="base" class="">
 
     
@@ -450,7 +457,7 @@ const Review = () => {
         <div id="u482-1" class="ax_default box_1 u482" data-label="R1" style={{width: '120px', height: '30px', left: '0px', top: '0px', visiblity: 'inherit'}}>
           <div id="u482-1_div" class="u482_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u482-1_text" class="text u482_text" style={{visibility: 'inherit'}}>
-            <p><span>September 17th, 2023</span></p>
+            <p><span>{getCookie("startDate")}</span></p>
           </div>
         </div>
 
@@ -458,7 +465,7 @@ const Review = () => {
         <div id="u483-1" class="ax_default box_1 u483" data-label="R2" style={{width: '120px', height: '30px', left: '120px', top: '0px', visibility: 'inherit'}}>
           <div id="u483-1_div" class="u483_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u483-1_text" class="text u483_text" style={{visibility: 'inherit'}}>
-            <p><span>3:00 AM</span></p>
+            <p><span>{getCookie("startTime")}</span></p>
           </div>
         </div>
 
@@ -466,7 +473,7 @@ const Review = () => {
         <div id="u484-1" class="ax_default box_1 u484" data-label="R3" style={{width: '120px', height: '30px', left: '240px', top: '0px', visibility: 'inherit'}}>
           <div id="u484-1_div" class="u484_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u484-1_text" class="text u484_text" style={{visibility: 'inherit'}}>
-            <p><span>September 19th, 2023</span></p>
+            <p><span>{getCookie("stopDate")}</span></p>
           </div>
         </div>
 
@@ -474,7 +481,7 @@ const Review = () => {
         <div id="u485-1" class="ax_default box_1 u485" data-label="R4" style={{width: '120px', height: '30px', left: '360px', top: '0px', visibility: 'inherit'}}>
           <div id="u485-1_div" class="u485_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u485-1_text" class="text u485_text" style={{visibility: 'inherit'}}>
-            <p><span>4:00 AM</span></p>
+            <p><span>{getCookie("stopTime")}</span></p>
           </div>
         </div>
       </div>
@@ -568,6 +575,7 @@ const Review = () => {
       </div>
     </div>
   </div>
+  </form>
   );
 };
 

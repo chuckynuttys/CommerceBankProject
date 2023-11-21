@@ -16,6 +16,8 @@ class LoginComponent extends Component {
       this.requestUser = this.requestUser.bind(this);
       
     };
+
+   
     changeValue=(e)=>{
       const nameValue = e.target.name;
       const value = JSON.stringify(e.target.value);
