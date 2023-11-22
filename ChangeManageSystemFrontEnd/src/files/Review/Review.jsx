@@ -17,7 +17,7 @@ const Review = () => {
   
   let description = getCookie("description");
   return (
-    <form>
+    <form onSubmit={toEntry}>
     <div id="base" class="">
 
     
@@ -213,12 +213,12 @@ const Review = () => {
     </div>
 
     
-    <div id="u454" class="ax_default primary_button">
-      <div id="u454_div" class=""></div>
-      <div id="u454_text" class="text ">
-        <p><span>Edit Change Request</span></p>
-      </div>
-    </div>
+    <button id="u454" class="ax_default primary_button" style={{cursor: 'pointer'}} type="submit"> 
+                      <div id="u454_div" class=""></div>
+                      <div id="u454_text" class="text ">
+                        <p><span>Modify Change Request</span></p>
+                        </div>
+                      </button>
 
     
     <div id="u455" class="ax_default primary_button">

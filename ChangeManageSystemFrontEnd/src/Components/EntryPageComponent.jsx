@@ -22,16 +22,25 @@ class EntryPageComponent extends Component{
             changeType:'', 
             changeDepartment:'',
             startDate:'',
+            origStart:'',
+            origEnd:'',
+            devOps:'',
+            dba:'',
+            secur:'',
+            sched:'',
             startTime:'',
             stopDate:'',
             stopTime:'',
             timeOfDay:'',
+            appBool:'',
         }
         //methods go here for declaration
         this.saveCookies = this.saveCookies.bind(this);
         this.handleValue = this.handleValue.bind(this);
         this.convertDateValueToDate = this.convertDateValueToDate.bind(this);
-        this.restoreValues = this.restoreValues.bind(this);
+        this.loadValues = this.loadValues.bind(this);
+        this.checkRadioButton = this.checkRadioButton.bind(this);
+        let x = 2;
         
     };
 
@@ -181,7 +190,12 @@ class EntryPageComponent extends Component{
     }
 
     getCheckBox=(e)=> {
+      this.dba = "";
+      this.devOps = "";
+      this.secur = "";
+      this.sched = "";
       let x = false;
+      let i = 1;
       //const form = document.querySelector('form');
       document.querySelectorAll('[type="checkbox"]').forEach(item => {
       if (item.checked === true) {
@@ -191,6 +205,15 @@ class EntryPageComponent extends Component{
           }
           else
              this.changeDepartment = this.changeDepartment + ', ' + item.value;
+          if (i == 1)
+            this.devOps = item.value;
+          if (i == 2)
+            this.dba = item.value;
+          if (i == 3)
+            this.secur = item.value;
+          if (i == 4)
+            this.sched = item.value;
+          i = i + 1;
       }
       })
       
@@ -201,7 +224,8 @@ class EntryPageComponent extends Component{
         this.startDate = document.getElementById("startDateInput").value;
         this.stopDate = document.getElementById("stopDateInput").value;
         console.log(this.startDate);
-        
+        this.origStart = this.startDate;
+        this.origEnd = this.stopDate;
         const startDate = new Date(this.startDate);
         const stopDate = new Date(this.stopDate);
         const startTime = new Date(this.startDate);
@@ -250,13 +274,20 @@ class EntryPageComponent extends Component{
         document.cookie = "stopDate= " + this.removeQuote(this.stopDate) + "; path=/;";
         document.cookie = "startTime= " + this.removeQuote(this.startTime) + "; path=/;"
         document.cookie = "stopTime= " + this.removeQuote(this.stopTime) + "; path=/;"
+        document.cookie = "start= " + this.removeQuote(this.origStart) + "; path=/;"
+        document.cookie = "end= " + this.removeQuote(this.origEnd) + "; path=/;"
+        document.cookie = "devOps= " + this.removeQuote(this.devOps) + "; path=/;"
+        document.cookie = "dba= " + this.removeQuote(this.dba) + "; path=/;"
+        document.cookie = "security= " + this.removeQuote(this.secur) + "; path=/;"
+        document.cookie = "scheduling= " + this.removeQuote(this.sched) + "; path=/;"
+
         console.log(document.cookie);
         let x = true;
         this.props.execute(true);
        
     }
 
-    handleValue = (e, val) => {
+    handleValue = (e, val, tue) => {
         const nameValue = e.target.name;
         const value = JSON.stringify(e.target.value);
         if (val == 0) {
@@ -277,16 +308,86 @@ class EntryPageComponent extends Component{
         if (val == 5) {
             this.backOutMinutes = value;
         }
+       
+
+        
         
         
     };
     
-   restoreValues = (placeholder, cookieName) => {
-      if (getCookie(cookieName) == undefined) {
-        return placeholder;
+   loadValues = (cookieName, label) => {
+      if (getCookie(cookieName) != undefined) {
+        document.getElementById(label).defaultValue = getCookie(cookieName);
       }
-      return getCookie(cookieName);
+      else {
+        document.getElementById(label).defaultValue = "";
+      }
    }
+
+   checkRadioButton = (cookieName) => {
+      if (document.getElementById("fix").value == cookieName) {
+        document.getElementById("fix").checked = true;
+        this.reasonType = document.getElementById("fix").value;
+      }
+      if (document.getElementById("enhance").value == cookieName) {
+        document.getElementById("enhance").checked = true;
+        this.reasonType = document.getElementById("enhance").value;
+      }
+      if (document.getElementById("planned").value == cookieName) {
+        document.getElementById("planned").checked = true;
+        this.changeType = document.getElementById("planned").value;
+      }
+      if (document.getElementById("unplanned").value == cookieName) {
+        document.getElementById("unplanned").checked = true;
+        this.changeType = document.getElementById("unplanned").value;
+      }
+      if (document.getElementById("dba").value == cookieName) {
+        document.getElementById("dba").checked = true;
+        this.changeDepartment = document.getElementById("dba").value;
+      }
+      if (document.getElementById("changeTypeCheckBox").value == cookieName) {
+        document.getElementById("changeTypeCheckBox").checked = true;
+        this.changeDepartment = document.getElementById("changeTypeCheckBox").value;
+      }
+      if (document.getElementById("security").value == cookieName) {
+        document.getElementById("security").checked = true;
+        this.changeDepartment = document.getElementById("security").value;
+      }
+      if (document.getElementById("scheduling").value == cookieName) {
+        document.getElementById("scheduling").checked = true;
+        this.changeDepartment = document.getElementById("scheduling").value;
+      }
+      
+      
+   }
+   
+
+   componentDidMount (){
+    this.loadValues("appID", "applicationID");
+    this.appId = document.getElementById("applicationID").value;
+    this.loadValues("description", "description");
+    this.description = document.getElementById("description").value;
+    this.loadValues("reason", "why");
+    this.reason = document.getElementById("why").value;
+    this.loadValues("result", "whatIsChanging");
+    this.result = document.getElementById("whatIsChanging").value;
+    this.loadValues("backOutPlan", "backOutPlan");
+    this.backOutPlan = document.getElementById("backOutPlan").value;
+    this.loadValues("backOutMinutes", "backOutMinutes");
+    this.backOutMinutes = document.getElementById("backOutMinutes").value;
+    this.loadValues("start", "startDateInput");
+    this.startDate = document.getElementById("startDateInput");
+    this.loadValues("end", "stopDateInput");
+    this.stopDate = document.getElementById("stopDateInput");
+    this.checkRadioButton(getCookie("reasonType"));
+    this.checkRadioButton(getCookie("changeType"));
+    this.checkRadioButton(getCookie("devOps"));
+    this.checkRadioButton(getCookie("dba"));
+    this.checkRadioButton(getCookie("security"));
+    this.checkRadioButton(getCookie("scheduling"));
+   }
+  
+
 
     render() { 
         return (
@@ -294,29 +395,29 @@ class EntryPageComponent extends Component{
           <fieldset>
               <label className= "labelInput" htmlFor="aId">
               <input 
-              className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" onChange={e => this.handleValue(e, 0) } placeholder={this.restoreValues("Application ID", "appID")} />
+              className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" defaultValue="" onChange={e => this.handleValue(e, 0, "applicationID") } placeholder="Application ID" />
               <p className = "button">Three character ID of the application team implementing the change</p>
               </label>
               <label className= "labelInput" htmlFor="descr">
-              <textarea id="description" name = "description" rows="3" cols="30" onChange={e => this.handleValue(e, 1) } placeholder="Description"></textarea>
+              <textarea id="description" name = "description" rows="3" cols="30" defaultValue="" onChange={e => this.handleValue(e, 1) } placeholder="Description"></textarea>
               <p className = "button">80 Character description of what the change is</p>
               </label>
               <label className= "labelInput"  htmlFor="why">
-             <textarea rows="3" cols="30" placeholder="Why" name = "why" id="why" onChange={e => this.handleValue(e, 2) }></textarea>
+             <textarea rows="3" cols="30" placeholder="Why" name = "why" id="why" defaultValue="" onChange={e => this.handleValue(e, 2) }></textarea>
               <p className = "button">Why is the change needed</p>
               </label>
              </fieldset>
              <fieldset className="fs2">
              <label className= "labelInput" htmlFor="whatIs">
-                <input className="inputLabelTopPage" id="whatIsChanging" name="whatIsChanging" rows='9' cols = '50' onChange={e => this.handleValue(e, 3) } placeholder="What is changing?" />
+                <input className="inputLabelTopPage" id="whatIsChanging" name="whatIsChanging" rows='9' cols = '50' defaultValue="" onChange={e => this.handleValue(e, 3) } placeholder="What is changing" />
                 <p className = "button">New version of software, server configuration changes, etc..</p>
               </label>
               <label className= "labelInput" htmlFor="backOut">
-              <textarea rows="3" cols="30" placeholder="Back-Out Plan" id="backOutPlan"  onChange={e => this.handleValue(e, 4) } name = "backOutPlan"></textarea>
+              <textarea rows="3" cols="30" placeholder="Back-Out Plan" id="backOutPlan" defaultValue="" onChange={e => this.handleValue(e, 4) } name = "backOutPlan"></textarea>
               <p className = "button">Description of what it takes to revert the change</p>
               </label>
               <label className= "labelInput" htmlFor="backOutMins">
-                <input className="inputLabelTopPage" id="backOutMinutes" name="backOutMinutes" rows='9' cols = '50' onChange={e => this.handleValue(e, 5) } placeholder="Back-Out Minutes" />
+                <input className="inputLabelTopPage" id="backOutMinutes" name="backOutMinutes" rows='9' defaultValue="" cols = '50' onChange={e => this.handleValue(e, 5) } placeholder="Back-Out Minutes" />
                 <p className = "button">How long will it take to perform the back-out in minutes</p>
               </label>
              </fieldset>
@@ -362,23 +463,22 @@ class EntryPageComponent extends Component{
               <input className="inputCheck" type="checkbox" name="security" value="Security" id="security" />
               <p className="checkP">Security</p>
               <input className="inputCheck" type="checkbox" name="scheduling" value="Scheduling" id="scheduling" />
-              <p className="checkP">DBA</p>
+              <p className="checkP">Scheduling</p>
               </div>
              </fieldset>
              <fieldset className="doubleStyle">
               <div className="calDiv">
               <legend className="legendCal">Change Window Start Date</legend>
-               <input type = "datetime-local" className="inputCalender" id ="startDateInput" />
+               <input type = "datetime-local" className="inputCalender" id ="startDateInput" defaultValue="" />
              </div>
              
              <div className="calDiv">
               <legend className="legendCal">Change Window Stop Date</legend>
-               <input type = "datetime-local" className="inputCalender" id ="stopDateInput" />
+               <input type = "datetime-local" className="inputCalender" id ="stopDateInput" defaultValue="" />
                 </div>
               </fieldset>
              <fieldset className="Submit">
              <input type="submit" value="Submit" onClick={this.saveCookies} /> 
-          
              </fieldset>
         </Form>
         );
