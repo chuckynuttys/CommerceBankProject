@@ -89,7 +89,7 @@ class ActionComponent extends Component {
 
 
         } else {
-            // Unfreeze
+            // Unfreez
             params.stateLevel = "Open";
             this.state.reload = true;
         }
