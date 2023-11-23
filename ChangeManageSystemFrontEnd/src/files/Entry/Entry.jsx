@@ -10,17 +10,23 @@ import { useNavigate } from 'react-router-dom';
 var navBarNumber;
 
 const Entry = () => {
+  let x = 0;
+  const navigate = useNavigate();
+  const execute = (x) => {
+      if (x == true)
+        navigate("/Review");
+  }
   return (
     <div>
-      <form>
-        <NavBar navBarNumber={1} />
-        <div className="menu">
-          <h1> <img className="logo" src={logo} alt="logo" /> </h1>
-          <h2>Change Request Form</h2>
-          <EntryPageComponent />
-        </div>
-      </form>
-    </div>
+    <form>
+    <NavBar navBarNumber={1}/>
+          <div className="menu">
+             <h1> <img className = "logo" src={logo} alt="logo" /> </h1>
+             <h2>Change Request Form</h2>
+             <EntryPageComponent execute={execute}/>
+          </div>
+          </form>
+          </div>
   );
 };
 export default Entry;
