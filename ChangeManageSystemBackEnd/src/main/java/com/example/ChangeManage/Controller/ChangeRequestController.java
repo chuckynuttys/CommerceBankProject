@@ -60,9 +60,17 @@ public class ChangeRequestController{
     @PatchMapping("/changerequests/{id}")
     public boolean updateStateLevelOfChangeRequest(@PathVariable Integer id,
                                                  @RequestParam(required = true) String stateLevel,
+                                                   @RequestParam(required = false) String implementationStatus,
+                                                   @RequestParam(required = false) String implementationTime,
+                                                   @RequestParam(required = false) String implementationDate,
                                                    @RequestParam(required = false) Boolean archivedStatus) {
     if (archivedStatus != null) {
-        return (changeRequestService.updateChangeRequestsByStateLevelAndArchivedStatus(id, stateLevel, archivedStatus));
+        if (implementationStatus != null) {
+            return (changeRequestService.updateChangeRequestImplementation(id, stateLevel, implementationStatus,
+                    implementationTime, implementationDate, archivedStatus));
+        } else {
+            return (changeRequestService.updateChangeRequestsByStateLevelAndArchivedStatus(id, stateLevel, archivedStatus));
+        }
     } else {
         return (changeRequestService.updateChangeRequestsByStateLevel(id, stateLevel));
     }

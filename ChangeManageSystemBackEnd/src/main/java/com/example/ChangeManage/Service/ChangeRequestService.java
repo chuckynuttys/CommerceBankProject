@@ -45,7 +45,7 @@ public class ChangeRequestService
                 // that are Open from the user
                 return
                         Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
-                                                archivedStatus, id, "Open"),
+                                                archivedStatus, id),
                                         changeRequestRepository.findChangeRequestsNotFromUserWithCustomQuery(
                                                 archivedStatus, id, "Frozen"))
                                 .filter(Optional::isPresent)
@@ -58,7 +58,7 @@ public class ChangeRequestService
                 // Only show Change Requests that are Department not from the User and Change Requests
                 // that are open from the user
                 return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
-                                        archivedStatus, id, "Open"),
+                                        archivedStatus, id),
                                 changeRequestRepository.findChangeRequestsNotFromUserWithCustomQuery(
                                         archivedStatus, id, "Department Approved"))
                         .filter(Optional::isPresent)
@@ -70,7 +70,7 @@ public class ChangeRequestService
             case "operationUser":
                 // Show all change Requests except frozen ones from the User
                 return Optional.of(Stream.of(changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(
-                                        archivedStatus, id, "Open"),
+                                        archivedStatus, id),
                                 changeRequestRepository.findAllChangeRequestsNotFromUserWithCustomQuery(
                                         archivedStatus, id))
                         .filter(Optional::isPresent)
@@ -81,8 +81,7 @@ public class ChangeRequestService
 
             default:
                 // Only show Change Requests from the user that are Open
-                return changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(archivedStatus, id,
-                        "Open");
+                return changeRequestRepository.findChangeRequestsFromUserWithCustomQuery(archivedStatus, id);
 
         }
     }
@@ -106,6 +105,20 @@ public class ChangeRequestService
                 .orElseThrow(()->new IllegalArgumentException("check Id"));
         changeRequestEntity.setStateLevel(stateLevel);
 
+        changeRequestRepository.save(changeRequestEntity);
+        return true;
+    }
+    @Transactional
+    public boolean updateChangeRequestImplementation(Integer id, String stateLevel, String implementationStatus,
+                                                     String implementationTime, String implementationDate,
+                                                     boolean archivedStatus) {
+        ChangeRequest changeRequestEntity = changeRequestRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Check Id"));
+        changeRequestEntity.setStateLevel(stateLevel);
+        changeRequestEntity.setImplementationStatus(implementationStatus);
+        changeRequestEntity.setImplementationTime(implementationTime);
+        changeRequestEntity.setImplementationDate(implementationDate);
+        changeRequestEntity.setArchivedStatus(archivedStatus);
         changeRequestRepository.save(changeRequestEntity);
         return true;
     }

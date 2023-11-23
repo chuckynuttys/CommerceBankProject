@@ -10,14 +10,15 @@ body {
     font-feature-settings: "kern" 1;
     font-kerning: normal;
     overflow: hidden;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 a {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
     margin: 0px 9px 0px 0px;
     vertical-align: bottom;
 }
@@ -36,8 +37,8 @@ input[type=text]::-ms-clear {
 
 #outerContainer {
     position: absolute;
-    width:1000px;
-    height:1500px;
+    width: 1000px;
+    height: 1500px;
     overflow: hidden;
     display: flex;
 }
@@ -59,7 +60,8 @@ input[type=text]::-ms-clear {
     user-select: none;
 }
 
-.splitbar:hover, .splitbar.active {
+.splitbar:hover,
+.splitbar.active {
     background: #CBD5E0;
 }
 
@@ -73,7 +75,7 @@ input[type=text]::-ms-clear {
 
 #mainPanel {
     background-color: #d8d8d8;
-    opacity: 0; 
+    opacity: 0;
     flex: 1;
     overflow: hidden;
 }
@@ -102,9 +104,10 @@ input[type=text]::-ms-clear {
     padding-top: 40px;
     color: #FFFFFF;
 }
-    .mobileMode #browserOutOfDateNotification {
-        padding-top: 15px;
-    }
+
+.mobileMode #browserOutOfDateNotification {
+    padding-top: 15px;
+}
 
 #supportedBrowsersListContainer {
     border-radius: 5px;
@@ -132,9 +135,10 @@ input[type=text]::-ms-clear {
     justify-content: flex-end;
     margin-top: 28px;
 }
-    .mobileMode #browserOutOfDateNotificationButtons {
-        margin-top: 8px;
-    }
+
+.mobileMode #browserOutOfDateNotificationButtons {
+    margin-top: 8px;
+}
 
 #updateBrowserButton {
     display: inline-block;
@@ -164,7 +168,9 @@ input[type=text]::-ms-clear {
     user-select: none;
 }
 
-.leftPanel, .rightPanel, .mobileOnlyPanel {
+.leftPanel,
+.rightPanel,
+.mobileOnlyPanel {
     position: relative;
     background-color: #FCFDFF;
     overflow: hidden;
@@ -173,7 +179,8 @@ input[type=text]::-ms-clear {
 }
 
 
-.popup, .leftPanel.popup {
+.popup,
+.leftPanel.popup {
     position: absolute;
     z-index: 20000;
     display: none;
@@ -183,12 +190,12 @@ input[type=text]::-ms-clear {
     box-shadow: 0 1px 2px 0 rgba(87, 87, 87, 0.5);
 }
 
-.leftPanel.popup .sitemapHeader, .leftPanel.popup #searchDiv {
+.leftPanel.popup .sitemapHeader,
+.leftPanel.popup #searchDiv {
     display: none;
 }
 
-#clipFrameScroll {
-}
+#clipFrameScroll {}
 
 .splitterMask {
     position: absolute;
@@ -206,10 +213,10 @@ input[type=text]::-ms-clear {
 }
 
 #maximizePanelContainer {
-  font-size: 4px;
-  overflow: hidden;
-  z-index: 1000;
-  display: none;
+    font-size: 4px;
+    overflow: hidden;
+    z-index: 1000;
+    display: none;
 }
 
 #maximizePanel {
@@ -217,22 +224,26 @@ input[type=text]::-ms-clear {
     cursor: pointer;
 }
 
-#maximizePanelContainer, #maximizePanelOver, #maximizePanel {
-  position:absolute;
-  left: 0px;
-  top: 0px;
-  width: 28px;
-  height: 36px;
+#maximizePanelContainer,
+#maximizePanelOver,
+#maximizePanel {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 28px;
+    height: 36px;
 }
 
 #interfaceControlFrameMinimizeContainer {
-    font-size: 2px; /*for IE*/
+    font-size: 2px;
+    /*for IE*/
     text-align: right;
     z-index: 100;
     height: 36px;
     width: 28px;
     border-right: solid 1px #CBD5E0;
 }
+
 #interfaceControlFrameMinimizeContainer a {
     display: inline-block;
     width: 28px;
@@ -255,14 +266,16 @@ input[type=text]::-ms-clear {
     z-index: 100;
     width: 55px;
     background-color: #62666b;
-    text-align: center;  
+    text-align: center;
 }
+
 #interfaceControlFrameCloseContainer a {
     display: inline-block;
     width: 55px;
     color: #ffffff;
     padding: 5px 0px;
 }
+
 #inspectControlFrameHeader li {
     float: left;
     display: block;
@@ -325,6 +338,7 @@ input[type=text]::-ms-clear {
     right: auto;
     transform: translateX(-20px);
 }
+
 .pluginHint.right {
     left: auto;
     right: 50%;
@@ -349,6 +363,7 @@ input[type=text]::-ms-clear {
     right: auto;
     transform: translateX(-50%) rotate(45deg);
 }
+
 .pluginHint.right::after {
     left: auto;
     right: 20px;
@@ -453,33 +468,38 @@ input[type=text]::-ms-clear {
 }
 
 #overflowMenuButton {
-    background: url('../images/overflow-icon.svg') no-repeat center center, linear-gradient(transparent,transparent);
-}
-#overflowMenuButton.selected {
-    background: url('../images/overflow_icon_off.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/overflow-icon.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
 
-.overflowOptionCheckbox, #projectOptionsHotspotsCheckbox {
+#overflowMenuButton.selected {
+    background: url('../images/overflow_icon_off.svg') no-repeat center center, linear-gradient(transparent, transparent);
+}
+
+.overflowOptionCheckbox,
+#projectOptionsHotspotsCheckbox {
     position: relative;
     border: solid 1px #718096;
     display: inline-block;
 }
-    .overflowOptionCheckbox {
-        width: 10px;
-        height: 10px;
-        margin-right: 14px;
-        top: 1px;
-    }
-    #projectOptionsHotspotsCheckbox {
-        width: 16px;
-        height: 16px;
-        margin-right: 25px;
-        margin-left: 21px;
-        top: 2.5px;
-    }
 
-.overflowOptionCheckbox.selected, #projectOptionsHotspotsCheckbox.selected {
-    background: url('../images/overflow_checkmark.svg') no-repeat center center, linear-gradient(transparent,transparent);
+.overflowOptionCheckbox {
+    width: 10px;
+    height: 10px;
+    margin-right: 14px;
+    top: 1px;
+}
+
+#projectOptionsHotspotsCheckbox {
+    width: 16px;
+    height: 16px;
+    margin-right: 25px;
+    margin-left: 21px;
+    top: 2.5px;
+}
+
+.overflowOptionCheckbox.selected,
+#projectOptionsHotspotsCheckbox.selected {
+    background: url('../images/overflow_checkmark.svg') no-repeat center center, linear-gradient(transparent, transparent);
     background-color: #75BB43;
     border: solid 1px #75BB43;
     background-size: contain;
@@ -520,12 +540,12 @@ input[type=text]::-ms-clear {
 
 .showOption {
     font-size: 14px;
-	padding: 9px 0px 0px 15px;
+    padding: 9px 0px 0px 15px;
     /*color: #3B3B3B;*/
 }
 
 .showOption:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 #publishButton {
@@ -545,33 +565,41 @@ input[type=text]::-ms-clear {
     border-top: solid 1.5px #525252;
     margin: auto;
 }
+
 .caret {
     width: 9px;
     height: 7px;
-    background: url('../images/caret_down.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/caret_down.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
+
 .selected .caret {
-    background: url('../images/caret_down_off.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/caret_down_off.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
+
 .upCaret {
     transform: rotate(-45deg);
 }
+
 .leftCaret {
     transform: rotate(-135deg);
 }
+
 .downCaret {
     transform: rotate(-225deg);
 }
+
 .rightCaret {
     transform: rotate(-315deg);
 }
 
-#pageSelectDropdown, #adaptiveViewsDropdown {
+#pageSelectDropdown,
+#adaptiveViewsDropdown {
     display: inline-block;
     margin-left: 8px;
 }
 
-.minimizeIcon, .maximizeIcon {
+.minimizeIcon,
+.maximizeIcon {
     transition: .25s linear;
     position: absolute;
     height: 36px;
@@ -579,18 +607,18 @@ input[type=text]::-ms-clear {
 }
 
 #minimizeX {
-    background: url('../images/close_x_minimize.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/close_x_minimize.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
 
 #minimizeArrow {
     opacity: 0;
     transform: rotate(270deg);
-    background: url('../images/caret_down.svg') no-repeat center center, linear-gradient(transparent,transparent);
-} 
+    background: url('../images/caret_down.svg') no-repeat center center, linear-gradient(transparent, transparent);
+}
 
 #maximizeButton {
     transform: rotate(-270deg);
-    background: url('../images/caret_down.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/caret_down.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
 
 .collapseHovered #minimizeX {
@@ -619,7 +647,7 @@ input[type=text]::-ms-clear {
 }
 
 #separatorContainer {
-    display: none; 
+    display: none;
     line-height: 24px;
     height: 36px;
 }
@@ -685,6 +713,7 @@ input[type=text]::-ms-clear {
     padding: 0px 6px;
     cursor: pointer;
 }
+
 #interfaceAdaptiveViewsContainer:hover {
     border-radius: 3px;
     background-color: #EDEFF1;
@@ -703,10 +732,10 @@ input[type=text]::-ms-clear {
 
 #interfaceAdaptiveViewsIconButton {
     display: none;
-    float:left;
+    float: left;
     width: 16px;
     margin-right: 6px;
-    background: url('../images/views-icon.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/views-icon.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
 
 #interfaceScaleContainer {
@@ -731,10 +760,10 @@ input[type=text]::-ms-clear {
     width: 56px;
     height: 36px;
     padding-top: 1px;
-    background: url('../images/axure9_logo.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/axure9_logo.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
 
-#overflowMenuContainer > #overflowMadeWith {
+#overflowMenuContainer>#overflowMadeWith {
     line-height: 24px;
     border-top: 1px solid #ccc;
     margin-top: 7px;
@@ -762,7 +791,7 @@ input[type=text]::-ms-clear {
 }
 
 #interfaceControlFrameLogoContainer {
-    overflow: hidden;    
+    overflow: hidden;
     margin-left: auto;
     margin-right: auto;
     height: 100%;
@@ -789,7 +818,7 @@ input[type=text]::-ms-clear {
 
 #scaleMenuButton {
     display: flex;
-    align-items: center;    
+    align-items: center;
     margin: 4px 0;
     padding: 0 6px;
 }
@@ -805,7 +834,7 @@ input[type=text]::-ms-clear {
     /*color: #6d6d6d;*/
 }
 
-#expandScaleArrow {    
+#expandScaleArrow {
     margin-left: 6px;
 }
 
@@ -889,7 +918,8 @@ div.mobileSubHeader {
     margin: 0px 12px 11px 15px;
 }
 
-div.mobileText, span.mobileText {
+div.mobileText,
+span.mobileText {
     font-size: 16px;
     color: #4a4a4a;
 }
@@ -904,7 +934,8 @@ div.mobileText, span.mobileText {
     text-decoration: none;
 }
 
-#refreshText, #exitText {
+#refreshText,
+#exitText {
     margin-top: 6px;
 }
 
@@ -915,28 +946,28 @@ div.mobileText, span.mobileText {
 #refreshIcon {
     height: 20px;
     object-fit: contain;
-    background: url('../images/refresh.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/refresh.svg') no-repeat center center, linear-gradient(transparent, transparent);
     margin-top: 14px;
 }
 
 #exitIcon {
     height: 19px;
     object-fit: contain;
-    background: url('../images/exit.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/exit.svg') no-repeat center center, linear-gradient(transparent, transparent);
     margin-top: 14px;
 }
 
 #returnIcon {
     height: 46px;
     object-fit: contain;
-    background: url('../images/return.svg') no-repeat center center, linear-gradient(transparent,transparent);
+    background: url('../images/return.svg') no-repeat center center, linear-gradient(transparent, transparent);
 }
 
 
 .nativePrototypeButton {
-    width:50%;
-    margin-left:auto;
-    margin-right:auto;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .circleBackground {
@@ -965,11 +996,13 @@ div.mobileText, span.mobileText {
     position: relative;
     margin: auto;
 }
-#forwardSlash{
+
+#forwardSlash {
     top: 28px;
     transform: rotate(-45deg);
 }
-#backwardSlash{
+
+#backwardSlash {
     transform: rotate(90deg);
 }
 
@@ -1016,31 +1049,36 @@ div.mobileText, span.mobileText {
 }
 
 /*@media (max-width: 419px) {*/
-    .mobileMode #topPanel {
-        display: none;
-    }
+.mobileMode #topPanel {
+    display: none;
+}
 
-    .mobileMode #mainPanel {
-        -webkit-overflow-scrolling: touch;
-    }
+.mobileMode #mainPanel {
+    -webkit-overflow-scrolling: touch;
+}
 
-    .mobileMode .leftPanel, .mobileMode .rightPanel, .mobileMode .mobileOnlyPanel {
-        box-shadow: 0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18);
-        top: 45px;
-        left: 100px;
-    }
+.mobileMode .leftPanel,
+.mobileMode .rightPanel,
+.mobileMode .mobileOnlyPanel {
+    box-shadow: 0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18);
+    top: 45px;
+    left: 100px;
+}
 
-    .mobileMode .leftPanel, .mobileMode .rightPanel, .mobileMode .mobileOnlyPanel {
-        float: left;
-    }
+.mobileMode .leftPanel,
+.mobileMode .rightPanel,
+.mobileMode .mobileOnlyPanel {
+    float: left;
+}
 
-    .mobileMode .rightPanel {
-        margin-left: 13px;
-    }
+.mobileMode .rightPanel {
+    margin-left: 13px;
+}
 
-    .mobileMode #maximizePanelContainer {
-        display: none;
-    }
+.mobileMode #maximizePanelContainer {
+    display: none;
+}
+
 /*}*/
 
 @media (max-width: 850px) {
@@ -1048,7 +1086,10 @@ div.mobileText, span.mobileText {
         right: 0px;
     }
 
-    #overflowMadeWith, #publishContainer.preview, #separatorContainer, #separatorContainer.hasLeft {
+    #overflowMadeWith,
+    #publishContainer.preview,
+    #separatorContainer,
+    #separatorContainer.hasLeft {
         display: none;
     }
 

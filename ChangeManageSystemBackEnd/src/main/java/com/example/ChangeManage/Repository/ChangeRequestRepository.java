@@ -20,10 +20,10 @@ public interface ChangeRequestRepository extends JpaRepository<ChangeRequest, In
 //            "(SELECT * FROM CHANGE_REQUEST c WHERE c.archived_Status = :archivedStatus AND c.id = :id " +
 //            "AND c.state_Level = :stateLevel)", nativeQuery = true)
 //    Optional<List<ChangeRequest>> findChangeRequestsWithCustomQuery(boolean archivedStatus, int id, String stateLevel);
-    @Query(value = "SELECT * FROM CHANGE_REQUEST c WHERE c.archived_Status = :archivedStatus AND c.id = :id " +
-            "AND c.state_Level = :stateLevel", nativeQuery = true)
+    @Query(value = "SELECT * FROM CHANGE_REQUEST c WHERE c.archived_Status = :archivedStatus AND c.id = :id ",
+            nativeQuery = true)
     Optional<List<ChangeRequest>> findChangeRequestsFromUserWithCustomQuery (boolean archivedStatus,
-                                                                            int id, String stateLevel);
+                                                                            int id);
     @Query(value = "SELECT * FROM CHANGE_REQUEST c WHERE c.archived_Status = :archivedStatus AND c.id != :id " +
             "AND c.state_Level = :stateLevel", nativeQuery = true)
     Optional<List<ChangeRequest>> findChangeRequestsNotFromUserWithCustomQuery (boolean archivedStatus,
