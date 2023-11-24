@@ -3,7 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from "../files/Functions/CookieManagement";
-import { convertDateValueToDate } from '../files/Functions/ConvertDateValueToDate';
 
 class EntryPageComponent extends Component{
     
@@ -39,12 +38,11 @@ class EntryPageComponent extends Component{
         //methods go here for declaration
         this.saveCookies = this.saveCookies.bind(this);
         this.handleValue = this.handleValue.bind(this);
+        this.convertDateValueToDate = this.convertDateValueToDate.bind(this);
         this.loadValues = this.loadValues.bind(this);
-        this.manageDates = this.manageDates.bind(this);
         this.checkRadioButton = this.checkRadioButton.bind(this);
-        this.formatDate = this.formatDate.bind(this);
-        this.formatTime = this.formatTime.bind(this);
-        this.execute = this.execute.bind(this);
+        let x = 2;
+        
     };
 
     removeQuote=(x) => {
@@ -52,9 +50,9 @@ class EntryPageComponent extends Component{
     }
 
     formatDate=(day, month, year, value) => {
-      let newDay = convertDateValueToDate(day, "Day", null);
-      let newMonth = convertDateValueToDate(month, "Month", null);
-      let newYear = convertDateValueToDate(year, "Year", null);
+      let newDay = this.convertDateValueToDate(day, "Day", null);
+      let newMonth = this.convertDateValueToDate(month, "Month", null);
+      let newYear = this.convertDateValueToDate(year, "Year", null);
       if (value == 1) 
         this.startDate = newMonth + " " + newDay + ", " + newYear;
       if (value == 2)
@@ -62,13 +60,142 @@ class EntryPageComponent extends Component{
     }
 
     formatTime=(hour, minute, value) => {
-      let newHour = convertDateValueToDate(hour, "Hour", null);
-      let newMinute = convertDateValueToDate(minute, "Minute", null);
-      this.timeOfDay = getCookie("timeOfDay");
+      let newHour = this.convertDateValueToDate(hour, "Hour", null);
+      let newMinute = this.convertDateValueToDate(minute, "Minute", null);
       if (value == 1) 
         this.startTime = newHour + ":" + newMinute + this.timeOfDay;
       if (value == 2)
         this.stopTime = newHour + ":" + newMinute + this.timeOfDay;
+    }
+
+    
+
+    convertDateValueToDate = (date, type, amOrpm) => {
+      switch (type) {
+        case "Year":
+          return date.toString();
+    
+        case "Month":
+          switch (date) {
+            case 0:
+              return "January";
+            case 1:
+              return "Febuary";
+            case 2:
+              return "March";
+            case 3:
+              return "April";
+            case 4:
+              return "May";
+            case 5:
+              return "June";
+            case 6:
+              return "July";
+            case 7:
+              return "August";
+            case 8:
+              return "September";
+            case 9:
+              return "October";
+            case 10:
+              return "November";
+            case 11:
+              return "December";
+          }
+        case "Day":
+          switch (date) {
+            case 1:
+              return "1st";
+            case 2:
+              return "2nd";
+            case 3:
+              return "3rd";
+            case 4:
+              return "4th";
+            case 5:
+              return "5th";
+            case 6:
+              return "6th";
+            case 7:
+              return "7th";
+            case 8:
+              return "8th";
+            case 9:
+              return "9th";
+            case 10:
+              return "10th";
+            case 11:
+              return "11th";
+            case 12:
+              return "12th";
+            case 13:
+              return "13th";
+            case 14:
+              return "14th";
+            case 15:
+              return "15th";
+            case 16:
+              return "16th";
+            case 17:
+              return "17th";
+            case 18:
+              return "18th";
+            case 19:
+              return "19th";
+            case 20:
+              return "20th";
+            case 21:
+              return "21st";
+            case 22:
+              return "22nd";
+            case 23:
+              return "23rd";
+            case 24:
+              return "24th";
+            case 25:
+              return "25th";
+            case 26:
+              return "26th";
+            case 27:
+              return "27th";
+            case 28:
+              return "28th";
+            case 29:
+              return "29th";
+            case 30:
+              return "30th";
+            default:
+              return "31st";
+          }
+        case "Hour":
+          date = parseInt(date);
+          if (date == 0) {
+            date = 12;
+            this.timeOfDay = " PM";
+            return date.toString();
+          } else if (date > 12) {
+            date = date - 12;
+            this.timeOfDay = " PM";
+            return date.toString();
+          } else {
+            this.timeOfDay = " AM";
+            return date.toString();
+          }
+        case "Minute":
+          if (amOrpm == "AM") {
+            if (date < 10) {
+              return '0' + date.toString();
+            } else {
+              return date.toString();
+            }
+          } else {
+            if (date < 10) {
+              return '0' + date.toString();
+            } else {
+              return date.toString();
+            }
+          }
+      }
     }
 
     getCheckBox=(e)=> {
@@ -98,60 +225,63 @@ class EntryPageComponent extends Component{
           i = i + 1;
       }
     })
+
   }
-
-    manageDates=(e) => {
-      this.startDate = document.getElementById("startDateInput").value;
-      this.stopDate = document.getElementById("stopDateInput").value;
-      this.origStart = this.startDate;
-      this.origEnd = this.stopDate;
-      const startDate = new Date(this.startDate);
-      const stopDate = new Date(this.stopDate);
-      const startTime = new Date(this.startDate);
-      const stopTime = new Date(this.stopDate);
-      this.formatTime(startDate.getHours(), startDate.getMinutes(), 1);
-      this.formatTime(stopDate.getHours(), stopDate.getMinutes(), 2);
-      this.formatDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), 1);
-      this.formatDate(stopDate.getDate(), stopDate.getMonth(), stopDate.getFullYear(), 2);
-    }
-
-    getRadioButton = (e) => {
-      var fix = document.getElementById("fix");
-      var enhance = document.getElementById("enhance");
-      var planned = document.getElementById("planned");
-      var unplanned = document.getElementById("unplanned");
-      var emergency = document.getElementById("emergency");
-      var low = document.getElementById("low");
-      var medium = document.getElementById("medium");
-      var high = document.getElementById("high");
-      if (fix.checked == true) {
-        this.reasonType = fix.value;
-      }
-      if (enhance.checked == true) {
-        this.reasonType = enhance.value;
-      }
-      if (planned.checked == true) {
-        this.changeType = planned.value;
-      }
-      if (unplanned.checked == true) {
-        this.changeType = unplanned.value;
-      }
-      if (emergency.checked == true) {
-        this.changeType = emergency.value;
-      }
-      if (low.checked == true) {
-        this.riskLevel = low.value;
-      }
-      if (medium.checked == true) {
-        this.riskLevel = medium.value;
-      }
-      if (high.checked == true) {
-        this.riskLevel = high.value;
-      }
-    }
-
-    saveCookies = (e) => {
+    saveCookies=(e)=>{   //should be working
+        e.preventDefault();
+        this.startDate = document.getElementById("startDateInput").value;
+        this.stopDate = document.getElementById("stopDateInput").value;
+        console.log(this.startDate);
+        this.origStart = this.startDate;
+        this.origEnd = this.stopDate;
+        const startDate = new Date(this.startDate);
+        const stopDate = new Date(this.stopDate);
+        const startTime = new Date(this.startDate);
+        const stopTime = new Date(this.stopDate);
+        console.log(startDate.getDate());
+        this.formatTime(startDate.getHours(), startDate.getMinutes(), 1);
+        this.formatTime(stopDate.getHours(), stopDate.getMinutes(), 2);
+        this.formatDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), 1);
+        this.formatDate(stopDate.getDate(), stopDate.getMonth(), stopDate.getFullYear(), 2);
+        this.getCheckBox();
+        let value = 0;
+        var fix = document.getElementById("fix");
+        var enhance = document.getElementById("enhance");
+        var planned = document.getElementById("planned");
+        var unplanned = document.getElementById("unplanned");
+        var emergency = document.getElementById("emergency");
+        var low = document.getElementById("low");
+        var medium = document.getElementById("medium");
+        var high = document.getElementById("high");
+        if (fix.checked == true) {
+          this.reasonType = fix.value;
+          
+        }
+        if (enhance.checked == true) {
+          this.reasonType = enhance.value;
+          
+        }
+        if (planned.checked == true) {
+          this.changeType = planned.value;
+        }
+        if (unplanned.checked == true) {
+          this.changeType = unplanned.value;
+        }
+        if (emergency.checked == true) {
+          this.changeType = emergency.value;
+        }
+        if (low.checked == true) {
+          this.riskLevel = low.value;
+        }
+        if (medium.checked == true) {
+          this.riskLevel = medium.value;
+        }
+        if (high.checked == true) {
+          this.riskLevel = high.value;
+        }
+        
         document.cookie = "appID=" + this.removeQuote(this.appId) + "; path=/;";
+        
         document.cookie = "description=" + this.removeQuote(this.description) + "; path=/";
         document.cookie = "whyDescription=" + this.removeQuote(this.whyDescription) + "; path=/;";
         document.cookie = "result=" + this.removeQuote(this.result) + "; path=/;";
@@ -171,16 +301,10 @@ class EntryPageComponent extends Component{
         document.cookie = "security= " + this.removeQuote(this.secur) + "; path=/;";
         document.cookie = "scheduling= " + this.removeQuote(this.sched) + "; path=/;";
         document.cookie = "riskLevel= " + this.removeQuote(this.riskLevel) + "; path=/;";
-    }
 
-    execute=(e)=>{   //should be working
-        e.preventDefault();
-        this.manageDates();   // obtains date values and stores
-        this.getCheckBox();    // obtains values in check boxes
-        this.getRadioButton();   // obtains values in radio buttons
-        this.saveCookies();    // saves all values to document cookies
+        
         let x = true;
-        this.props.execute(true); // functionality for page switch
+        this.props.execute(true);
   }
   
     handleValue = (e, val, tue) => {
@@ -236,6 +360,7 @@ class EntryPageComponent extends Component{
         document.getElementById("emergency").checked = true;
         this.changeType = document.getElementById("emergency").value;
       }
+      
       if (document.getElementById("dba").value == cookieName) {
         document.getElementById("dba").checked = true;
         this.changeDepartment = document.getElementById("dba").value;
@@ -252,6 +377,7 @@ class EntryPageComponent extends Component{
         document.getElementById("scheduling").checked = true;
         this.changeDepartment = document.getElementById("scheduling").value;
       }
+      
       if (document.getElementById("low").value == cookieName) {
         document.getElementById("low").checked = true;
         this.riskLevel = document.getElementById("low").value;
@@ -264,6 +390,7 @@ class EntryPageComponent extends Component{
         document.getElementById("high").checked = true;
         this.riskLevel = document.getElementById("high").value;
       }
+      
    }
    
 
@@ -291,6 +418,7 @@ class EntryPageComponent extends Component{
     this.checkRadioButton(getCookie("security"));
     this.checkRadioButton(getCookie("scheduling"));
     this.checkRadioButton(getCookie("riskLevel"));
+    
    }
   
 
@@ -404,7 +532,7 @@ class EntryPageComponent extends Component{
                 </div>
               </fieldset>
              <fieldset className="Submit">
-             <input type="submit" value="Submit" onClick={this.execute} /> 
+             <input type="submit" value="Submit" onClick={this.saveCookies} /> 
              </fieldset>
         </Form>
         );

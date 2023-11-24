@@ -1,6 +1,4 @@
-import { getCookie, makeCookie } from "./CookieManagement";
-function  convertDateValueToDate(date, type, amOrpm) {
-  let timeOfDay = "";
+function convertDateValueToDate(date, type, amOrpm) {
   switch (type) {
     case "Year":
       return date.toString();
@@ -32,6 +30,7 @@ function  convertDateValueToDate(date, type, amOrpm) {
         case 11:
           return "December";
       }
+      break;
     case "Day":
       switch (date) {
         case 1:
@@ -101,33 +100,18 @@ function  convertDateValueToDate(date, type, amOrpm) {
       date = parseInt(date);
       if (date == 0) {
         date = 12;
-        timeOfDay = " PM";
-        makeCookie("timeOfDay", timeOfDay);
-        return date.toString();
+        return date.toString() + " AM";
       } else if (date > 12) {
         date = date - 12;
-        timeOfDay = " PM";
-        makeCookie("timeOfDay", timeOfDay);
-        return date.toString();
+        return date.toString() + " PM";
       } else {
-        timeOfDay = " AM";
-        makeCookie("timeOfDay", timeOfDay);
-        return date.toString();
+        return date.toString() + " AM";
       }
-     
     case "Minute":
       if (amOrpm == "AM") {
-        if (date < 10) {
-          return '0' + date.toString();
-        } else {
-          return date.toString();
-        }
+        return date.toString() + " AM";
       } else {
-        if (date < 10) {
-          return '0' + date.toString();
-        } else {
-          return date.toString();
-        }
+        return date.toString() + " PM";
       }
   }
 }
