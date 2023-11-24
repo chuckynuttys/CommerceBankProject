@@ -32,6 +32,8 @@ function convertDateToDateValue(date, type, amOrpm) {
       }
       break;
     case "Day":
+      console.log(date);
+      console.log(date === "23rd");
       switch (date) {
         case "1st":
           return 1;

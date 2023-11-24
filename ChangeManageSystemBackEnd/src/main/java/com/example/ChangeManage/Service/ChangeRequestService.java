@@ -4,8 +4,10 @@ import com.example.ChangeManage.ChangeManageApplication;
 import com.example.ChangeManage.Controller.UserNotFoundException;
 import com.example.ChangeManage.Repository.CMUserRepository;
 import com.example.ChangeManage.Repository.ChangeRequestRepository;
+import com.example.ChangeManage.Repository.ReasonTypeRepository;
 import com.example.ChangeManage.domain.CMUser;
 import com.example.ChangeManage.domain.ChangeRequest;
+import com.example.ChangeManage.domain.ReasonType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,7 @@ public class ChangeRequestService
 {
     private final CMUserRepository cmUserRepository;
     private final ChangeRequestRepository changeRequestRepository;
+    private final ReasonTypeRepository reasonTypeRepository;
 
 
 
@@ -31,12 +34,33 @@ public class ChangeRequestService
         if (user != null) {
             changeRequest.setUser(user);
             System.out.println("Post Request Successful, posting change Request");
-            return changeRequestRepository.save(changeRequest);
+            Optional<ReasonType> reasonType = reasonTypeRepository.findById(1);
+            HashMap<String, Integer> map = new HashMap<>();
+
+            if (reasonType.isPresent()) {
+                map = reasonType.get().getMap();
+                if (Objects.equals(changeRequest.getReason(), "Fix")) {
+                    map.put("Fix", map.get("Fix") + 1);
+                    changeRequest.setReasonNumber(map.get("Fix"));
+                } else {
+                    map.put("Enhancement", map.get("Enhancement") + 1);
+                    changeRequest.setReasonNumber(map.get("Enhancement"));
+                }
+                reasonType.get().setMap(map);
+                return changeRequestRepository.save(changeRequest);
+            } else {
+                throw new UserNotFoundException(String.format("ReasonType by id[%s] not found.", 1));
+            }
+
         } else {
             throw new UserNotFoundException(String.format("User by username[%s] not found.", username));
         }
     }
-
+    @Transactional
+    public Optional<ChangeRequest> getChangeRequestById(boolean archivedStatus, int id) {
+        System.out.println(id);
+        return changeRequestRepository.findChangeRequestByIdWithCustomQuery(archivedStatus, id);
+    }
     @Transactional
     public Optional<List<ChangeRequest>> getChangeRequestsById(boolean archivedStatus, int id, String authorizationLevel) {
         switch (authorizationLevel) {
@@ -123,6 +147,18 @@ public class ChangeRequestService
         return true;
     }
 
+    @Transactional
+    public boolean updateChangeRequest (ChangeRequest changeRequest, String username) {
+        CMUser user = cmUserRepository.findByUsername(username);
+        if (user != null) {
+            changeRequest.setUser(user);
+            changeRequestRepository.save(changeRequest);
+            return true;
+        } else {
+            throw new UserNotFoundException(String.format("User by username[%s] not found.", username));
+        }
+
+    }
 
 
 }

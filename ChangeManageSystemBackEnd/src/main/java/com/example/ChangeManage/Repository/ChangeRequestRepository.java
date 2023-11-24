@@ -24,6 +24,9 @@ public interface ChangeRequestRepository extends JpaRepository<ChangeRequest, In
             nativeQuery = true)
     Optional<List<ChangeRequest>> findChangeRequestsFromUserWithCustomQuery (boolean archivedStatus,
                                                                             int id);
+    @Query(value = "SELECT * FROM CHANGE_REQUEST c where c.archived_Status = :archivedStatus AND c.change_Id = :id",
+            nativeQuery = true)
+    Optional<ChangeRequest> findChangeRequestByIdWithCustomQuery (boolean archivedStatus, int id);
     @Query(value = "SELECT * FROM CHANGE_REQUEST c WHERE c.archived_Status = :archivedStatus AND c.id != :id " +
             "AND c.state_Level = :stateLevel", nativeQuery = true)
     Optional<List<ChangeRequest>> findChangeRequestsNotFromUserWithCustomQuery (boolean archivedStatus,

@@ -10,6 +10,7 @@ import user from "../Functions/UserFile";
 import { getCookie } from "../Functions/CookieManagement";
 import { useForceUpdate } from "../Functions/ForceUpdate";
 import { getSortOrder } from "../Functions/GetSortedOrder";
+import { useNavigate } from "react-router";
 
 const ListScreenApp = () => {
   const [changeRequests, setChangeRequests] = useState([]);
@@ -48,6 +49,12 @@ const ListScreenApp = () => {
         .then((res) => {
           setChangeRequests(res);
         });
+    }
+  };
+  const navigate = useNavigate();
+  const handleSignIn = (t) => {
+    if (t == true) {
+      navigate("/Entry");
     }
   };
 
@@ -463,6 +470,7 @@ const ListScreenApp = () => {
                     changeRequest={changeRequest}
                     tabSet={1}
                     index={index}
+                    handleSignIn={handleSignIn}
                   />
                 ))}
               </div>
@@ -639,6 +647,7 @@ const ListScreenApp = () => {
                     changeRequest={changeRequest}
                     tabSet={2}
                     index={index}
+                    handleSignIn={handleSignIn}
                   />
                 ))}
               </div>

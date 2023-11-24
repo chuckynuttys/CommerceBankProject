@@ -94,7 +94,7 @@ function ListChangeRequests(props) {
 
         <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet}
           currentUserId={props.changeRequest.user.id} changeWindowStartDate={changeWindowStartDate} changeWindowStartTime={changeWindowStartTime}
-          changeWindowStopDate={changeWindowStopDate} changeWindowStopTime={changeWindowStopTime} />
+          changeWindowStopDate={changeWindowStopDate} changeWindowStopTime={changeWindowStopTime} handleSignIn={props.handleSignIn}/>
 
       </div>
     );
@@ -173,13 +173,13 @@ function ListChangeRequests(props) {
           </div>
         </div>
 
-        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet} currentUserId={props.changeRequest.user.id} />
+        <ActionComponent stateLevel={stateLevel} changeId={changeId} navigate={navigate} changeCount={changeCount} tabSet={props.tabSet} currentUserId={props.changeRequest.user.id} 
+        handleSignIn={props.handleSignIn}/>
 
       </div>
     )
   } else {
     // Archived Change Requests
-    if (implementationStatus == "Implemented") {
       return (
         <div id="u564-1" class="preeval" style={{ width: '720px', height: '75px', top: ((indexNumber - 1) * 75) + "px" }}>
 
@@ -231,60 +231,7 @@ function ListChangeRequests(props) {
           </div>
         </div>
       )
-    } else {
-      return (
-        <div id="u564-1" class="preeval" style={{ width: '720px', height: '75px', top: ((indexNumber - 1) * 75) + "px" }}>
-
-
-          <div id="u565-1" class="ax_default box_1 u565" style={{ width: '212px', height: '60px', left: '120px', top: '0px', visibility: 'inherit' }}>
-            <div id="u565-1_div" class="u565_div" style={{ width: '216px', height: '60px', visibility: 'inherit' }}></div>
-            <div id="u565-1_text" class="text u565_text" style={{ visibility: 'inherit' }}>
-              <p><span>{description}</span></p>
-            </div>
-          </div>
-
-
-          <div id="u566-1" class="ax_default box_1 u566" style={{ width: '116px', height: '60px', left: '0px', top: '0px', visibility: 'inherit' }}>
-            <div id="u566-1_div" class="u566_div" style={{ width: '116px', height: '60px', visibility: 'inherit' }}></div>
-            <div id="u566-1_text" class="text u566_text" style={{ visibility: 'inherit' }}>
-              <p><span>{changeId}</span></p>
-            </div>
-          </div>
-
-
-          <div id="u567-1" class="ax_default box_1 u567" style={{ width: '120ps', height: '60px', left: '465px', top: '0px', visibility: 'inherit' }}>
-            <div id="u567-1_div" class="u567_div" style={{ width: '133px', height: '60px', visibility: 'inherit' }}></div>
-            <div id="u567-1_text" class="text u567_text" style={{ visibility: 'inherit' }}>
-              <p><span>{implementer}</span></p>
-            </div>
-          </div>
-
-
-          <div id="u568-1" class="ax_default box_1 u568" style={{ width: '116px', height: '60px', left: '340px', top: '0px', visibility: 'inherit' }}>
-            <div id="u568-1_div" class="u568_div" style={{ width: '116px', height: '60px', visibility: 'inherit' }}></div>
-            <div id="u568-1_text" class="text u568_text" style={{ visibility: 'inherit' }}>
-              <p><span>{stateLevel}</span></p>
-            </div>
-          </div>
-
-
-          <div id="u569-1" class="ax_default box_1 u569" style={{ width: '116px', height: '60px', left: '600px', top: '0px', visibility: 'inherit' }}>
-            <div id="u569-1_div" class="u569_div" style={{ width: '207px', height: '60px', visibility: 'inherit' }}></div>
-            <div id="u569-1_text" class="text u569_text" style={{ visibility: 'inherit' }}>
-              <p><span>{implementationStatus}</span></p>
-            </div>
-          </div>
-
-          <div id="u570-1" class="ax_default box_1 u570" style={{ width: '224px', height: '60px', left: '811px', top: '0px', visibility: 'inherit' }}>
-            <div id="u570-1_div" class="u570_div" style={{ width: '224px', height: '60px', visibility: 'inherit' }}></div>
-            <div id="u570-1_text" class="text u570_text" style={{ visibility: 'inherit' }}>
-              <p><span>N/A</span></p>
-            </div>
-          </div>
-        </div>
-      )
-    }
-
+    
   }
 
 }

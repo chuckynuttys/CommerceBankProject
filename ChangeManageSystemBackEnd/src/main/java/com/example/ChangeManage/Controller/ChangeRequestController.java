@@ -23,9 +23,10 @@ public class ChangeRequestController{
 
     // Creating ChangeRequests
     @PostMapping("/changerequest")
-    public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest, String username) {
+    public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest,
+                                  @RequestParam(required = true) String username) {
 
-
+        System.out.println("Posting Request");
         return new ResponseEntity<>(changeRequestService.create(changeRequest, username), HttpStatus.CREATED);
     }
 
@@ -34,8 +35,12 @@ public class ChangeRequestController{
     public ResponseEntity<?> getChangeRequests(@RequestParam(required = true) boolean archivedStatus,
                                                @RequestParam(required = false) Integer id,
                                                @RequestParam(required = false) String authorizationLevel) {
+        System.out.println(archivedStatus);
+        System.out.println(id);
+        System.out.println(authorizationLevel);
         if (id == null) {
             // Archived Status Request
+
             Optional<List<ChangeRequest>> changeRequestList =
                     changeRequestService.getChangeRequestsByArchivedStatus(archivedStatus);
             if (changeRequestList.isPresent()) {
@@ -44,7 +49,17 @@ public class ChangeRequestController{
             }
             return new ResponseEntity<>(changeRequestService.getChangeRequestsByArchivedStatus(archivedStatus),
                     HttpStatus.OK);
+        } else if (authorizationLevel == null) {
+
+            Optional<ChangeRequest> changeRequest = changeRequestService.getChangeRequestById(archivedStatus, id);
+            if (changeRequest.isPresent()) {
+                System.out.println("Change Request present.");
+            } else {
+                System.out.println("Change request not present");
+            }
+            return new ResponseEntity<>(changeRequestService.getChangeRequestById(archivedStatus, id), HttpStatus.OK);
         } else {
+
             Optional<List<ChangeRequest>> changeRequestList = changeRequestService.getChangeRequestsById(archivedStatus,
                     id, authorizationLevel);
             if (changeRequestList.isPresent()) {
@@ -64,6 +79,7 @@ public class ChangeRequestController{
                                                    @RequestParam(required = false) String implementationTime,
                                                    @RequestParam(required = false) String implementationDate,
                                                    @RequestParam(required = false) Boolean archivedStatus) {
+        System.out.println("Test2");
     if (archivedStatus != null) {
         if (implementationStatus != null) {
             return (changeRequestService.updateChangeRequestImplementation(id, stateLevel, implementationStatus,
@@ -74,6 +90,14 @@ public class ChangeRequestController{
     } else {
         return (changeRequestService.updateChangeRequestsByStateLevel(id, stateLevel));
     }
+    }
+
+    @PutMapping("/changerequests/{id}")
+    public boolean updateChangeRequest (@PathVariable Integer id,
+                                        @RequestParam(required = true) String username,
+                                        @RequestBody ChangeRequest changeRequest) {
+        System.out.println("Test1");
+        return changeRequestService.updateChangeRequest(changeRequest, username);
     }
 
 }

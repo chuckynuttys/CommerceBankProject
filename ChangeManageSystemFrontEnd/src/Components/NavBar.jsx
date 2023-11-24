@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/navBar.css';
+import { makeCookie } from '../files/Functions/CookieManagement';
 
 
 const NavBar = (props) => {
     const navigate = useNavigate();
     function handleClick(value) {
+        makeCookie("editChangeRequest", false);
         navigate("/" + value);
     }
     if (props.navBarNumber == 1) {

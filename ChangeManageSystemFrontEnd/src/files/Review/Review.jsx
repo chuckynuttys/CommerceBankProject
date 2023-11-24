@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../../css/pages.css';
 import '../../css/styles.css';
 import './Review.css';
@@ -6,18 +6,137 @@ import { useNavigate } from "react-router-dom";
 import backgroundImg from '../../Images/BackgroundImg.jpg';
 import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
-import { getCookie } from '../CookieManagement';
+import { deleteCookie, getCookie, makeCookie } from "../Functions/CookieManagement";
 var navBarNumber;
 
 const Review = () => {
   const navigate = useNavigate();
   const toEntry = (e) => {
-    navigate("/Entry");
+    e.preventDefault();
+    console.log(e.submitter.value);
+    if (e.submitter.value == "modify") {
+      navigate("/Entry");
+    } else {
+      let otherNeededDepartmentsList = "";
+      if (getCookie("scheduling") != "") {
+        otherNeededDepartmentsList = getCookie("scheduling");
+      }
+      if (getCookie("security") != "") {
+        if (getCookie("scheduling") == "") {
+          otherNeededDepartmentsList = getCookie("security");
+        } else {
+          otherNeededDepartmentsList += ", " + getCookie("security"); 
+        }
+      }
+      if (getCookie("dba") != "") {
+        if (getCookie("scheduling") == "" && getCookie("security") == "") {
+          otherNeededDepartmentsList = getCookie("dba");
+        } else {
+          otherNeededDepartmentsList += ", " + getCookie("dba");
+        }
+      }
+      if (getCookie("devOps") != "") {
+        if (getCookie("scheduling") == "" && getCookie("security") == "" && getCookie("dba") == "") {
+          otherNeededDepartmentsList = getCookie("devOps");
+        } else {
+          otherNeededDepartmentsList += ", " + getCookie("devOps");
+        }
+        
+      }
+      const changeRequest = {
+        applicationId: getCookie("appID"),
+        description: getCookie("description"),
+        reason: getCookie("reasonType"),
+        changeType: getCookie("changeType"),
+        whyDescription: getCookie("whyDescription"),
+        whatDescription: getCookie("result"),
+        backOutPlan: getCookie("backOutPlan"),
+        backOutMinutes: getCookie("backOutMinutes"),
+        changeWindowStartDate: getCookie("startDate"),
+        changeWindowStopDate: getCookie("stopDate"),
+        changeWindowStartTime: getCookie("startTime"),
+        changeWindowStopTime: getCookie("stopTime"),
+        otherNeededDepartments: otherNeededDepartmentsList,
+        riskLevel: getCookie("riskLevel"),
+        implementer: getCookie("name"),
+        implementationStatus: null,
+        implementationDate: null,
+        implementationTime: null,
+        stateLevel: "Open",
+        archivedStatus: false,
+      }
+      
+      if (getCookie("editChangeRequest")) {
+        const params = {
+         username: getCookie("username"),
+        }
+        changeRequest.changeId = getCookie("changeRequestId");
+        changeRequest.reasonNumber = getCookie("reasonNo");
+        
+        const searchParams = new URLSearchParams(params);
+        console.log(changeRequest);
+      fetch(`http://localhost:8080/changerequests/` + parseInt(getCookie("changeRequestId")) + "?" + searchParams.toString(), {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          
+        },
+        body: JSON.stringify(changeRequest)
+      })
+      } else {
+        const params = {
+          username: getCookie("username"),
+        }
+        const searchParams = new URLSearchParams(params);
+        fetch(`http://localhost:8080/changerequest?` + searchParams.toString(), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            
+          },
+          body: JSON.stringify(changeRequest)
+        })
+      }
+      
+
+      deleteCookie("start", getCookie("start"), "localhost");
+      deleteCookie("changeDepartment", getCookie("changeDepartment"), "localhost");
+      deleteCookie("appID", getCookie("appID"), "localhost");
+      deleteCookie("editChangeRequest", getCookie("editChangeRequest"), "localhost");
+      deleteCookie("changeRequestId", getCookie("changeRequestId"), "localhost");
+      deleteCookie("startTime", getCookie("startTime"), "localhost");
+      deleteCookie("security", getCookie("security"), "localhost");
+      deleteCookie("startDate", getCookie("startDate"), "localhost");
+      deleteCookie("riskLevel", getCookie("riskLevel"), "localhost");
+      deleteCookie("changeType", getCookie("changeType"), "localhost");
+      deleteCookie("stopDate", getCookie("stopDate"), "localhost");
+      deleteCookie("stop", getCookie("stop"), "localhost");
+      deleteCookie("reasonType", getCookie("reasonType"), "localhost");
+      deleteCookie("end", getCookie("end"), "localhost");
+      deleteCookie("description", getCookie("description"), "localhost");
+      deleteCookie("scheduling", getCookie("scheduling"), "localhost");
+      deleteCookie("backOutMinutes", getCookie("backOutMinutes"), "localhost");
+      deleteCookie("devOps", getCookie("devOps"), "localhost");
+      deleteCookie("backOutPlan", getCookie("backOutPlan"), "localhost");
+      deleteCookie("stopTime", getCookie("stopTime"), "localhost");
+      deleteCookie("reason", getCookie("reason"), "localhost");
+      deleteCookie("reasonNo", getCookie("reasonNo"), "localhost");
+      deleteCookie("result", getCookie("result"), "localhost");
+      deleteCookie("whyDescription", getCookie("whyDescription"), "localhost");
+      deleteCookie("dba", getCookie("dba"), "localhost");
+      
+      navigate("/ListScreenApp");
+    }
+    
   }
+  useEffect(() => {
+  let form = document.getElementById("form");
+  form.addEventListener("submit", toEntry);
   
+  }, []);
   let description = getCookie("description");
   return (
-    <form onSubmit={toEntry}>
+    <form id="form">
     <div id="base" class="">
 
 
@@ -42,12 +161,7 @@ const Review = () => {
         <script id="u442_script" type="axure-repeater-template" data-label="RRepeater">
 
 
-          <div id="u443" class="ax_default box_1 u443" data-label="Reason_Number">
-            <div id="u443_div" class="u443_div"></div>
-            <div id="u443_text" class="text u443_text">
-              <p><span>Reason_Number</span></p>
-            </div>
-          </div>
+          
 
 
           <div id="u444" class="ax_default box_1 u444" data-label="Full Name">
@@ -71,7 +185,7 @@ const Review = () => {
           <div id="u446_text" class="text u446_text">
             <p><span>Reason</span></p> 
           </div>
-
+          </div>
 
           <div id="u447" class="ax_default box_1 u447" data-label="Change Type">
             <div id="u447_div" class="u447_div"></div>
@@ -113,27 +227,18 @@ const Review = () => {
           </div>
 
 
-          <div id="u452" class="ax_default box_1 u452" data-label="Change Number">
-            <div id="u452_div" class="u452_div"></div>
-            <div id="u452_text" class="text u452_text">
-              <p><span>Change_Number</span></p>
-            </div>
-          </div>
+          
+
         </script>
         <div id="u442-1" class="preeval" style={{ width: '1200px', height: '30px' }}>
 
         
-        <div id="u443-1" class="ax_default box_1 u443" data-label="Reason_Number" style={{width: '120px', height: '30px', left: '600px', top: '0px', visibility: 'inherit'}}>
-          <div id="u443-1_div" class="u443_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
-          <div id="u443-1_text" class="text u443_text" style={{visibility: 'inherit'}}>
-            <p><span>{getCookie("reasonNo")}</span></p>
-          </div>
-
+        
 
           <div id="u444-1" class="ax_default box_1 u444" data-label="Full Name" style={{ width: '120px', height: '30px', left: '120px', top: '0px', visibility: 'inherit' }}>
             <div id="u444-1_div" class="u444_div" style={{ width: '120px', height: '30px', visibility: 'inherit' }}></div>
             <div id="u444-1_text" class="text u444_text" style={{ visibility: 'inherit' }}>
-              <p><span>Robert Lukenbill</span></p>
+              <p><span>{getCookie("name")}</span></p>
             </div>
           </div>
 
@@ -143,13 +248,14 @@ const Review = () => {
           <div id="u445-1_text" class="text u445_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("description")}</span></p>
           </div>
-
+          </div>
     
         <div id="u446-1" class="ax_default box_1 u446" data-label="Reason" style={{width: '120px', height: '30px', left: '480px', top: '0px', visibility: 'inherit'}}>
           <div id="u446-1_div" class="u446_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u446-1_text" class="text u446_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("reasonType")}</span></p>
           </div>
+        </div>
 
         
         <div id="u447-1" class="ax_default box_1 u447" data-label="Change Type" style={{width: '120px', height: '30px', left: '720px', top: '0px', visibility: 'inherit'}}>
@@ -157,6 +263,7 @@ const Review = () => {
           <div id="u447-1_text" class="text u447_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("changeType")}</span></p>
           </div>
+        </div>
 
         
         <div id="u448-1" class="ax_default box_1 u448" data-label="Application ID" style={{width: '120px', height: '30px', left: '240px', top: '0px', visibility: 'inherit'}}>
@@ -164,47 +271,45 @@ const Review = () => {
           <div id="u448-1_text" class="text u448_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("appID")}</span></p>
           </div>
+        </div>
 
         
         <div id="u449-1" class="ax_default box_1 u449" data-label="Why" style={{width: '120px', height: '30px', left: '840px', top: '0px', visibility: 'inherit'}}>
           <div id="u449-1_div" class="u449_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u449-1_text" class="text u449_text" style={{visibility: 'inherit'}}>
-            <p><span>{getCookie("reason")}</span></p>
+            <p><span>{getCookie("whyDescription")}</span></p>
           </div>
-
+          </div>
         
         <div id="u450-1" class="ax_default box_1 u450" data-label="What" style={{width: '120px', height: '30px', left: '960px', top: '0px', visibility: 'inherit'}}>
           <div id="u450-1_div" class="u450_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u450-1_text" class="text u450_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("result")}</span></p>
           </div>
-
+          </div>
 
           <div id="u451-1" class="ax_default box_1 u451" data-label="Who" style={{ width: '120px', height: '30px', left: '1080px', top: '0px', visibility: 'inherit' }}>
             <div id="u451-1_div" class="u451_div" style={{ width: '120px', height: '30px', visibility: 'inherit' }}></div>
             <div id="u451-1_text" class="text u451_text" style={{ visibility: 'inherit' }}>
-              <p><span>Robert Lukenbill</span></p>
+              <p><span>{getCookie("name")}</span></p>
             </div>
           </div>
 
 
-          <div id="u452-1" class="ax_default box_1 u452" data-label="Change Number" style={{ width: '120px', height: '30px', left: '0px', top: '0px', visiblity: 'inherit' }}>
-            <div id="u452-1_div" class="u452_div" style={{ width: '120px', height: '30px', visibility: 'inherit' }}></div>
-            <div id="u452-1_text" class="text u452_text" style={{ visibility: 'inherit' }}>
-              <p><span>1</span></p>
-            </div>
+          
+
           </div>
         </div>
-      </div>
 
     
     <div id="u453" class="ax_default image">
       <img id="u453_img" class="img " src={logo}/>
       <div id="u453_text" class="text " style={{display: 'none', visibility: 'hidden'}}>
       </div>
+    </div>
 
     
-    <button id="u454" class="ax_default primary_button" style={{cursor: 'pointer'}} type="submit"> 
+    <button id="u454" class="ax_default primary_button" style={{cursor: 'pointer'}} type="submit" value="modify"> 
                       <div id="u454_div" class=""></div>
                       <div id="u454_text" class="text ">
                         <p><span>Modify Change Request</span></p>
@@ -212,20 +317,15 @@ const Review = () => {
                       </button>
 
 
-      <div id="u455" class="ax_default primary_button">
+      <button id="u455" class="ax_default primary_button" style={{cursor: 'pointer'}} type="submit" value="submit">
         <div id="u455_div" class=""></div>
         <div id="u455_text" class="text ">
           <p><span>Submit Change Request</span></p>
         </div>
-      </div>
+      </button>
 
 
-      <div id="u456" class="ax_default box_1" data-label="Change Number (Header)">
-        <div id="u456_div" class=""></div>
-        <div id="u456_text" class="text ">
-          <p><span>Change_Number</span></p>
-        </div>
-      </div>
+      
 
 
       <div id="u457" class="ax_default box_1" data-label="Full Name (Header)">
@@ -449,6 +549,7 @@ const Review = () => {
           <div id="u482-1_div" class="u482_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u482-1_text" class="text u482_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("startDate")}</span></p>
+            </div>
           </div>
 
         
@@ -456,15 +557,15 @@ const Review = () => {
           <div id="u483-1_div" class="u483_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u483-1_text" class="text u483_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("startTime")}</span></p>
+            </div>
           </div>
-
         
         <div id="u484-1" class="ax_default box_1 u484" data-label="R3" style={{width: '120px', height: '30px', left: '240px', top: '0px', visibility: 'inherit'}}>
           <div id="u484-1_div" class="u484_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u484-1_text" class="text u484_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("stopDate")}</span></p>
+            </div>
           </div>
-
         
         <div id="u485-1" class="ax_default box_1 u485" data-label="R4" style={{width: '120px', height: '30px', left: '360px', top: '0px', visibility: 'inherit'}}>
           <div id="u485-1_div" class="u485_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
@@ -472,6 +573,7 @@ const Review = () => {
             <p><span>{getCookie("stopTime")}</span></p>
           </div>
         </div>
+      </div>
       </div>
 
 
@@ -525,27 +627,27 @@ const Review = () => {
           <div id="u487-1_div" class="u487_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u487-1_text" class="text u487_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("backOutPlan")}</span></p>
+            </div>
           </div>
-
         
         <div id="u488-1" class="ax_default box_1 u488" data-label="R6" style={{width: '120px', height: '30px', left: '120px', top: '0px', visibility: 'inherit'}}>
           <div id="u488-1_div" class="u488_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u488-1_text" class="text u488_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("backOutMinutes")}</span></p>
+            </div>
           </div>
-
         
         <div id="u489-1" class="ax_default box_1 u489" data-label="R7" style={{width: '120px', height: '30px', left: '240px', top: '0px', visibility: 'inherit'}}>
           <div id="u489-1_div" class="u489_div" style={{width: '120px', height: '30px', visibility: 'inherit'}}></div>
           <div id="u489-1_text" class="text u489_text" style={{visibility: 'inherit'}}>
             <p><span>{getCookie("changeDepartment")}</span></p>
+            </div>
           </div>
-
 
           <div id="u490-1" class="ax_default box_1 u490" data-label="R8" style={{ width: '120px', height: '30px', left: '360px', top: '0px', visibility: 'inherit' }}>
             <div id="u490-1_div" class="u490_div" style={{ width: '120px', height: '30px', visibility: 'inherit' }}></div>
             <div id="u490-1_text" class="text u490_text" style={{ visibility: 'inherit' }}>
-              <p><span>Low</span></p>
+              <p><span>{getCookie("riskLevel")}</span></p>
             </div>
           </div>
 
@@ -556,10 +658,11 @@ const Review = () => {
               <p><span>Open</span></p>
             </div>
           </div>
+
         </div>
       </div>
     </div>
-  </div>
+ 
   </form>
   );
 };

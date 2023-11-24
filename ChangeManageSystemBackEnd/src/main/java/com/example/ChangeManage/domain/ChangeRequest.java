@@ -3,9 +3,11 @@ package com.example.ChangeManage.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Optional;
+import javax.persistence.GeneratedValue;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,10 +18,10 @@ public class ChangeRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer changeId;
-    private Integer applicationId;
+    private String applicationId;
     private String description;
     private String reason;
-    private Integer reasonNumber; // Ticket number if a fix, Service Request number if an enhancement
+    private Integer reasonNumber;
     private String changeType;
     private String whyDescription;
     private String whatDescription;
@@ -41,5 +43,7 @@ public class ChangeRequest {
     @ManyToOne
     @JoinColumn(name = "id")
     private CMUser user;
+
+
 
 }

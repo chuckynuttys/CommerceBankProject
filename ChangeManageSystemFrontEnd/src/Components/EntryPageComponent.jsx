@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from '../files/CookieManagement';
+import { getCookie } from "../files/Functions/CookieManagement";
 
 class EntryPageComponent extends Component{
     
@@ -13,7 +13,7 @@ class EntryPageComponent extends Component{
             description:'',
             reasonNo:'',
             temp:'',
-            reason:'',
+            whyDescription:'',
             result:'',
             username:'',
             backOutPlan:'',
@@ -33,6 +33,7 @@ class EntryPageComponent extends Component{
             stopTime:'',
             timeOfDay:'',
             appBool:'',
+            riskLevel:'',
         }
         //methods go here for declaration
         this.saveCookies = this.saveCookies.bind(this);
@@ -182,9 +183,17 @@ class EntryPageComponent extends Component{
           }
         case "Minute":
           if (amOrpm == "AM") {
-            return date.toString();
+            if (date < 10) {
+              return '0' + date.toString();
+            } else {
+              return date.toString();
+            }
           } else {
-            return date.toString();
+            if (date < 10) {
+              return '0' + date.toString();
+            } else {
+              return date.toString();
+            }
           }
       }
     }
@@ -218,47 +227,6 @@ class EntryPageComponent extends Component{
     })
 
   }
-
-  saveCookies = (e) => {   //should be working
-    e.preventDefault();
-    this.startDate = document.getElementById("startDateInput").value;
-    this.stopDate = document.getElementById("stopDateInput").value;
-    this.getCheckBox();
-    var fix = document.getElementById("fix");
-    var enhance = document.getElementById("enhance");
-    var planned = document.getElementById("planned");
-    var unplanned = document.getElementById("unplanned");
-    var emergency = document.getElementById("emergency");
-    if (fix.checked == true) {
-      this.reasonType = fix.value;
-    }
-    if (enhance.checked == true) {
-      this.reasonType = enhance.value;
-    }
-    if (planned.checked == true) {
-      this.changeType = planned.value;
-    }
-    if (unplanned.checked == true) {
-      this.changeType = unplanned.value;
-    }
-    if (emergency.checked == true) {
-      this.changeType = emergency.value;
-    }
-    document.cookie = "appID=" + this.appId;
-    document.cookie = "description=" + this.description;
-    document.cookie = "reason=" + this.reason;
-    document.cookie = "result=" + this.result;
-    document.cookie = "backOutPlan=" + this.backOutPlan;
-    document.cookie = "backOutMinutes=" + this.backOutMinutes;
-    document.cookie = "reasonType= " + this.reasonType;
-    document.cookie = "changeType= " + this.changeType;
-    document.cookie = "changeDepartment= " + this.changeDepartment;
-    document.cookie = "startDate= " + this.startDate;
-    document.cookie = "changeWindowStopDate= " + this.stopDate;
-    console.log(document.cookie);
-    let x = true;
-  }
-
     saveCookies=(e)=>{   //should be working
         e.preventDefault();
         this.startDate = document.getElementById("startDateInput").value;
@@ -282,13 +250,16 @@ class EntryPageComponent extends Component{
         var planned = document.getElementById("planned");
         var unplanned = document.getElementById("unplanned");
         var emergency = document.getElementById("emergency");
+        var low = document.getElementById("low");
+        var medium = document.getElementById("medium");
+        var high = document.getElementById("high");
         if (fix.checked == true) {
           this.reasonType = fix.value;
-          value = 1;
+          
         }
         if (enhance.checked == true) {
           this.reasonType = enhance.value;
-          value = 2;
+          
         }
         if (planned.checked == true) {
           this.changeType = planned.value;
@@ -299,11 +270,20 @@ class EntryPageComponent extends Component{
         if (emergency.checked == true) {
           this.changeType = emergency.value;
         }
-        this.reasonNo=value;
+        if (low.checked == true) {
+          this.riskLevel = low.value;
+        }
+        if (medium.checked == true) {
+          this.riskLevel = medium.value;
+        }
+        if (high.checked == true) {
+          this.riskLevel = high.value;
+        }
+        
         document.cookie = "appID=" + this.removeQuote(this.appId) + "; path=/;";
-        document.cookie = "reasonNo=" + this.reasonNo + "; path=/;";
+        
         document.cookie = "description=" + this.removeQuote(this.description) + "; path=/";
-        document.cookie = "reason=" + this.removeQuote(this.reason) + "; path=/;";
+        document.cookie = "whyDescription=" + this.removeQuote(this.whyDescription) + "; path=/;";
         document.cookie = "result=" + this.removeQuote(this.result) + "; path=/;";
         document.cookie = "backOutPlan=" + this.removeQuote(this.backOutPlan) + "; path=/;";
         document.cookie = "backOutMinutes=" + this.removeQuote(this.backOutMinutes) + "; path=/;";
@@ -312,36 +292,21 @@ class EntryPageComponent extends Component{
         document.cookie = "changeDepartment= " + this.removeQuote(this.changeDepartment) + "; path=/;";
         document.cookie = "startDate= " + this.removeQuote(this.startDate) + "; path=/;";
         document.cookie = "stopDate= " + this.removeQuote(this.stopDate) + "; path=/;";
-        document.cookie = "startTime= " + this.removeQuote(this.startTime) + "; path=/;"
-        document.cookie = "stopTime= " + this.removeQuote(this.stopTime) + "; path=/;"
-        document.cookie = "start= " + this.removeQuote(this.origStart) + "; path=/;"
-        document.cookie = "end= " + this.removeQuote(this.origEnd) + "; path=/;"
-        document.cookie = "devOps= " + this.removeQuote(this.devOps) + "; path=/;"
-        document.cookie = "dba= " + this.removeQuote(this.dba) + "; path=/;"
-        document.cookie = "security= " + this.removeQuote(this.secur) + "; path=/;"
-        document.cookie = "scheduling= " + this.removeQuote(this.sched) + "; path=/;"
+        document.cookie = "startTime= " + this.removeQuote(this.startTime) + "; path=/;";
+        document.cookie = "stopTime= " + this.removeQuote(this.stopTime) + "; path=/;";
+        document.cookie = "start= " + this.removeQuote(this.origStart) + "; path=/;";
+        document.cookie = "end= " + this.removeQuote(this.origEnd) + "; path=/;";
+        document.cookie = "devOps= " + this.removeQuote(this.devOps) + "; path=/;";
+        document.cookie = "dba= " + this.removeQuote(this.dba) + "; path=/;";
+        document.cookie = "security= " + this.removeQuote(this.secur) + "; path=/;";
+        document.cookie = "scheduling= " + this.removeQuote(this.sched) + "; path=/;";
+        document.cookie = "riskLevel= " + this.removeQuote(this.riskLevel) + "; path=/;";
 
-        console.log(document.cookie);
+        
         let x = true;
         this.props.execute(true);
-       
-    }
-    if (val == 1 && value != "") {
-      this.description = value;
-    }
-    if (val == 2) {
-      this.reason = value;
-    }
-    if (val == 3) {
-      this.result = value;
-    }
-    if (val == 4) {
-      this.backOutPlan = value;
-    }
-    if (val == 5) {
-      this.backOutMinutes = value;
-    }
-
+  }
+  
     handleValue = (e, val, tue) => {
         const nameValue = e.target.name;
         const value = JSON.stringify(e.target.value);
@@ -352,7 +317,7 @@ class EntryPageComponent extends Component{
             this.description = value;
         }
         if (val == 2) {
-            this.reason = value;
+            this.whyDescription = value;
         }
         if (val == 3) {
             this.result = value;
@@ -363,11 +328,6 @@ class EntryPageComponent extends Component{
         if (val == 5) {
             this.backOutMinutes = value;
         }
-       
-
-        
-        
-        
     };
     
    loadValues = (cookieName, label) => {
@@ -396,6 +356,11 @@ class EntryPageComponent extends Component{
         document.getElementById("unplanned").checked = true;
         this.changeType = document.getElementById("unplanned").value;
       }
+      if (document.getElementById("emergency").value == cookieName) {
+        document.getElementById("emergency").checked = true;
+        this.changeType = document.getElementById("emergency").value;
+      }
+      
       if (document.getElementById("dba").value == cookieName) {
         document.getElementById("dba").checked = true;
         this.changeDepartment = document.getElementById("dba").value;
@@ -413,6 +378,18 @@ class EntryPageComponent extends Component{
         this.changeDepartment = document.getElementById("scheduling").value;
       }
       
+      if (document.getElementById("low").value == cookieName) {
+        document.getElementById("low").checked = true;
+        this.riskLevel = document.getElementById("low").value;
+      }
+      if (document.getElementById("medium").value == cookieName) {
+        document.getElementById("medium").checked = true;
+        this.riskLevel = document.getElementById("medium").value;
+      }
+      if (document.getElementById("high").value == cookieName) {
+        document.getElementById("high").checked = true;
+        this.riskLevel = document.getElementById("high").value;
+      }
       
    }
    
@@ -422,8 +399,8 @@ class EntryPageComponent extends Component{
     this.appId = document.getElementById("applicationID").value;
     this.loadValues("description", "description");
     this.description = document.getElementById("description").value;
-    this.loadValues("reason", "why");
-    this.reason = document.getElementById("why").value;
+    this.loadValues("whyDescription", "why");
+    this.whyDescription = document.getElementById("why").value;
     this.loadValues("result", "whatIsChanging");
     this.result = document.getElementById("whatIsChanging").value;
     this.loadValues("backOutPlan", "backOutPlan");
@@ -431,15 +408,17 @@ class EntryPageComponent extends Component{
     this.loadValues("backOutMinutes", "backOutMinutes");
     this.backOutMinutes = document.getElementById("backOutMinutes").value;
     this.loadValues("start", "startDateInput");
-    this.startDate = document.getElementById("startDateInput");
+    this.startDate = document.getElementById("startDateInput").value;
     this.loadValues("end", "stopDateInput");
-    this.stopDate = document.getElementById("stopDateInput");
+    this.stopDate = document.getElementById("stopDateInput").value;
     this.checkRadioButton(getCookie("reasonType"));
     this.checkRadioButton(getCookie("changeType"));
     this.checkRadioButton(getCookie("devOps"));
     this.checkRadioButton(getCookie("dba"));
     this.checkRadioButton(getCookie("security"));
     this.checkRadioButton(getCookie("scheduling"));
+    this.checkRadioButton(getCookie("riskLevel"));
+    
    }
   
 
@@ -506,6 +485,26 @@ class EntryPageComponent extends Component{
                 <p className="radioP">Emergency</p>
               </label>
              </fieldset>
+
+
+             <fieldset className="radioButton">
+              <legend className="legendRadio">
+                Risk Level
+              </legend>
+              <label className= "labelRadio" >
+                <input className="inputRadio" type = "radio" name="riskLevel" value="Low" id="low"/>
+                <p className="radioP">Low</p>
+              </label>
+              <label className="labelRadio">
+                <input className="inputRadio" type = "radio" name="riskLevel" value="Medium" id="medium"/>
+                <p className="radioP">Medium</p>
+              </label>
+              <label className= "labelRadio" >
+                <input className="inputRadio" type = "radio" name="riskLevel" value="High" id="high"/>
+                <p className="radioP">High</p>
+              </label>
+             </fieldset>
+
              <fieldset className="radioButton">
               <legend className="legendRadio">
                 Other Needed Departments 
@@ -537,108 +536,7 @@ class EntryPageComponent extends Component{
              </fieldset>
         </Form>
         );
-
-
-
-  render() {
-    return (
-      <Form>
-        <fieldset>
-          <label className="labelInput" htmlFor="aId">
-            <input
-              className="inputLabelTopPage" id="applicationID" name="applicationID" rows="9" cols="50" onChange={e => this.handleValue(e, 0)} placeholder="Application ID" />
-            <p className="button">Three character ID of the application team implementing the change</p>
-          </label>
-          <label className="labelInput" htmlFor="descr">
-            <textarea id="description" name="description" rows="3" cols="30" onChange={e => this.handleValue(e, 1)} placeholder="Description"></textarea>
-            <p className="button">80 Character description of what the change is</p>
-          </label>
-          <label className="labelInput" htmlFor="why">
-            <textarea rows="3" cols="30" placeholder="Why" name="why" id="why" onChange={e => this.handleValue(e, 2)}></textarea>
-            <p className="button">Why is the change needed</p>
-          </label>
-        </fieldset>
-        <fieldset className="fs2">
-          <label className="labelInput" htmlFor="whatIs">
-            <input className="inputLabelTopPage" id="whatIsChanging" name="whatIsChanging" rows='9' cols='50' onChange={e => this.handleValue(e, 3)} placeholder="What is changing?" />
-            <p className="button">New version of software, server configuration changes, etc..</p>
-          </label>
-          <label className="labelInput" htmlFor="backOut">
-            <textarea rows="3" cols="30" placeholder="Back-Out Plan" id="backOutPlan" onChange={e => this.handleValue(e, 4)} name="backOutPlan"></textarea>
-            <p className="button">Description of what it takes to revert the change</p>
-          </label>
-          <label className="labelInput" htmlFor="backOutMins">
-            <input className="inputLabelTopPage" id="backOutMinutes" name="backOutMinutes" rows='9' cols='50' onChange={e => this.handleValue(e, 5)} placeholder="Back-Out Minutes" />
-            <p className="button">How long will it take to perform the back-out in minutes</p>
-          </label>
-        </fieldset>
-        <fieldset className="radioButton">
-          <legend className="legendRadio">
-            Reason Type
-          </legend>
-          <label className="labelRadio" >
-            <input className="inputRadio" type="radio" name="reasonType" value="Fix" id="fix" />
-            <p className="radioP">Fix</p>
-          </label>
-          <label className="labelRadio">
-            <input className="inputRadio" type="radio" name="reasonType" value="Enhancement" id="enhance" />
-            <p className="radioP">Enhancement</p>
-          </label>
-        </fieldset>
-        <fieldset className="radioButton">
-          <legend className="legendRadio">
-            Change Type
-          </legend>
-          <label className="labelRadio" >
-            <input className="inputRadio" type="radio" name="changeType" value="Planned" id="planned" />
-            <p className="radioP">Planned</p>
-          </label>
-          <label className="labelRadio">
-            <input className="inputRadio" type="radio" name="changeType" value="Unplanned" id="unplanned" />
-            <p className="radioP">Unplanned</p>
-          </label>
-          <label className="labelRadio" >
-            <input className="inputRadio" type="radio" name="changeType" value="Emergency" id="emergency" />
-            <p className="radioP">Emergency</p>
-          </label>
-        </fieldset>
-        <fieldset className="radioButton">
-          <legend className="legendRadio">
-            Other Needed Departments
-          </legend>
-          <div className="radioElements">
-            <input className="inputCheck" type="checkbox" name="devops" value="DevOps" id="changeTypeCheckBox" />
-            <p className="checkP">DevOps</p>
-            <input className="inputCheck" type="checkbox" name="dba" value="DBA" id="dba" />
-            <p className="checkP">DBA</p>
-            <input className="inputCheck" type="checkbox" name="security" value="Security" id="security" />
-            <p className="checkP">Security</p>
-            <input className="inputCheck" type="checkbox" name="scheduling" value="Scheduling" id="scheduling" />
-            <p className="checkP">DBA</p>
-          </div>
-        </fieldset>
-        <fieldset className="doubleStyle">
-          <div className="calDiv">
-            <legend className="legendCal">Change Window Start Date</legend>
-            <input type="datetime-local" className="inputCalender" id="startDateInput" />
-          </div>
-
-          <div className="calDiv">
-            <legend className="legendCal">Change Window Stop Date</legend>
-            <input type="datetime-local" className="inputCalender" id="stopDateInput" />
-          </div>
-        </fieldset>
-        <fieldset className="Submit">
-          <input type="submit" value="Submit" onClick={this.saveCookies} />
-
-        </fieldset>
-      </Form>
-    );
-
-  }
-
+    }
 }
-
-
 
 export default EntryPageComponent;
