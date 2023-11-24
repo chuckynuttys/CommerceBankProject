@@ -42,6 +42,8 @@ class LoginComponent extends Component {
 
             makeCookie("id", post.id);
             makeCookie("authorizationLevel", post.authorizationLevel);
+            makeCookie("username", post.username);
+            makeCookie("name", post.firstName + " " + post.lastName);
             console.log(document.cookie);
             this.props.handleSignIn(true);
           } else {

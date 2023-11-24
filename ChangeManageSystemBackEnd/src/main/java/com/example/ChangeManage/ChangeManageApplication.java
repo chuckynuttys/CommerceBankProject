@@ -1,13 +1,12 @@
 package com.example.ChangeManage;
 
-import com.example.ChangeManage.Controller.CMUserController;
-import com.example.ChangeManage.Controller.ChangeRequestController;
 import com.example.ChangeManage.Repository.CMUserRepository;
-import com.example.ChangeManage.Repository.ChangeRequestRepository;
 import com.example.ChangeManage.Service.CMUserService;
 import com.example.ChangeManage.Service.ChangeRequestService;
+import com.example.ChangeManage.Service.ReasonTypeService;
 import com.example.ChangeManage.domain.CMUser;
 import com.example.ChangeManage.domain.ChangeRequest;
+import com.example.ChangeManage.domain.ReasonType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 @SpringBootApplication
@@ -110,22 +110,32 @@ public class ChangeManageApplication {
 	}
 	@Bean
 	public CommandLineRunner demoChangeRequestTest(ChangeRequestService changeRequestService,
-												   CMUserService cmUserService) {
+												   CMUserService cmUserService,
+												   ReasonTypeService reasonTypeService) {
 
 		return args -> {
 			int j = 1;
 			int k = 1;
+			ReasonType reasonType = new ReasonType();
+			HashMap<String, Integer> map = new HashMap<>();
+			map.put("Fix", 0);
+			map.put("Enhancement", 0);
+			reasonType.setMap(map);
+			reasonTypeService.create(reasonType);
 			for (int i = 1; i <= 20; i++) {
 				ChangeRequest changeRequest = new ChangeRequest();
-				changeRequest.setApplicationId(i);
+				changeRequest.setApplicationId("ABC");
 				changeRequest.setDescription("This is a sentence that is 80 characters long " +
 						"and includes spaces and periods...");
-				changeRequest.setReason("Fix");
-				if (Objects.equals(changeRequest.getReason(), "Fix")) {
-					changeRequest.setReasonNumber(j++);
+
+
+				if (i < 11) {
+					changeRequest.setReason("Fix");
 				} else {
-					changeRequest.setReasonNumber(k++);
+					changeRequest.setReason("Enhancement");
 				}
+
+
 				changeRequest.setChangeType("Emergency");
 				changeRequest.setWhyDescription("This is a sentence that is 80 characters long " +
 						"and includes spaces and periods...");
@@ -150,7 +160,7 @@ public class ChangeManageApplication {
 
 				if (i > 10) {
 					changeRequest.setImplementationStatus("Approved");
-					changeRequest.setImplementationDate("October 1st");
+					changeRequest.setImplementationDate("October 1st, 2023");
 					changeRequest.setImplementationTime("3:00 PM");
 					changeRequest.setArchivedStatus(true);
 				}
@@ -172,6 +182,7 @@ public class ChangeManageApplication {
 				}
 
 			}
+
 
 //			// non-Archived Change Requests (10; 2 per user)
 //			ChangeRequest newChangeRequest = new ChangeRequest(1, 1,

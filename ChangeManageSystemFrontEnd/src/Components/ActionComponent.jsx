@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import user from "../files/Functions/UserFile";
-import { getCookie } from "../files/Functions/CookieManagement";
+import { getCookie, makeCookie } from "../files/Functions/CookieManagement";
 import { left } from "@popperjs/core";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -42,6 +42,11 @@ class ActionComponent extends Component {
         const params = {
             stateLevel: this.state.stateLevel,
         }
+        const params2 = {
+            archivedStatus: false,
+            id: this.state.changeId,
+        }
+        let updateFetch = true;
 
         if (e.target.value == "Freeze") {
             // Freeze 
@@ -70,30 +75,123 @@ class ActionComponent extends Component {
                 this.state.reload = false;
             }
 
-        } else if (e.target.value == "Deny") {
-            // Deny & Archive
-            let confirm = window.confirm("Are you sure you want to Deny the Change Request?");
-            if (confirm) {
-                params.stateLevel = "Denied";
-                params.archivedStatus = "true";
-                this.state.reload = true;
+        
+            } else if (e.target.value == "Edit") {
+                // Edit function here
+                // Should set some variable to be checked in Entry page.
+                // If variable is true, make a fetch request for a specific id, input the results into the fields,
+                // then repeat the process as if a regular Entry page form.
+                
+                updateFetch = false;
             } else {
-                this.state.reload = false;
+                // Unfreeze
+                params.stateLevel = "Open";
+                this.state.reload = true;
             }
+            if (updateFetch) {
+                this.fetchRequest(params);
+            } else {
+                const searchParams = new URLSearchParams(params2);
+                fetch(`http://localhost:8080/changerequests?` + searchParams.toString(), { method: "GET"})
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                  makeCookie("appID", res.applicationId);
+                  makeCookie("description", res.description);
+                  makeCookie("whyDescription", res.whyDescription);
+                  makeCookie("result", res.whatDescription);
+                  makeCookie("backOutPlan", res.backOutPlan);
+                  makeCookie("backOutMinutes", res.backOutMinutes);
+                  makeCookie("reasonType", res.reason);
+                  makeCookie("changeType", res.changeType);
+                  console.log(res.otherNeededDepartments);
+                  if (res.otherNeededDepartments.indexOf(", ") >= 0) {
+                    const array = res.otherNeededDepartments.split(", ");
+                    for (let i = 0; i < array.length(); i++) {
+                        if (array[i] == "DevOps") {
+                            makeCookie("devOps", array[i]);
+                        } else if (array[i] == "DBA") {
+                            makeCookie("dba", array[i]);
+                        } else if (array[i] == "security") {
+                            makeCookie("security", array[i]);
+                        } else {
+                            makeCookie("scheduling", array[i]);
+                        }
+                    }
+                  } else {
+                    switch (res.otherNeededDepartments) {
+                        case "DevOps":
+                            makeCookie("devOps", res.otherNeededDepartments);
+                            break;
+                        case "DBA":
+                            makeCookie("dba", res.otherNeededDepartments);
+                            break;
+                        case "Security":
+                            makeCookie("security", res.otherNeededDepartments);
+                            break;
+                        case "Scheduling":
+                            makeCookie("scheduling", res.otherNeededDepartments);
+                            break;
+                    }
+                  }
+                  
+                  makeCookie("changeDepartment", res.otherNeededDepartments);
+                  let startTime = res.changeWindowStartTime;
+                  let startDate = res.changeWindowStartDate;
+                  startTime = startTime.split(" ");
+                    let time = startTime[0].split(":");
+                    const startHour = convertDateToDateValue(time[0], "Hour", startTime[1]);
+                    const startMinute = convertDateToDateValue(time[1], "Minute", startTime[1]);
 
-        } else if (e.target.value == "Edit") {
-            // Edit function here
-            // Should set some variable to be checked in Entry page.
-            // If variable is true, make a fetch request for a specific id, input the results into the fields,
-            // then repeat the process as if a regular Entry page form.
+                    // Splits startDate and converts it into a proper Date value for Month, Day, Year
+                    startDate = startDate.split(" ");
 
+                    const startMonth = convertDateToDateValue(startDate[0], "Month", startTime[1]);
+                    const startDay = convertDateToDateValue(startDate[1], "Day", startTime[1]);
+                    const startYear = convertDateToDateValue(startDate[2], "Year", startTime[1]);
 
-        } else {
-            // Unfreeze
-            params.stateLevel = "Open";
-            this.state.reload = true;
-        }
-        this.fetchRequest(params);
+                  let stopTime = res.changeWindowStopTime;
+                  let stopDate = res.changeWindowStopDate;
+                  stopTime = stopTime.split(" ");
+                  let time2 = stopTime[0].split(":");
+                  const stopHour = convertDateToDateValue(time2[0], "Hour", stopTime[1]);
+                  const stopMinute = convertDateToDateValue(time2[1], "Minute", stopTime[1]);
+                  stopDate = stopDate.split(" ");
+  
+                  const stopMonth = convertDateToDateValue(stopDate[0], "Month", stopTime[1]);
+                  const stopDay = convertDateToDateValue(stopDate[1], "Day", stopTime[1]);
+                  const stopYear = convertDateToDateValue(stopDate[2], "Year", stopTime[1]);
+                  // Creates three new Dates, correctly putting startDateAndTime, stopDateAndTime, currentDateandTime into comparable variables.
+                  let startDateAndTime = new Date(startYear, startMonth, startDay, startHour, startMinute);
+                  let stopDateAndTime = new Date(stopYear, stopMonth, stopDay, stopHour, stopMinute);
+                  
+                  
+
+                  let offset = startDateAndTime.getTimezoneOffset() * 60 * 1000;
+                  let localDate = startDateAndTime - offset;
+                  let localDateObj = new Date(localDate);
+                  let isoString = localDateObj.toISOString();
+                  isoString = isoString.slice(0,19);
+                  console.log(isoString);
+
+                  makeCookie("start", isoString);
+
+                  let offset2  = stopDateAndTime.getTimezoneOffset() * 60 * 1000;
+                  let localDate2 = stopDateAndTime - offset2;
+                  let localDateObj2 = new Date(localDate2);
+                  let isoString2 = localDateObj2.toISOString();
+                  isoString2 = isoString2.slice(0,19);
+                  console.log(isoString2);
+                  makeCookie("end", isoString2);
+                  makeCookie("editChangeRequest", true);
+                  makeCookie("changeRequestId", res.changeId);
+                  
+                  makeCookie("reasonNo", res.reasonNumber);
+                  makeCookie("riskLevel", res.riskLevel);
+
+                  this.props.handleSignIn(true);
+                });
+            }
 
     }
 
@@ -144,6 +242,9 @@ class ActionComponent extends Component {
                 // Sets the Start Time and Dates as their raw values not as Date Values
                 let startTime = this.props.changeWindowStartTime;
                 let startDate = this.props.changeWindowStartDate;
+                console.log(this.props);
+                console.log(this.props.changeWindowStartTime);
+                console.log(startTime);
 
                 // Splits startTime and converts it into a proper Date value for Hours and Minutes
                 startTime = startTime.split(" ");
@@ -153,9 +254,12 @@ class ActionComponent extends Component {
 
                 // Splits startDate and converts it into a proper Date value for Month, Day, Year
                 startDate = startDate.split(" ");
+                
 
+                let startDay = startDate[1].split(",");
+                
                 const startMonth = convertDateToDateValue(startDate[0], "Month", startTime[1]);
-                const startDay = convertDateToDateValue(startDate[1], "Day", startTime[1]);
+                startDay = convertDateToDateValue(startDay[0], "Day", startTime[1]);
                 const startYear = convertDateToDateValue(startDate[2], "Year", startTime[1]);
 
                 // Repeats the same logic for stop Time and Date as for start Time and Date
@@ -168,17 +272,23 @@ class ActionComponent extends Component {
                 const stopMinute = convertDateToDateValue(time2[1], "Minute", stopTime[1]);
                 stopDate = stopDate.split(" ");
 
+                let stopDay = stopDate[1].split(",");
+
                 const stopMonth = convertDateToDateValue(stopDate[0], "Month", stopTime[1]);
-                const stopDay = convertDateToDateValue(stopDate[1], "Day", stopTime[1]);
+                stopDay = convertDateToDateValue(stopDay[0], "Day", stopTime[1]);
                 const stopYear = convertDateToDateValue(stopDate[2], "Year", stopTime[1]);
+                
                 // Creates three new Dates, correctly putting startDateAndTime, stopDateAndTime, currentDateandTime into comparable variables.
                 const startDateAndTime = new Date(startYear, startMonth, startDay, startHour, startMinute);
                 const stopDateAndTime = new Date(stopYear, stopMonth, stopDay, stopHour, stopMinute);
                 const currentDateandTime = new Date(this.state.date);
+                console.log(startDateAndTime);
+                console.log(stopDateAndTime);
+                console.log(currentDateandTime);
 
                 // Compares to see if the current date is between the dates using getTime()
                 if (currentDateandTime.getTime() > startDateAndTime.getTime() && currentDateandTime.getTime() < stopDateAndTime.getTime()) {
-                    alert("You selected: " + currentDateandTime.toUTCString() + "\nAnd it is between Change Request time range.");
+                    alert("You selected: " + currentDateandTime.toLocaleString() + "\nAnd it is between Change Request time range.");
                     this.state.reload = true;
 
                     // Splits the fields up to then do the reverse of what was done in convertDateToDateValue()
@@ -209,7 +319,7 @@ class ActionComponent extends Component {
                     }
                     this.fetchRequest(params);
                 } else {
-                    alert("You selected: " + currentDateandTime.toUTCString() + "\nAnd it is not between the Change Request time range, please try again.");
+                    alert("You selected: " + currentDateandTime.toLocaleString() + "\nAnd it is not between the Change Request time range, please try again.");
                     this.state.reload = false;
                 }
 
