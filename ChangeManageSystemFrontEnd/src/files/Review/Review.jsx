@@ -238,7 +238,7 @@ const Review = () => {
           <div id="u444-1" class="ax_default box_1 u444" data-label="Full Name" style={{ width: '120px', height: '30px', left: '120px', top: '0px', visibility: 'inherit' }}>
             <div id="u444-1_div" class="u444_div" style={{ width: '120px', height: '30px', visibility: 'inherit' }}></div>
             <div id="u444-1_text" class="text u444_text" style={{ visibility: 'inherit' }}>
-              <p><span>{getCookie("name")}</span></p>
+              <p><span>{getCookie("username")}</span></p>
             </div>
           </div>
 
@@ -291,7 +291,7 @@ const Review = () => {
           <div id="u451-1" class="ax_default box_1 u451" data-label="Who" style={{ width: '120px', height: '30px', left: '1080px', top: '0px', visibility: 'inherit' }}>
             <div id="u451-1_div" class="u451_div" style={{ width: '120px', height: '30px', visibility: 'inherit' }}></div>
             <div id="u451-1_text" class="text u451_text" style={{ visibility: 'inherit' }}>
-              <p><span>{getCookie("name")}</span></p>
+              <p><span>{getCookie("username")}</span></p>
             </div>
           </div>
 
