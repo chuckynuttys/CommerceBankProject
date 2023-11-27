@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { getCookie, deleteCookie } from "../files/Functions/CookieManagement";
+import { getCookie, deleteCookie, makeCookie } from "../files/Functions/CookieManagement";
 import { convertDateValueToDate } from '../files/Functions/ConvertDateValueToDate';
 
 class EntryPageComponent extends Component{
@@ -151,26 +151,16 @@ class EntryPageComponent extends Component{
     }
 
     saveCookies = (e) => {
-        document.cookie = "appID=" + this.removeQuote(this.appId) + "; path=/;";
-        document.cookie = "description=" + this.removeQuote(this.description) + "; path=/";
-        document.cookie = "whyDescription=" + this.removeQuote(this.whyDescription) + "; path=/;";
-        document.cookie = "result=" + this.removeQuote(this.result) + "; path=/;";
-        document.cookie = "backOutPlan=" + this.removeQuote(this.backOutPlan) + "; path=/;";
-        document.cookie = "backOutMinutes=" + this.removeQuote(this.backOutMinutes) + "; path=/;";
-        document.cookie = "reasonType= " + this.removeQuote(this.reasonType) + "; path=/;";
-        document.cookie = "changeType= " + this.removeQuote(this.changeType) + "; path=/;";
-        document.cookie = "changeDepartment= " + this.removeQuote(this.changeDepartment) + "; path=/;";
-        document.cookie = "startDate= " + this.removeQuote(this.startDate) + "; path=/;";
-        document.cookie = "stopDate= " + this.removeQuote(this.stopDate) + "; path=/;";
-        document.cookie = "startTime= " + this.removeQuote(this.startTime) + "; path=/;";
-        document.cookie = "stopTime= " + this.removeQuote(this.stopTime) + "; path=/;";
-        document.cookie = "start= " + this.removeQuote(this.origStart) + "; path=/;";
-        document.cookie = "end= " + this.removeQuote(this.origEnd) + "; path=/;";
-        document.cookie = "devOps= " + this.removeQuote(this.devOps) + "; path=/;";
-        document.cookie = "dba= " + this.removeQuote(this.dba) + "; path=/;";
-        document.cookie = "security= " + this.removeQuote(this.secur) + "; path=/;";
-        document.cookie = "scheduling= " + this.removeQuote(this.sched) + "; path=/;";
-        document.cookie = "riskLevel= " + this.removeQuote(this.riskLevel) + "; path=/;";
+      let x = 0;
+      const values = [this.appId, this.description, this.whyDescription, this.result, this.backOutPlan, this.backOutMinutes,
+                      this.reasonType, this.changeType, this.changeDepartment, this.startDate, this.stopDate, this.startTime, this.stopTime,
+                      this.origStart, this.origEnd, this.devOps, this.dba, this.secur, this.sched, this.risklevel];
+      let list = "appID,description,whyDescription,result,backOutPlan,backOutMinutes,reasonType,changeType,changeDepartment,startDate" +
+                 "stopDate,startTime,stopTime,start,end,devOps,dba,security,scheduling,riskLevel";
+      const names = list.split(",");
+      for (x = 0; x < values.length; x++) {
+        makeCookie(names[x], this.removeQuote(values[x]));
+      }
     }
 
     execute=(e)=>{   //should be working
@@ -268,29 +258,14 @@ class EntryPageComponent extends Component{
    
 
    componentDidMount (){
+    let x = 0;
+    let list = "appID,description,whyDescription,result,backOutPlan,backOutMinutes,reasonType,changeType,changeDepartment,startDate" +
+                 "stopDate,startTime,stopTime,start,end,devOps,dba,security,scheduling,riskLevel,editChangeRequest";
+    let names = list.split(",");
     if (getCookie("editChangeRequest") == false) {
-      deleteCookie("appID", getCookie("appID"), "localhost");
-      deleteCookie("description", getCookie("description"), "localhost");
-      deleteCookie("whyDescription", getCookie("whyDescription"), "localhost");
-      deleteCookie("result", getCookie("result"), "localhost");
-      deleteCookie("backOutPlan", getCookie("backOutPlan"), "localhost");
-      deleteCookie("backOutMinutes", getCookie("backOutMinutes"), "localhost");
-      deleteCookie("start", getCookie("start"), "localhost");
-      deleteCookie("end", getCookie("end"), "localhost");
-      deleteCookie("reasonType", getCookie("reasonType"), "localhost");
-      deleteCookie("changeType", getCookie("changeType"), "localhost");
-      deleteCookie("changeDepartment", getCookie("changeDepartment"), "localhost");
-      deleteCookie("startDate", getCookie("startDate"), "localhost");
-      deleteCookie("stopDate", getCookie("stopDate"), "localhost");
-      deleteCookie("startTime", getCookie("startTime"), "localhost");
-      deleteCookie("stopTime", getCookie("stopTime"), "localhost");
-      deleteCookie("devOps", getCookie("devOps"), "localhost");
-      deleteCookie("dba", getCookie("dba"), "localhost");
-      deleteCookie("security", getCookie("security"), "localhost");
-      deleteCookie("scheduling", getCookie("scheduling"), "localhost");
-      deleteCookie("riskLevel", getCookie("riskLevel"), "localhost");
-      deleteCookie("editChangeRequest", getCookie("editChangeRequest"), "localhost");
-    
+      for (x = 0; x < names.length;x++) {
+          deleteCookie(names[x], getCookie(names[x]), "localhost");
+      }
   }
     this.loadValues("appID", "applicationID");
     this.appId = document.getElementById("applicationID").value;
