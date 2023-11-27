@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from "../files/Functions/CookieManagement";
+import { getCookie, deleteCookie } from "../files/Functions/CookieManagement";
 import { convertDateValueToDate } from '../files/Functions/ConvertDateValueToDate';
 
 class EntryPageComponent extends Component{
@@ -268,6 +268,30 @@ class EntryPageComponent extends Component{
    
 
    componentDidMount (){
+    if (getCookie("editChangeRequest") == false) {
+      deleteCookie("appID", getCookie("appID"), "localhost");
+      deleteCookie("description", getCookie("description"), "localhost");
+      deleteCookie("whyDescription", getCookie("whyDescription"), "localhost");
+      deleteCookie("result", getCookie("result"), "localhost");
+      deleteCookie("backOutPlan", getCookie("backOutPlan"), "localhost");
+      deleteCookie("backOutMinutes", getCookie("backOutMinutes"), "localhost");
+      deleteCookie("start", getCookie("start"), "localhost");
+      deleteCookie("end", getCookie("end"), "localhost");
+      deleteCookie("reasonType", getCookie("reasonType"), "localhost");
+      deleteCookie("changeType", getCookie("changeType"), "localhost");
+      deleteCookie("changeDepartment", getCookie("changeDepartment"), "localhost");
+      deleteCookie("startDate", getCookie("startDate"), "localhost");
+      deleteCookie("stopDate", getCookie("stopDate"), "localhost");
+      deleteCookie("startTime", getCookie("startTime"), "localhost");
+      deleteCookie("stopTime", getCookie("stopTime"), "localhost");
+      deleteCookie("devOps", getCookie("devOps"), "localhost");
+      deleteCookie("dba", getCookie("dba"), "localhost");
+      deleteCookie("security", getCookie("security"), "localhost");
+      deleteCookie("scheduling", getCookie("scheduling"), "localhost");
+      deleteCookie("riskLevel", getCookie("riskLevel"), "localhost");
+      deleteCookie("editChangeRequest", getCookie("editChangeRequest"), "localhost");
+    
+  }
     this.loadValues("appID", "applicationID");
     this.appId = document.getElementById("applicationID").value;
     this.loadValues("description", "description");
