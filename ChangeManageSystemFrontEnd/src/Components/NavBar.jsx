@@ -50,21 +50,17 @@ const NavBar = (props) => {
     } else if (props.navBarNumber == 2) {
         // NavBar for Review
         return (
-            <div>
-
-                <div id="u478" className="ax_default button" style={{ cursor: 'pointer' }} onClick={() => handleClick("ListScreenApp")}>
-                    <div id="u478_div" className=""></div>
-                    <div id="u478_text" className="text ">
-                        <p><span>View Change Requests</span></p>
-                    </div>
+            <div className="doubleNavBarGrid">
+                <div className='emptyText'>&nbsp;</div>
+                <div className="twoTotal" style={{ cursor: 'pointer' }} onClick={() => handleClick("ListScreenApp")}>
+                        <p><span  className='navText'>View Change Requests</span></p>
+        
                 </div>
-
-                <div id="u479" className="ax_default button" style={{ cursor: 'pointer' }} onClick={() => handleClick("Login")}>
-                    <div id="u479_div" className=""></div>
-                    <div id="u479_text" className="text ">
-                        <p><span>Log out</span></p>
-                    </div>
+                <div className='emptyText'>&nbsp;</div>
+                <div className="twoTotal" style={{ cursor: 'pointer' }} onClick={() => handleClick("Login")}>
+                        <p><span  className='navText'>Log Out</span></p>
                 </div>
+                <div className='emptyText'>&nbsp;</div>
             </div>
         );
         //Stuff for View Change Requests, Logout

@@ -1,6 +1,7 @@
 body {
   margin: 0px;
   background-color: rgba(214, 210, 196, 1);
+  -ms-overflow-style: none;
   background-image: none;
   position: relative;
   left: -0px;

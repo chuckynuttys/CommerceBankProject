@@ -1,4 +1,5 @@
 .navbar {
+  size:auto;
   width: 80%;
   height: 1rem 0;
   background-color: rgba(242, 242, 242, 1);
@@ -34,11 +35,43 @@
   border-top: 3px solid #4fa800;
 }
 
-.navtext {
+.navText {
   margin: auto;
   text-align: center;
   font-family: "cera_proregular", Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #107052;
+}
+
+.emptyText{
+  background-color: #eee;
+  margin-top: 5px;
+}
+.doubleNavBarGrid{
+  display: grid;
+  grid-template-columns: 70px 187px 1fr 187px 70px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0%;
+}
+.twoTotal{
+  margin-top: 5px;
+  width: 187;
+  border-top: 3px solid transparent;
+  display: inline-block;
+  position: relative;
+  padding: 10px;
+  background-color: #dddddd;
+  text-align: center;
+}
+.twoTotal:hover {
+  width: auto;
+  display: inline-block;
+  position: relative;
+  background-color: rgb(167, 166, 166);
+  border-top: 3px solid #4fa800;
 }

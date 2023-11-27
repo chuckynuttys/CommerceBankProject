@@ -411,7 +411,6 @@ class EntryPageComponent extends Component{
     this.startDate = document.getElementById("startDateInput").value;
     this.loadValues("end", "stopDateInput");
     this.stopDate = document.getElementById("stopDateInput").value;
-    this.checkRadioButton(getCookie("reasonType"));
     this.checkRadioButton(getCookie("changeType"));
     this.checkRadioButton(getCookie("devOps"));
     this.checkRadioButton(getCookie("dba"));
