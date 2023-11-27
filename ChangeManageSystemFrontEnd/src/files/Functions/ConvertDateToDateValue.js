@@ -95,8 +95,10 @@ function convertDateToDateValue(date, type, amOrpm) {
           return 29;
         case "30th":
           return 30;
-        default:
+        case "31st":
           return 31;
+        default:
+          return null;
       }
     case "Hour":
       date = parseInt(date);
