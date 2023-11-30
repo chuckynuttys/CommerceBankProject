@@ -258,7 +258,7 @@ textarea {
 
 }
 
-input[type="submit"] {
+.entrySubmit {
   display: block;
   width: 15em;
   margin: 1em auto;
@@ -274,7 +274,7 @@ input[type="submit"] {
 
 }
 
-input[type="submit"]:hover {
+.entrySubmit:hover {
   background-color: black;
   border: 2px solid #000000;
   cursor: pointer;

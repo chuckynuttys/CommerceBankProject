@@ -19,65 +19,27 @@ const Login = () => {
 
   return (
     <div>
-      <div id="base" className="">
-
-        <div id="u0" className="ax_default image">
-          <img id="u0_img" className="img " src={backgroundImg} />
-          <div id="u0_text" className="text ">
-            <p></p>
+      <div id="base" className="container">
+        <div className="borderBox">
           </div>
-        </div>
+        <div className="box">
+        <img id="u453_img" className="img " src={logo} />
 
-        <div id="u1" className="ax_default box_2">
-          <div id="u1_div" className=""></div>
-          <div id="u1_text" className="text ">
-            <p></p>
+          <div className="heading">
+          <p><span>Login to Change Request System</span></p>
           </div>
-        </div>
-
-        <div id="u2" className="ax_default box_3">
-          <div id="u2_div" className=""></div>
-          <div id="u2_text" className="text ">
-            <p></p>
-          </div>
-        </div>
-
-        <div id="u3" className="ax_default heading_1">
-          <div id="u3_div" className=""></div>
-          <div id="u3_text" className="text ">
-            <p><span>Log In to Change Request System</span></p>
-          </div>
-        </div>
-
-        <div id="u4" className="ax_default image">
-          <img id="u4_img" className="img " src={logo} />
-          <div id="u4_text" className="text ">
-            <p></p>
-          </div>
-        </div>
+            
+         
 
         <LoginComponent handleSignIn={handleSignIn} />
 
-        {/* Upper Label UserID */}
-        <div id="u7" className="ax_default shape ax_default_hidden selected" data-label="Upper Label" style={{ display: 'none', visibility: 'hidden' }}>
-          <div id="u7_div" className="selected"></div>
-          <div id="u7_text" className="text ">
-            <p><span>UserID</span></p>
-          </div>
-        </div>
+        
 
         {/* Upper Label Password */}
         <div id="u11" className="ax_default shape ax_default_hidden selected" data-label="Upper Label" style={{ display: 'none', visibility: 'hidden' }}>
           <div id="u11_div" className="selected"></div>
           <div id="u11_text" className="text ">
             <p><span>Password</span></p>
-          </div>
-        </div>
-
-        <div id="u14" className="ax_default paragraph ax_default_hidden" data-label="Password Required" style={{ display: 'none', visibility: 'hidden' }}>
-          <div id="u14_div" className=""></div>
-          <div id="u14_text" className="text ">
-            <p><span>This field is required.</span></p>
           </div>
         </div>
 
@@ -103,7 +65,8 @@ const Login = () => {
         </div>
       </div>
       <script src="resources/scripts/axure/ios.js"></script>
-    </div>
+      </div>
+      </div>
   );
 };
 

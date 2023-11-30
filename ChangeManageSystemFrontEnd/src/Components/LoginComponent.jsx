@@ -72,30 +72,25 @@ class LoginComponent extends Component {
   }
   render() {
     return (
-      <Form onSubmit={this.requestUser}>
-        <div id="u6" class="ax_default text_field" data-label="Input Field">
-          <div id="u6_div" class=""></div>
-          <input id="u6_input" type="text" class="u6_input" onChange={this.changeValue} name="username" placeholder='UserID' />
-        </div>
+      <Form className= "formLogin" onSubmit={this.requestUser}>
+        <div className='inputBox'>
+          <input className="inputText" onChange={this.changeValue} name="username" placeholder='UserID' />
+      </div>
         {this.state.incorrectUserId && (
           <div className="error-message">Incorrect userId</div>
         )}
 
 
-        <div id="u10" class="ax_default text_field" data-label="Input Field">
-          <div id="u10_div" class=""></div>
-          <input id="u10_input" type="text" class="u10_input" onChange={this.changeValue} name="password" placeholder='Password' />
+        <div className='inputBox'>
+          <input type="text" className="inputText" onChange={this.changeValue} name="password" placeholder='Password' />
         </div>
         {this.state.incorrectPassword && (
           <div className="error-message">Incorrect Password</div>
         )}
 
-        <button id="u13" class="ax_default primary_button" style={{ cursor: 'pointer' }} type="submit">
-          <div id="u13_div" class=""></div>
-          <div id="u13_text" class="text ">
-            <p><span>Log In</span></p>
-          </div>
-        </button>
+<div className='inputBox'>
+<input className="loginSubmit" type="submit" value="Login" onClick={this.execute} />
+</div>
       </Form>
     );
   }

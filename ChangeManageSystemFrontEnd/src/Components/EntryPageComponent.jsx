@@ -427,7 +427,7 @@ class EntryPageComponent extends Component{
                 </div>
               </fieldset>
              <fieldset className="Submit">
-             <input type="submit" value="Submit" onClick={this.execute} /> 
+             <input className="entrySubmit" type="submit" value="Submit" onClick={this.execute} /> 
              </fieldset>
         </Form>
         );
