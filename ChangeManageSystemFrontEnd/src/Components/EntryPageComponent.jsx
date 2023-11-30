@@ -4,7 +4,7 @@ import { Formik, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { getCookie, deleteCookie } from "../files/Functions/CookieManagement";
 import { convertDateValueToDate } from '../files/Functions/ConvertDateValueToDate';
-
+import logo from '../Images/Logo.png';
 class EntryPageComponent extends Component{
     
     constructor(values) {
@@ -321,7 +321,11 @@ class EntryPageComponent extends Component{
     render() { 
         return (
         <Form>
-          <fieldset>
+          <div className='entryContainer'>
+            <div className='backGroundItem'>
+          <h1 className = 'imageContainer'> <img className = "logo" src={logo} alt="logo" /> </h1>
+             <h2 className='h2'>Change Request Form</h2>
+              <fieldset className='fs1'>
               <label className= "labelInput" htmlFor="aId">
               <input 
               className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" defaultValue="" onChange={e => this.handleValue(e, 0, "applicationID") } placeholder="Application ID" />
@@ -350,6 +354,7 @@ class EntryPageComponent extends Component{
                 <p className = "button">How long will it take to perform the back-out in minutes</p>
               </label>
              </fieldset>
+             <div className = 'radioButtonContainer'>
              <fieldset className="radioButton">
               <legend className="legendRadio">
                 Reason Type 
@@ -415,6 +420,7 @@ class EntryPageComponent extends Component{
               <p className="checkP">Scheduling</p>
               </div>
              </fieldset>
+             </div>
              <fieldset className="doubleStyle">
               <div className="calDiv">
               <legend className="legendCal">Change Window Start Date</legend>
@@ -429,6 +435,8 @@ class EntryPageComponent extends Component{
              <fieldset className="Submit">
              <input className="entrySubmit" type="submit" value="Submit" onClick={this.execute} /> 
              </fieldset>
+             </div>
+             </div>
         </Form>
         );
     }

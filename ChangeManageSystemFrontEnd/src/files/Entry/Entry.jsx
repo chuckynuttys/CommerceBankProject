@@ -19,12 +19,8 @@ const Entry = () => {
   return (
     <div>
     <NavBar navBarNumber={1}/>
-          <div className="menu">
-             <h1> <img className = "logo" src={logo} alt="logo" /> </h1>
-             <h2>Change Request Form</h2>
              <EntryPageComponent execute={execute}/>
-          </div>
-          </div>
+    </div>
   );
 };
 export default Entry;

@@ -4,7 +4,9 @@
   margin-left: auto;
   margin-right: auto;
 }
-
+P{
+  text-align: left;
+}
 .multiplechoicediv {
   width: 100%;
   height: 100%;
@@ -15,9 +17,20 @@
   background-size: cover;
   z-index: -1;
 }
+.entryContainer{
+  display: grid;
+  grid-template-columns: 342px 852px 327px;
+  height: 780px;
+}
 
-h1 {
-  margin-top: 2px;
+.imageContainer {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  display: block;
+  align-self: start;
+  justify-self: center;
 }
 .form{
   -ms-overflow-style: none;
@@ -26,20 +39,16 @@ h1 {
   height: 100%;
 }
 
-.menu {
-  width: 80%;
-  background-color: rgba(242, 242, 242, 1);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  padding-right: 20px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  max-width: 900px;
-  overflow: hidden;
-  height: 100%;
-  overflow-y: hidden;
-  height: 100%;
+.backGroundItem{
+  display: grid;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-template-columns: repeat(2, 188px)
+  100px 188px 188px;
+  grid-template-rows: 130px 30px 
+  repeat(2, 110px);
+  background-color: #f2f2f2;
+  max-height: 780px;
 }
 
 img {
@@ -49,84 +58,52 @@ img {
 }
 
 .fs1 {
-  display: block;
-  position: relative;
-  border: none;
-  padding-top: 0px;
-  margin-right: auto;
-  padding-left: 5%;
-  margin: auto;
-  height: auto;
-  float: left;
-  margin-bottom: 0;
-  width: 40%;
-  padding-left: 5%;
-
+grid-row-start: 3;
+grid-row-end: 8;
+grid-column-start: 1;
+grid-column-end: 3;
+border: none;
 }
 
-fieldset {
-  display: block;
-  position: relative;
-  border: none;
-  padding-top: 0px;
-  margin-right: auto;
-  padding-right: 0;
-  margin: auto;
-  height: auto;
-  float: left;
-  margin-bottom: 0;
 
-}
 
 .fs2 {
-  float: right;
-  position: right;
-  padding: 0%;
-  padding-right: 5%;
-  width: 40%;
-  margin-bottom: 10px;
+display: block;
+grid-row-start: 3;
+grid-row-end: 8;
+grid-column-start: 4;
+grid-column-end: 6;
+border: none;
 }
 
-h2 {
+.h2 {
+  display: block;
+  justify-self: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
   font-size: 28;
   font-weight: bold;
   font-family: Arial;
-  padding-bottom: 1%;
   margin: 0%;
   color: rgb(121, 121, 121);
 }
-
+.labelInput:first-child{
+  margin-top: 0px;
+}
 .labelInput {
   display: block;
-  margin: 0.7rem 0;
   font-size: 12px;
-  margin-right: 0px;
-  margin-top: 25px;
-  margin-bottom: 0px;
-  height: 120px;
-  width: 100%;
-
-}
-
-.labelInput:first-of-type {
-  display: block;
-  margin: 0.7rem 0;
-  font-size: 12px;
-  margin-right: 0px;
   margin-top: 30px;
-  margin-bottom: 0px;
-  height: 100px;
   width: 100%;
-
 }
 
 .inputLabelTopPage {
-  padding: 5%;
   font-size: 16px;
-  top: 0;
   display: block;
   width: 100%;
-  position: relative;
+  height: 50px;
   background-color: rgb(231, 231, 231);
   border: 1px solid rgb(231, 231, 231);
   font-family: "Roboto", sans-serif;
@@ -134,9 +111,7 @@ h2 {
 }
 
 .inputRadio {
-  position: relative;
   display: inline-block;
-  margin-right: auto;
   size: 45%;
   width: 8%;
   margin-top: 0px;
@@ -145,9 +120,7 @@ h2 {
 }
 
 .button {
-  margin-top: 8px;
-  font-size: 12px;
-  margin-bottom: auto;
+  
   width: 80%;
 }
 
@@ -156,6 +129,7 @@ textarea {
   border: 1px solid rgb(231, 231, 231);
   padding: 5%;
   top: 10px;
+  height: 84px;
   width: 100%;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
@@ -163,18 +137,20 @@ textarea {
 }
 
 .legendRadio {
+  align-self: center;
   font-size: 17 px;
   color: rgb(121, 121, 121);
   font-weight: lighter;
   font-family: 'Roboto';
-  margin-bottom: 0%;
   text-align: center;
+  border: none;
 }
 
 .labelRadio {
   display: inline-block;
   width: 100%;
-  margin-left: 30%;
+  height: 20px;
+  align-self: start;
 }
 
 .redio-wrap label {
@@ -188,23 +164,27 @@ textarea {
   margin-right: 40px;
 }
 
+.radioButtonContainer{
+  display: grid;
+  grid-row-start: 8;
+  grid-row-end: 9;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .radioButton {
-  display: inline-block;
-  width: 19%;
-  height: auto;
-  margin-bottom: -12px;
-  padding-bottom: 0%;
-  padding-left: 10px;
-  padding-right: 10px;
+  display: grid;
+  text-align: left;
+  border: none;
+  align-items: start;
 }
 
 .radioP {
-  position: relative;
   display: inline-block;
   left: 0px;
-  margin-bottom: 0%;
   margin-left: 4px;
-  margin-top: 0px;
   size: auto;
   width: auto;
   font-size: 20px;
@@ -241,37 +221,31 @@ textarea {
 }
 
 .inputCalender {
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  margin-left: 30%;
+  width: 55%;
+  justify-self: center;
+  align-self: center;
+  padding: .5%;
+  
 }
 
 .doubleStyle {
-  width: 100%;
-  height: 50px;
-  margin-left: auto;
-  margin-bottom: -17px;
-  padding-bottom: 0px;
-  padding-right: 20px;
-  margin-top: 2%;
-
+ grid-row-start: 9;
+ grid-row-end: 10;
+ grid-column-start: 1;
+ grid-column-end: 6;
+ border: none;
 }
 
 .entrySubmit {
   display: block;
   width: 15em;
-  margin: 1em auto;
-  margin-bottom: 0;
-  margin-top: 3%;
-  height: auto;
   font-size: 1.1rem;
   font-weight: bold;
   font-family: Arial;
   color: rgb(255, 255, 255);
   background-color: #006747;
   border: 2px solid #006747;
-
+  align-self: center;
 }
 
 .entrySubmit:hover {
@@ -281,20 +255,24 @@ textarea {
 }
 
 .Submit {
-  position: relative;
-  margin: auto;
-  width: 100%;
-  padding: 10px;
+  align-self: center;
+  justify-self: center;
+  grid-row-start: 10;
+  grid-row-end: 11;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  border: none;
+  
 }
 
 .calDiv {
   width: 50%;
   margin: auto;
-  display: inline-block;
+  display: inline-grid;
 }
 
 .legendCal {
   width: 100%;
-  display: flex;
+  text-align: center;
   justify-content: center;
 }
