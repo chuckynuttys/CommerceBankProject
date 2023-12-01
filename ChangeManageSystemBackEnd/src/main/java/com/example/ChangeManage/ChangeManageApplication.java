@@ -146,8 +146,8 @@ public class ChangeManageApplication {
 				changeRequest.setBackOutMinutes("20 Minutes");
 				changeRequest.setChangeWindowStartDate("September 21st 2023");
 				changeRequest.setChangeWindowStopDate("October 23rd 2023");
-				changeRequest.setChangeWindowStartTime("5:00 PM");
-				changeRequest.setChangeWindowStopTime("7:00 PM");
+				changeRequest.setChangeWindowStartTime("5:00PM");
+				changeRequest.setChangeWindowStopTime("7:00PM");
 				changeRequest.setOtherNeededDepartments("DevOps");
 				changeRequest.setRiskLevel("Low");
 				changeRequest.setStateLevel("Open");
@@ -161,7 +161,7 @@ public class ChangeManageApplication {
 				if (i > 10) {
 					changeRequest.setImplementationStatus("Approved");
 					changeRequest.setImplementationDate("October 1st, 2023");
-					changeRequest.setImplementationTime("3:00 PM");
+					changeRequest.setImplementationTime("3:00PM");
 					changeRequest.setArchivedStatus(true);
 				}
 				if (i == 1 || i == 2 || i == 11 || i == 12) {

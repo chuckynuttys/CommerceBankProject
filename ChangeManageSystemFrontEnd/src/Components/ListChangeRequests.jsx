@@ -71,22 +71,22 @@ function ListChangeRequests(props) {
           </div>
         </div>
 
-        <div id="u528-1" class="ax_default box_1 u528" data-label="Why" style={{ width: '126px', height: '70px', left: '793px', top: '0px', visibility: 'inherit' }}>
-          <div id="u528-1_div" class="u528_div" style={{ width: '126px', height: '70px', visibility: 'inherit' }}></div>
+        <div id="u528-1" class="ax_default box_1 u528" data-label="Why" style={{ width: '154px', height: '70px', left: '793px', top: '0px', visibility: 'inherit' }}>
+          <div id="u528-1_div" class="u528_div" style={{ width: '143px', height: '70px', visibility: 'inherit' }}></div>
           <div id="u528-1_text" class="text u528_text" style={{ visibility: 'inherit' }}>
             <p><span>{whyDescription}</span></p>
           </div>
         </div>
 
-        <div id="u529-1" class="ax_default box_1 u529" data-label="What" style={{ width: '126px', height: '70px', left: '923px', top: '0px', visibility: 'inherit' }}>
+        <div id="u529-1" class="ax_default box_1 u529" data-label="What" style={{ width: '126px', height: '70px', left: '938px', top: '0px', visibility: 'inherit' }}>
           <div id="u529-1_div" class="u529_div" style={{ width: '126px', height: '70px', visibility: 'inherit' }}></div>
           <div id="u529-1_text" class="text u529_text" style={{ visibility: 'inherit' }}>
             <p><span>{implementer}</span></p>
           </div>
         </div>
 
-        <div id="u530-1" class="ax_default box_1 u530" data-label="Who" style={{ width: '106px', height: '70px', left: '1053px', top: '0px', visibility: 'inherit' }}>
-          <div id="u530-1_div" class="u530_div" style={{ width: '106px', height: '70px', visibility: 'inherit' }}></div>
+        <div id="u530-1" class="ax_default box_1 u530" data-label="Who" style={{ width: '84px', height: '70px', left: '1071px', top: '0px', visibility: 'inherit' }}>
+          <div id="u530-1_div" class="u530_div" style={{ width: '84px', height: '70px', visibility: 'inherit' }}></div>
           <div id="u530-1_text" class="text u530_text" style={{ visibility: 'inherit' }}>
             <p><span>{stateLevel}</span></p>
           </div>

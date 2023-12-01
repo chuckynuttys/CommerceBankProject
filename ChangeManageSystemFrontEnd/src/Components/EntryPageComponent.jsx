@@ -35,6 +35,10 @@ class EntryPageComponent extends Component{
             timeOfDay:'',
             appBool:'',
             riskLevel:'',
+            dontSubmit: false,
+            dateIncorrect: false,
+            fieldIncorrect: '',
+            fieldTooLong: false,
         }
         //methods go here for declaration
         this.saveCookies = this.saveCookies.bind(this);
@@ -45,7 +49,70 @@ class EntryPageComponent extends Component{
         this.formatDate = this.formatDate.bind(this);
         this.formatTime = this.formatTime.bind(this);
         this.execute = this.execute.bind(this);
+        this.checkFields = this.checkFields.bind(this);
     };
+
+    checkFields = () => {
+      
+      if (document.getElementById("applicationID").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("description").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("why").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("whatIsChanging").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("backOutPlan").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("backOutMinutes").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("fix").value == "" && document.getElementById("enhance").value == "")  {
+        this.dontSubmit = true;
+      } else if (document.getElementById("planned").value == "" && document.getElementById("unplanned").value == "" && document.getElementById("emergency").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("low").value == "" && document.getElementById("medium").value == "" && document.getElementById("high").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("changeTypeCheckBox").value == "" && document.getElementById("dba").value == "" && document.getElementById("security").value == "" 
+      && document.getElementById("scheduling").value == "") {
+        this.dontSubmit = true;
+      } else if (document.getElementById("startDateInput").value == "") {
+        this.dontSubmit = true;
+      }else if (document.getElementById("stopDateInput").value == "") {
+        this.dontSubmit = true;
+      } else {
+        this.dontSubmit = false;
+      }
+
+      if (document.getElementById("startDateInput").value >= document.getElementById("stopDateInput").value) {
+        this.dateIncorrect = true;
+      } else {
+        this.dateIncorrect = false;
+      }
+
+      if (document.getElementById("applicationID").value.length != 3) {
+        this.fieldTooLong = true;
+        this.fieldIncorrect = "Application ID must be 3 characters long.";
+      } else if (document.getElementById("description").value.length > 80) {
+        this.fieldTooLong = true;
+        this.fieldIncorrect = "Description must be 80 characters long or less.";
+      } else if (document.getElementById("why").value.length > 80) {
+        this.fieldTooLong = true;
+        this.fieldIncorrect = "Why Description must be 80 characters long or less.";
+      } else if (document.getElementById("whatIsChanging").value.length > 80) {
+        this.fieldTooLong = true;
+        this.fieldIncorrect = "What Is Changing Description must be 80 characters long or less.";
+      } else if (document.getElementById("backOutPlan").value.length > 80) {
+        this.fieldTooLong = true;
+        this.fieldIncorrect = "BackOut Plan Description must be 80 characters long or less.";
+      } else if (document.getElementById("backOutMinutes").value.length > 80) {
+        this.fieldTooLong = true;
+        this.fieldIncorrect = "BackOut Minutes must be 80 characters long or less.";
+      } else {
+        
+        this.fieldTooLong = false;
+        this.fieldIncorrect = "";
+      }
+    }
 
     removeQuote=(x) => {
       return x.replaceAll("\"", "");
@@ -103,6 +170,7 @@ class EntryPageComponent extends Component{
     manageDates=(e) => {
       this.startDate = document.getElementById("startDateInput").value;
       this.stopDate = document.getElementById("stopDateInput").value;
+      console.log(document.getElementById("startDateInput").value < document.getElementById("stopDateInput").value);
       this.origStart = this.startDate;
       this.origEnd = this.stopDate;
       const startDate = new Date(this.startDate);
@@ -175,12 +243,29 @@ class EntryPageComponent extends Component{
 
     execute=(e)=>{   //should be working
         e.preventDefault();
-        this.manageDates();   // obtains date values and stores
-        this.getCheckBox();    // obtains values in check boxes
-        this.getRadioButton();   // obtains values in radio buttons
-        this.saveCookies();    // saves all values to document cookies
-        let x = true;
-        this.props.execute(true); // functionality for page switch
+        this.checkFields();
+        if (!this.dontSubmit && !this.dateIncorrect && !this.fieldTooLong) {
+          this.manageDates();   // obtains date values and stores
+          this.getCheckBox();    // obtains values in check boxes
+          this.getRadioButton();   // obtains values in radio buttons
+          this.saveCookies();    // saves all values to document cookies
+          let x = true;
+          this.props.execute(true); // functionality for page switch
+        } else {
+          
+          if (this.dontSubmit) {
+            document.getElementById("errorField").textContent = "All Fields must be filled out to continue.";
+            document.getElementById("errorField").setAttribute("style", "top: 713px; position: absolute; color: red; visibility: visible");
+          } else if (this.fieldTooLong) {
+            document.getElementById("errorField").textContent = this.fieldIncorrect;
+            document.getElementById("errorField").setAttribute("style", "top: 713px; position: absolute; color: red; visibility: visible");
+          } else {
+            document.getElementById("errorField").setAttribute("style", "top: 713px; position: absolute; color: red; visibility: visible");
+            document.getElementById("errorField").textContent = "Change window Start Range Must be less than Change Window Stop Date";
+          }
+          
+        }
+        
   }
   
     handleValue = (e, val, tue) => {
@@ -441,6 +526,9 @@ class EntryPageComponent extends Component{
                <input type = "datetime-local" className="inputCalender" id ="stopDateInput" defaultValue="" />
                 </div>
               </fieldset>
+            <h2 className='h2' id="errorField" style={{ top: '713px', position: 'absolute', color: 'red', visibility: 'hidden'}}> All Fields must be filled out to continue.
+            </h2>
+
              <fieldset className="Submit">
              <input className="entrySubmit" type="submit" value="Submit" onClick={this.execute} /> 
              </fieldset>

@@ -79,7 +79,7 @@ const NavBar = (props) => {
                 <div id="u496" className="ax_default button" style={{ cursor: 'pointer' }} onClick={() => handleClick("Login")}>
                     <div id="u496_div" className=""></div>
                     <div id="u496_text" className="text ">
-                        <p><span>Log out</span></p>
+                        <p style={{'text-align': 'center'}}><span>Log out</span></p>
                     </div>
                 </div>
 
