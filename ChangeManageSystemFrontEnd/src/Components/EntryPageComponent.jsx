@@ -255,12 +255,12 @@ class EntryPageComponent extends Component{
           
           if (this.dontSubmit) {
             document.getElementById("errorField").textContent = "All Fields must be filled out to continue.";
-            document.getElementById("errorField").setAttribute("style", "top: 713px; position: absolute; color: red; visibility: visible");
+            document.getElementById("errorField").setAttribute("style", "top: 699px; position: absolute; color: red; visibility: visible");
           } else if (this.fieldTooLong) {
             document.getElementById("errorField").textContent = this.fieldIncorrect;
-            document.getElementById("errorField").setAttribute("style", "top: 713px; position: absolute; color: red; visibility: visible");
+            document.getElementById("errorField").setAttribute("style", "top: 699px; position: absolute; color: red; visibility: visible");
           } else {
-            document.getElementById("errorField").setAttribute("style", "top: 713px; position: absolute; color: red; visibility: visible");
+            document.getElementById("errorField").setAttribute("style", "top: 699px; position: absolute; color: red; visibility: visible");
             document.getElementById("errorField").textContent = "Change window Start Range Must be less than Change Window Stop Date";
           }
           
@@ -526,7 +526,7 @@ class EntryPageComponent extends Component{
                <input type = "datetime-local" className="inputCalender" id ="stopDateInput" defaultValue="" />
                 </div>
               </fieldset>
-            <h2 className='h2' id="errorField" style={{ top: '713px', position: 'absolute', color: 'red', visibility: 'hidden'}}> All Fields must be filled out to continue.
+            <h2 className='h2' id="errorField" style={{ top: '699px', position: 'absolute', color: 'red', visibility: 'hidden'}}> All Fields must be filled out to continue.
             </h2>
 
              <fieldset className="Submit">

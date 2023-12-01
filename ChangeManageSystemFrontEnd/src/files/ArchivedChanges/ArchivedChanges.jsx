@@ -22,16 +22,10 @@ const AC = () => {
 
 
   return (
-    <div id="base" class="">
+    <div id="base" class="" style={{ left: '-174px'}}>
 
 
-      <div id="u557" class="ax_default image">
-        <img id="u557_img" class="img " src={backgroundImg} />
-        <div id="u557_text" class="text " style={{ display: 'none', visibility: 'hidden' }}>
-          <p></p>
-        </div>
-      </div>
-
+      
 
       <div id="u558" class="ax_default box_3">
         <div id="u558_div" class=""></div>

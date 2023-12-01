@@ -161,17 +161,8 @@ const ListScreenApp = () => {
   };
 
   return (
-    <div id="base" class="">
-      <div id="u492" class="ax_default image">
-        <img id="u492_img" class="img " src={backgroundImg} />
-        <div
-          id="u492_text"
-          class="text "
-          style={{ display: "none", visibility: "hidden" }}
-        >
-          <p></p>
-        </div>
-      </div>
+    <div id="base" class="" style={{ left: '-174px'}}>
+      
 
       <div id="u493" class="ax_default box_3">
         <div id="u493_div" class=""></div>
