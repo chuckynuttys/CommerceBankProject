@@ -264,6 +264,14 @@ class EntryPageComponent extends Component{
         document.getElementById("high").checked = true;
         this.riskLevel = document.getElementById("high").value;
       }
+      if (document.getElementById("fix").value == cookieName) {
+        document.getElementById("fix").checked = true;
+        this.riskLevel = document.getElementById("fix").value;
+      }
+      if (document.getElementById("enhance").value == cookieName) {
+        document.getElementById("enhance").checked = true;
+        this.riskLevel = document.getElementById("enhance").value;
+      }
    }
    
 
@@ -314,6 +322,7 @@ class EntryPageComponent extends Component{
     this.checkRadioButton(getCookie("security"));
     this.checkRadioButton(getCookie("scheduling"));
     this.checkRadioButton(getCookie("riskLevel"));
+    this.checkRadioButton(getCookie("reasonType"))
    }
   
 

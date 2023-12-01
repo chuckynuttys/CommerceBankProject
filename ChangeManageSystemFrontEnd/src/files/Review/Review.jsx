@@ -73,7 +73,8 @@ const Review = () => {
         archivedStatus: false,
       };
 
-      if (getCookie("editChangeRequest")) {
+      if (getCookie("editChangeRequest") == "true") {
+        
         const params = {
           username: getCookie("username"),
         };
