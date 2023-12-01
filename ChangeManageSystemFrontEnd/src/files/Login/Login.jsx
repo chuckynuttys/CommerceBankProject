@@ -18,15 +18,14 @@ const Login = () => {
 
 
   return (
-    <div>
       <div id="base" className="container">
-        <div className="borderBox">
-          </div>
+         <div className="borderBox">
+          </div> 
         <div className="box">
         <img id="u453_img" className="img " src={logo} />
 
           <div className="heading">
-          <p><span>Login to Change Request System</span></p>
+          <p className='pform'><span>Login to Change Request System</span></p>
           </div>
             
          
@@ -65,7 +64,6 @@ const Login = () => {
         </div>
       </div>
       <script src="resources/scripts/axure/ios.js"></script>
-      </div>
       </div>
   );
 };

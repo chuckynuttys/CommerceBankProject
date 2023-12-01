@@ -3,7 +3,6 @@ import '../../css/pages.css';
 import '../../css/styles.css';
 import './Entry.css';
 import backgroundImg from '../../Images/BackgroundImg.jpg';
-import logo from '../../Images/Logo.png';
 import NavBar from "../../Components/NavBar";
 import EntryPageComponent from "../../Components/EntryPageComponent";
 import { useNavigate } from 'react-router-dom';
