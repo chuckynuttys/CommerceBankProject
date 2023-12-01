@@ -337,7 +337,7 @@ class EntryPageComponent extends Component{
               <fieldset className='fs1'>
               <label className= "labelInput" htmlFor="aId">
               <input 
-              className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" defaultValue="" onChange={e => this.handleValue(e, 0, "applicationID") } placeholder="Application ID" />
+              className="inputLabelTopPage" id="applicationID" name = "applicationID" rows="9" cols="50" defaultValue="" onChange={e => this.handleValue(e, 0, "applicationID") } placeholder="Application ID" required />
               <p className = "button">Three character ID of the application team implementing the change</p>
               </label>
               <label className= "labelInput" htmlFor="descr">

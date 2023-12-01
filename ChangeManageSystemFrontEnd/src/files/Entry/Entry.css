@@ -18,8 +18,9 @@ P{
   z-index: -1;
 }
 .entryContainer{
-  display: grid;
-  grid-template-columns: 342px 852px 327px;
+  margin-left:auto;
+  margin-right: auto;
+  width: 852px;
   height: 780px;
 }
 
@@ -41,8 +42,6 @@ P{
 
 .backGroundItem{
   display: grid;
-  grid-column-start: 2;
-  grid-column-end: 3;
   grid-template-columns: repeat(2, 188px)
   100px 188px 188px;
   grid-template-rows: 130px 30px 
